@@ -45,9 +45,15 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){
         String to_send = message.getText().toString();
-        NdefRecord record = NdefRecord.createMime("text/plain", to_send.getBytes());
+        NdefRecord record = NdefRecord.createMime("application/vnd.com.example.android.beam", to_send.getBytes());
         NdefMessage msg = new NdefMessage(record);
         return msg;
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        // onResume gets called after this to handle the intent
+        setIntent(intent);
     }
 
     protected void onResume() {
