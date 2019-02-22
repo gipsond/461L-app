@@ -2,7 +2,7 @@ package com.example.resyoume;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,5 +17,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClickNFC(View view){
         Intent nfc_intent = new Intent(this, NFCActivity.class);
         startActivity(nfc_intent);
+    }
+
+    // start the Database activity
+    public void onClickDatabase(View view) {
+        Intent db_intent = new Intent(this, DatabaseActivity.class);
+        startActivity(db_intent);
     }
 }

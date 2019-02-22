@@ -5,7 +5,7 @@ import org.apache.http.client.fluent.Response;
 import org.apache.http.entity.StringEntity;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
