@@ -1,5 +1,6 @@
 package com.example.resyoume;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
     // start the Database activity
     public void onClickDatabase(View view) {
         Intent db_intent = new Intent(this, DatabaseActivity.class);
+        startActivity(db_intent);
+    }
+
+    // start the Parse activity
+    public void onClickParse(View view) {
+        Intent db_intent = new Intent(this, ResumeParseActivity.class);
         startActivity(db_intent);
     }
 }
