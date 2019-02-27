@@ -7,10 +7,11 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback{
     NfcAdapter nfc_adapter;
@@ -34,16 +35,13 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
     public void send_nfc(View view){
         TextView status = (TextView) findViewById(R.id.NFCStatus);
-        status.setText("Sending...");
+        status.setText("Callback set. Looking for other device...");
         nfc_adapter.setNdefPushMessageCallback(this, this);
     }
 
-    public void receive_nfc(View view){
-        TextView status = (TextView) findViewById(R.id.NFCStatus);
-        status.setText("Receiving...");
-    }
-
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){
+        TextView status = (TextView) findViewById(R.id.NFCStatus);
+        status.setText("Device found. Sending message...");
         String to_send = message.getText().toString();
         NdefRecord record = NdefRecord.createMime("application/vnd.com.example.android.beam", to_send.getBytes());
         NdefMessage msg = new NdefMessage(record);
@@ -60,6 +58,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         super.onResume();
         Intent intent = getIntent();
         if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
+            TextView status = (TextView) findViewById(R.id.NFCStatus);
+            status.setText("Message received");
             Parcelable[] raw_messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) raw_messages[0];
             response.setText(new String(msg.getRecords()[0].getPayload()));

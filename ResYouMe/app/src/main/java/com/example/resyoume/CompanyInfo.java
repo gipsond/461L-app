@@ -1,22 +1,22 @@
 package com.example.resyoume;
-import org.apache.http.client.fluent.Content;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.client.fluent.Response;
-import org.apache.http.entity.StringEntity;
-
 import android.os.AsyncTask;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.client.fluent.Content;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.fluent.Response;
+import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CompanyInfo extends AppCompatActivity {
 
@@ -84,7 +84,9 @@ public class CompanyInfo extends AppCompatActivity {
     }
     // Creates an AsyncTask that does the company information lookup
     public void onClickInfo(View view) throws NullPointerException {
+        EditText companyNameField = (EditText) findViewById(R.id.SendText);
+        String companyName = companyNameField.getText().toString();
         CompanyInfoAsyncTask task = new CompanyInfoAsyncTask();
-        task.execute(""); // TODO: use the string to pass company domain name
+        task.execute(companyName); // TODO: use the string to pass company domain name
     }
 }

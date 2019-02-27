@@ -1,10 +1,10 @@
 package com.example.resyoume;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
     // start the Parse activity
     public void onClickParse(View view) {
-        Intent db_intent = new Intent(this, ResumeParseActivity.class);
-        startActivity(db_intent);
+        Intent parse_intent = new Intent(this, ResumeParseActivity.class);
+        startActivity(parse_intent);
+    }
+
+    public void onClickCompany(View view){
+        Intent company_intent = new Intent(this, CompanyInfo.class);
+        startActivity(company_intent);
     }
 }
