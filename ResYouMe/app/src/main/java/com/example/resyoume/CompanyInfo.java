@@ -1,20 +1,23 @@
 package com.example.resyoume;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.apache.http.client.fluent.Content;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.client.fluent.Response;
-import org.apache.http.entity.StringEntity;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,63 +33,55 @@ public class CompanyInfo extends AppCompatActivity {
         CompanyInfo_TextView = (TextView) findViewById(R.id.CompanyInfo);
     }
 
-    private class CompanyInfoAsyncTask extends AsyncTask<String, Void, JSONObject> {
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            super.onPostExecute(jsonObject);
-            Toast.makeText(CompanyInfo.this, "Company Information Loaded!", Toast.LENGTH_SHORT).show();
-            String CompanyName = null, Location = null, Twitter = null;
-            try {
-                CompanyName = jsonObject.getString("name");
-                Location = jsonObject.getString("location");
-                Twitter = jsonObject.getString("twitter");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            CompanyInfo_TextView.setText("Company Name: " + CompanyName +
-                                        "\nCompany Location: " + Location +
-                                        "\nCompany Twitter: " + Twitter);
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... strings) {
-            Request request = null;
-            Response response = null;
-            Content content = null;
-            JSONObject companyInfo_JSON = null;
-            try {
-                request = Request.Post("https://api.fullcontact.com/v3/company.enrich")
-                        .addHeader("Authorization","Bearer Kom1m2ezqBt2n2P46bo4dEw0uuZCNAIT")
-                        .body(new StringEntity("{" + "\"domain\":\"ni.com\"" + "}"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            try {
-                assert request != null;
-                response = request.execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                assert response != null;
-                content = response.returnContent();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                assert content != null;
-                companyInfo_JSON = new JSONObject(content.asString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return companyInfo_JSON;
-        }
-    }
-    // Creates an AsyncTask that does the company information lookup
     public void onClickInfo(View view) throws NullPointerException {
         EditText companyNameField = (EditText) findViewById(R.id.CompanyDomainName);
         String companyName = companyNameField.getText().toString();
-        CompanyInfoAsyncTask task = new CompanyInfoAsyncTask();
-        task.execute(companyName);
+
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String url = "https://api.fullcontact.com/v3/company.enrich";
+
+            // set up the POST request body
+            JSONObject body = new JSONObject();
+            body.put("domain", CompanyDomainName.getText().toString());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, body, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    String CompanyName = null, Location = null, Twitter = null, Website = null, Bio = null, Linkedin = null;
+                    try {
+                        CompanyName = response.getString("name");
+                        Location = response.getString("location");
+                        Twitter = response.getString("twitter");
+                        Website = response.getString("website");
+                        Bio = response.getString("bio");
+                        Linkedin = response.getString("linkedin");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    CompanyInfo_TextView.setText("Company Name: " + CompanyName +
+                            "\nCompany Location: " + Location +
+                            "\nCompany Bio: " + Bio +
+                            "\nCompany Website: " + Website +
+                            "\nCompany Linkedin: " + Linkedin +
+                            "\nCompany Twitter: " + Twitter);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    onBackPressed();
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    final Map<String, String> headers = new HashMap<>();
+                    // set up the POST request headers with security key
+                    headers.put("Authorization", "Bearer Kom1m2ezqBt2n2P46bo4dEw0uuZCNAIT");
+                    return headers;
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
+        }
+        catch(JSONException e){}
     }
 }
