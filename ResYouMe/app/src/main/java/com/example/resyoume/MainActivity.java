@@ -36,4 +36,9 @@ public class MainActivity extends AppCompatActivity {
         Intent company_intent = new Intent(this, CompanyInfo.class);
         startActivity(company_intent);
     }
+
+    public void onClickAbout(View view){
+        Intent about_intent = new Intent(this, AboutActivity.class);
+        startActivity(about_intent);
+    }
 }
