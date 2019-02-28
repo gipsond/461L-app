@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,4 +7,148 @@
     android:background="@color/colorPrimary"
     tools:context=".AboutActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/app_decription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rym_description" />
+
+        <TextView
+            android:id="@+id/spacer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Here are the members of team Sandpiper" />
+
+        <ImageView
+            android:id="@+id/erick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/erick_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: Erick Shepherd\n Major: Computer Engineering\n Responsibilities: NFC Module\n Commits: 6" />
+
+        <ImageView
+            android:id="@+id/david"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/david_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: David Gipson" />
+
+        <ImageView
+            android:id="@+id/james"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/james_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: James Sullivan" />
+
+        <ImageView
+            android:id="@+id/errol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/errol_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: Errol Williams II" />
+
+        <ImageView
+            android:id="@+id/jonathan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/jonathan_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: Jonathan Mounsif" />
+
+        <ImageView
+            android:id="@+id/mircea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/erickshepherd"
+            tools:srcCompat="@drawable/erickshepherd" />
+
+        <TextView
+            android:id="@+id/mircea_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: Mircea Antonescu" />
+
+        <TextView
+            android:id="@+id/spacer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tools used:\n Android Studio\n RapidParser API\n FullContact API\n Volley" />
+
+        <TextView
+            android:id="@+id/spacer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/github_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Github Stats: " />
+
+        <TextView
+            android:id="@+id/github_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/spacer4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/github_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/spacer5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

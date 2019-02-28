@@ -6,4 +6,6 @@
     <string name="hint_word">Word...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="rym_description">ResYouMe is an app created with the intent of making networking events like expo easier for students and recruiters. It accomplishes this by allowing students to upload their resumes and transfer them to recruiters with NFC.
+    ResYouMe also allows recruiters to create company business cards that can be sent to a student in exchange for their resumes and both students and recruiters can reformat and organize the documents they collect. Students can even collect additional information about companies using the FullContact API.</string>
 </resources>
