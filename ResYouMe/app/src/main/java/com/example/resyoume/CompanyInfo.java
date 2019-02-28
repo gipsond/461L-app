@@ -84,9 +84,9 @@ public class CompanyInfo extends AppCompatActivity {
     }
     // Creates an AsyncTask that does the company information lookup
     public void onClickInfo(View view) throws NullPointerException {
-        EditText companyNameField = (EditText) findViewById(R.id.SendText);
+        EditText companyNameField = (EditText) findViewById(R.id.CompanyDomainName);
         String companyName = companyNameField.getText().toString();
         CompanyInfoAsyncTask task = new CompanyInfoAsyncTask();
-        task.execute(companyName); // TODO: use the string to pass company domain name
+        task.execute(companyName);
     }
 }
