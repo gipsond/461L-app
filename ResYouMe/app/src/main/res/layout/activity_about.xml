@@ -149,7 +149,7 @@
             android:id="@+id/mircea_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Github Commits: 2" />
+            android:text="Github Commits: 0" />
 
         <TextView
             android:id="@+id/spacer2"
