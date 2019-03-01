@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.ResumeRepository;
 import com.example.resyoume.db.WorkPhase;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -60,7 +62,7 @@ import java.util.Map;
 
 public class ResumeParseActivity extends AppCompatActivity {
 
-    private static final String filename = "cv.pdf";
+    private  String filename = "";
 
     private ResumeViewModel resumeViewModel;
 
@@ -90,7 +92,19 @@ public class ResumeParseActivity extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.resume_list);
 
         adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_resume_parse, resumes);
+                android.R.layout.simple_list_item_1, resumes);
+
+        listView.setAdapter(adapter);
+
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setSelector(android.R.color.darker_gray);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+                filename = listView.getItemAtPosition(position).toString();
+            }
+        });
 
     }
 
@@ -101,22 +115,16 @@ public class ResumeParseActivity extends AppCompatActivity {
     }
 
     public void parse_resume(View view){
-        final TextView textView = (TextView) findViewById(R.id.parse_resume_button);
-        // ...
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://www.rapidparser.com/api/rest/v1/parse";
         JSONObject postParams = new JSONObject();
-        InputStream fileInStream = null;
         try {
             //read file into base64-string
-            AssetManager manager = getAssets();
-            fileInStream = manager.open(filename);
-            byte bytes[] = new byte[fileInStream.available()];
-            fileInStream.read(bytes);
+            File resume = new File(resume_dir, filename);
+            byte[] bytes = IOUtils.toByteArray(new FileInputStream(resume));
             String fileBase64Encoded = new String(Base64.encode(bytes, Base64.DEFAULT));
-            fileInStream.close();
 
             //prepare json-payload
             postParams.put("data", fileBase64Encoded);
@@ -297,12 +305,11 @@ public class ResumeParseActivity extends AppCompatActivity {
                                 );
 
                             Resume resume = new Resume(contact, educationPhases, workPhases);
-                            resumeViewModel.insert(resume);
+                            //resumeViewModel.insert(resume);
 
                             String out = firstname + " " + lastname + ":\n" +
                                     phonenumber + "\n" +
                                     email + "\n\n";
-                            textView.setText(out);
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -311,7 +318,6 @@ public class ResumeParseActivity extends AppCompatActivity {
                 },
 
                 error -> {
-                    textView.setText("That didn't work!");
                     String body;
                     //get status code here
                     final String statusCode = String.valueOf(error.networkResponse.statusCode);
@@ -321,12 +327,11 @@ public class ResumeParseActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         // exception
                     }
-                    textView.setText("Whoops");
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 final Map<String, String> headers = new HashMap<>();
-                String apiKey = "dd62a4d2-88f8-4e2e-bbe1-5c27940cf199";
+                String apiKey = "c1b6265d-7d2e-49ba-b3dc-4644cfc3912f";
                 String authorization = "Bearer " + apiKey;
                 // add headers <key,value>
                 headers.put("Accept", "application/json");       //Response format = app/json

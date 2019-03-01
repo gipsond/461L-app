@@ -96,14 +96,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/errolwilliams"
+            tools:srcCompat="@drawable/errolwilliams" />
 
         <TextView
             android:id="@+id/errol_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Errol Williams II" />
+            android:text="Name: Errol Williams\nMajor: Computer Engineering\nBio: \nResponsibilities: Resume Upload and Parse: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/errol_stats"
