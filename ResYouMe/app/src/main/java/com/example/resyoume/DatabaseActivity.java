@@ -36,16 +36,16 @@ public class DatabaseActivity extends AppCompatActivity {
         resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
         resumeViewModel.getAllResumes().observe(this, adapter::setResumes);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(DatabaseActivity.this, NewWordActivity.class);
-            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(view -> {
+//            Intent intent = new Intent(DatabaseActivity.this, NewWordActivity.class);
+//            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+//        });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
 //        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 //            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
 //            resumeViewModel.insert(word);
@@ -55,6 +55,6 @@ public class DatabaseActivity extends AppCompatActivity {
 //                    R.string.empty_not_saved,
 //                    Toast.LENGTH_LONG).show();
 //        }
-    }
+//    }
 
 }

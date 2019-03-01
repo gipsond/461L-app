@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.resyoume.db.Contact;
+import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
+import com.example.resyoume.db.WorkPhase;
 
 import java.util.List;
 
@@ -15,11 +18,29 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.ResumeViewHolder> {
 
     class ResumeViewHolder extends RecyclerView.ViewHolder {
-        private final TextView resumeItemView;
+        private final TextView resumeHeader;
+        private final TextView addressView;
+        private final TextView addressView2;
+        private final TextView emailView;
+        private final TextView phoneView;
+        private final TextView websiteView;
+        private final TextView interestsView;
+        private final TextView publicationsView;
+        private final TextView educationPhasesView;
+        private final TextView workPhasesView;
 
         private ResumeViewHolder(View itemView) {
             super(itemView);
-            resumeItemView = itemView.findViewById(R.id.textView);
+            resumeHeader = itemView.findViewById(R.id.resumeHeader);
+            addressView = itemView.findViewById(R.id.addressView);
+            addressView2 = itemView.findViewById(R.id.addressView2);
+            emailView = itemView.findViewById(R.id.emailView);
+            phoneView = itemView.findViewById(R.id.phoneView);
+            websiteView = itemView.findViewById(R.id.websiteView);
+            interestsView = itemView.findViewById(R.id.interestsView);
+            publicationsView = itemView.findViewById(R.id.publicationsView);
+            educationPhasesView = itemView.findViewById(R.id.educationPhasesView);
+            workPhasesView = itemView.findViewById(R.id.workPhasesView);
         }
     }
 
@@ -40,10 +61,31 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
     public void onBindViewHolder(ResumeViewHolder holder, int position) {
         if (resumes != null) {
             Resume current = resumes.get(position);
-            holder.resumeItemView.setText(current.contact.getFirstName() + " " + current.contact.getLastName() + "\n");
+            Contact contact = current.contact;
+            holder.resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
+            holder.addressView.setText(contact.getAddress());
+            holder.addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
+            holder.emailView.setText(contact.getEmail());
+            holder.phoneView.setText(contact.getPhoneNumber());
+            holder.websiteView.setText(contact.getHomepage());
+            holder.interestsView.setText(contact.getInterests());
+            holder.publicationsView.setText(contact.getPublications());
+
+            StringBuilder eduPhasesStr = new StringBuilder();
+            for (EducationPhase educationPhase : current.educationPhases) {
+                eduPhasesStr.append(educationPhase.getPlaintext());
+            }
+            holder.educationPhasesView.setText(eduPhasesStr.toString());
+
+            StringBuilder workPhasesStr = new StringBuilder();
+            for (WorkPhase workPhase : current.workPhases) {
+                workPhasesStr.append(workPhase.getPlaintext());
+            }
+            holder.workPhasesView.setText(workPhasesStr.toString());
+
         } else {
             // Covers the case of data not being ready yet.
-            holder.resumeItemView.setText("Resume loading...");
+            holder.resumeHeader.setText("Loading...");
         }
     }
 
