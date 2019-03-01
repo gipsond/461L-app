@@ -136,14 +136,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/mirceaantonescu"
+            tools:srcCompat="@drawable/mirceaantonescu" />
 
         <TextView
             android:id="@+id/mircea_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Mircea Antonescu" />
+            android:text="Name: Mircea Antonescu\nMajor: Computer Engineering\nBio: \nResponsibilities: NFC Module\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/mircea_stats"
