@@ -23,16 +23,16 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
         }
     }
 
-    private final LayoutInflater mInflater;
+    private final LayoutInflater inflater;
     private List<Resume> resumes; // Cached copy of words
 
     ResumeListAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public ResumeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        View itemView = inflater.inflate(R.layout.recyclerview_item, parent, false);
         return new ResumeViewHolder(itemView);
     }
 
@@ -40,7 +40,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
     public void onBindViewHolder(ResumeViewHolder holder, int position) {
         if (resumes != null) {
             Resume current = resumes.get(position);
-            holder.resumeItemView.setText(current.contact.getFirstName() + " " + current.contact.getLastName());
+            holder.resumeItemView.setText(current.contact.getFirstName() + " " + current.contact.getLastName() + "\n");
         } else {
             // Covers the case of data not being ready yet.
             holder.resumeItemView.setText("Resume loading...");

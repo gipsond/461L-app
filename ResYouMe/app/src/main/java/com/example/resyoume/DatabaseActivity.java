@@ -36,7 +36,6 @@ public class DatabaseActivity extends AppCompatActivity {
         resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
         resumeViewModel.getAllResumes().observe(this, adapter::setResumes);
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(DatabaseActivity.this, NewWordActivity.class);
