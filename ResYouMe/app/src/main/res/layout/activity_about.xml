@@ -28,7 +28,7 @@
             android:id="@+id/group_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Here are the members of team Sandpiper" />
+            android:text="Here are the members of Team Sandpiper:" />
 
         <ImageView
             android:id="@+id/erick"
@@ -41,20 +41,20 @@
             android:id="@+id/erick_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Erick Shepherd\n Major: Computer Engineering\n Responsibilities: NFC Module\n Commits: 6" />
+            android:text="Name: Erick Shepherd\nMajor: Computer Engineering\nResponsibilities: NFC Module\nCommits: 6" />
 
         <ImageView
             android:id="@+id/david"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/davidgipson"
+            tools:srcCompat="@drawable/davidgipson" />
 
         <TextView
             android:id="@+id/david_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: David Gipson" />
+            android:text="Name: David Gipson\nMajor: Computer Engineering\nResponsibilities: Database\nCommits: " />
 
         <ImageView
             android:id="@+id/james"
