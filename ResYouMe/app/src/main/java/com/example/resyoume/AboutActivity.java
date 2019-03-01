@@ -31,28 +31,54 @@ public class AboutActivity extends AppCompatActivity {
         github_link.setMovementMethod(LinkMovementMethod.getInstance());
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String httpReq = "https://api.github.com/repos/gipsond/461L-app/stats/commit_activity";
+        String httpReq = "https://api.github.com/repos/gipsond/461L-app/stats/contributors";
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, httpReq, null, new Response.Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
                         TextView github_stats = (TextView) findViewById(R.id.github_stats);
-                        int total = 0;
+                        TextView erick_stats = (TextView) findViewById(R.id.erick_stats);
+                        TextView david_stats = (TextView) findViewById(R.id.david_stats);
+                        TextView james_stats = (TextView) findViewById(R.id.james_stats);
+                        TextView jonathan_stats = (TextView) findViewById(R.id.jonathan_stats);
+                        TextView errol_stats = (TextView) findViewById(R.id.errol_stats);
+                        TextView mircea_stats = (TextView) findViewById(R.id.mircea_stats);
+
+                        int total_commits = 0;
+
                         int x;
                         for(x = 0; x < response.length(); x++){
 
                             try{
-                                JSONObject week = response.getJSONObject(x);
-                                String commits = week.getString("total");
-                                total += Integer.parseInt(commits);
+                                JSONObject contributor = response.getJSONObject(x);
+                                JSONObject author = contributor.getJSONObject("author");
+                                String name = author.getString("login");
+                                String commits = contributor.getString("total");
+                                String stat_string = "Github Commits: " + commits;
+                                total_commits += Integer.parseInt(commits);
+
+                                if(name.equals("erickjshepherd")){
+                                    erick_stats.setText(stat_string);
+                                }
+                                else if(name.equals("gipsond")){
+                                    david_stats.setText(stat_string);
+                                }
+                                else if(name.equals("jmounsif")){
+                                    jonathan_stats.setText(stat_string);
+                                }
+                                else if(name.equals("ErrolWilliams")){
+                                    errol_stats.setText(stat_string);
+                                }
                             }
                             catch(Exception e){
                                 github_stats.setText("error");
                             }
                         }
-                        String totalString = String.valueOf(total);
-                        github_stats.setText("Total Commits: " + totalString);
+                        String totalCommitString = String.valueOf(total_commits);
+                        String totalStatString = "Total Github Commits: " + totalCommitString;
+                        github_stats.setText(totalStatString);
                     }
                 }, new Response.ErrorListener() {
 
