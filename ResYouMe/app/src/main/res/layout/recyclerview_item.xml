@@ -1,12 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/resumeHeader"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light" />
+        android:background="@color/resumeHeaderBg" />
+
+    <TextView
+        android:id="@+id/addressView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/addressView2"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/emailView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/phoneView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/websiteView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/interestsView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/publicationsView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/educationPhasesView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
+    <TextView
+        android:id="@+id/workPhasesView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/resumeBg" />
+
 </LinearLayout>

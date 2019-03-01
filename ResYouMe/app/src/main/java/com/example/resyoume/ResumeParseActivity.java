@@ -1,6 +1,8 @@
 package com.example.resyoume;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,22 +20,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Base64;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.resyoume.db.Contact;
+import com.example.resyoume.db.EducationPhase;
+import com.example.resyoume.db.Resume;
+import com.example.resyoume.db.ResumeRepository;
+import com.example.resyoume.db.WorkPhase;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -55,11 +55,15 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ResumeParseActivity extends AppCompatActivity {
 
     private static final String filename = "cv.pdf";
+
+    private ResumeViewModel resumeViewModel;
+
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     ArrayList<String> resumes=new ArrayList<String>();
 
@@ -93,6 +97,7 @@ public class ResumeParseActivity extends AppCompatActivity {
     public void add_resume(String resume_name) {
         resumes.add(resume_name);
         adapter.notifyDataSetChanged();
+        resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
     }
 
     public void parse_resume(View view){
@@ -128,183 +133,175 @@ public class ResumeParseActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             //get person json object from response
-                            JSONObject person = new JSONObject(response.getString("person"));
+                            JSONObject person = response.getJSONObject("person");
 
                             //Initialize Fields
+
+                            final String FALLBACK = "";
                             String firstname = "";
                             String lastname = "";
+                            String title = "";
                             String gender = "";
                             String birthday = "";
                             String nationality = "";
                             String address = "";
+                            String postcode = "";
+                            String city = "";
+                            String state = "";
+                            String country = "";
                             String email = "";
                             String phonenumber = "";
-                            ArrayList<String> date_froms_edu = new ArrayList<>();
-                            ArrayList<String> date_tos_edu = new ArrayList<>();
-                            ArrayList<String> schoolnames = new ArrayList<>();
-                            ArrayList<String> countries_edu = new ArrayList<>();
-                            ArrayList<String[]> skills_edu = new ArrayList<>();
-                            ArrayList<String> plaintexts_edu = new ArrayList<>();
-                            ArrayList<String> date_froms_work = new ArrayList<>();
-                            ArrayList<String> date_tos_work = new ArrayList<>();
-                            ArrayList<String> functions = new ArrayList<>();
-                            ArrayList<String> companies = new ArrayList<>();
-                            ArrayList<String> countries_work = new ArrayList<>();
-                            ArrayList<String[]> skills_work = new ArrayList<>();
-                            ArrayList<String> plaintexts_work = new ArrayList<>();
+                            String homepage = "";
+                            String interests = "";
+                            String publications = "";
+                            String plaintext = "";
 
+                            List<WorkPhase> workPhases = new ArrayList<>();
+                            List<EducationPhase> educationPhases = new ArrayList<>();
 
-                            if(!person.isNull("personalinfo")) { //returns true if string not found or maps to null
-                                //get personalinfo from person object
-                                JSONObject personalinfo = new JSONObject(person.getString("personalinfo"));
-
-                                //parse personalinfo into fields
-                                if(!personalinfo.isNull("firstname")) {
-                                    firstname = personalinfo.getString("firstname");
-                                }
-                                if(!personalinfo.isNull("lastname")) {
-                                    lastname = personalinfo.getString("lastname");
-                                }
-                                if(!personalinfo.isNull("gender")) {
-                                    gender = personalinfo.getString("gender");
-                                }
-                                if(!personalinfo.isNull("birthday")) {
-                                    birthday = personalinfo.getString("birthday");
-                                }
-                                if(!personalinfo.isNull("nationality")) {
-                                    nationality = personalinfo.getString("nationality");
-                                }
-                                if(!personalinfo.isNull("address")) {
-                                    address = personalinfo.getString("address");
-                                }
-                                if(!personalinfo.isNull("email")) {
-                                    email = personalinfo.getString("email");
-                                }
-                                if(!personalinfo.isNull("phonenumber")) {
-                                    phonenumber = personalinfo.getString("phonenumber");
-                                }
+                            JSONObject personalinfo = person.optJSONObject("personalinfo"); // returns null if not found
+                            if (personalinfo != null) {
+                                firstname = personalinfo.optString("firstname", FALLBACK);
+                                lastname = personalinfo.optString("lastname", FALLBACK);
+                                title = personalinfo.optString("title", FALLBACK);
+                                gender = personalinfo.optString("gender", FALLBACK);
+                                birthday = personalinfo.optString("birthday", FALLBACK);
+                                nationality = personalinfo.optString("nationality", FALLBACK);
+                                address = personalinfo.optString("address", FALLBACK);
+                                postcode = personalinfo.optString("postcode", FALLBACK);
+                                city = personalinfo.optString("city", FALLBACK);
+                                state = personalinfo.optString("state", FALLBACK);
+                                country = personalinfo.optString("country", FALLBACK);
+                                email = personalinfo.optString("email", FALLBACK);
+                                phonenumber = personalinfo.optString("phonenumber", FALLBACK);
+                                homepage = personalinfo.optString("homepage", FALLBACK);
                             }
 
-                            if(!person.isNull("languages")) { //returns true if string not found or maps to null
-                                //get languages from person object
-                                JSONObject languages = new JSONObject(person.getString("languages"));
-
+                            //get languages from person object
+                            JSONObject languages = person.optJSONObject("languages");
+                            if (languages != null) {
                                 //parse languages into fields
                             }
 
-                            if(!person.isNull("educationphase")) { //returns true if string not found or maps to null
-                                //get educationphase from person object
-                                JSONArray educationphases = new JSONArray(person.getString("educationphase"));
+                            //get educationphase from person object
+                            JSONArray educationPhaseArray = person.optJSONArray("educationphase");
+                            if (educationPhaseArray != null) {
+                                for (int i = 0; i < educationPhaseArray.length(); i++) {
+                                    JSONObject educationPhaseJSON = educationPhaseArray.optJSONObject(i);
+                                    if (educationPhaseJSON != null) {
+                                        // parse educationphase into fields
+                                        String datefrom = educationPhaseJSON.optString("datefrom");
+                                        String dateto = educationPhaseJSON.optString("dateto");
+                                        String schoolname = educationPhaseJSON.optString("schoolname");
+                                        String eduCountry = educationPhaseJSON.optString("country");
 
-                                for (int i = 0; i < educationphases.length(); i++) {
-                                    JSONObject educationphase = new JSONObject(educationphases.get(i).toString());
-
-                                    //parse educationphase into fields
-                                    if (!educationphase.isNull("datefrom")) {
-                                        String datefrom_edu = educationphase.getString("datefrom");
-                                        date_froms_edu.add(datefrom_edu);
-                                    }
-                                    if (!educationphase.isNull("dateto")) {
-                                        String dateto_edu = educationphase.getString("dateto");
-                                        date_tos_edu.add(dateto_edu);
-                                    }
-                                    if (!educationphase.isNull("schoolname")) {
-                                        String schoolname = educationphase.getString("schoolname");
-                                        schoolnames.add(schoolname);
-                                    }
-                                    if (!educationphase.isNull("country")) {
-                                        String country_edu = educationphase.getString("country");
-                                        countries_edu.add(country_edu);
-                                    }
-                                    /* Demo value changes output from Array to Value, uncomment when switch to production api key
-                                    if (!educationphase.isNull("skill")) {
-                                        JSONArray skill_edu = educationphase.getJSONArray("skill");
-                                        String skill_edu_arr[] = new String[skill_edu.length()];
-                                        for (int j = 0; j < skill_edu.length(); j++) {
-                                            skill_edu_arr[j] = skill_edu.getString(j);
+                                        /* Demo value changes output from Array to Value, uncomment when switch to production api key
+                                        if (!educationphase.isNull("skill")) {
+                                            JSONArray skill_edu = educationphase.getJSONArray("skill");
+                                            String skill_edu_arr[] = new String[skill_edu.length()];
+                                            for (int j = 0; j < skill_edu.length(); j++) {
+                                                skill_edu_arr[j] = skill_edu.getString(j);
+                                            }
+                                            skills_edu.add(skill_edu_arr);
                                         }
-                                        skills_edu.add(skill_edu_arr);
-                                    }
-                                    */
-                                    if (!educationphase.isNull("plaintext")) {
-                                        String plaintext_edu = educationphase.getString("plaintext");
-                                        plaintexts_edu.add(plaintext_edu);
+                                        */
+
+                                        String eduPlaintext = educationPhaseJSON.optString("plaintext");
+
+                                        EducationPhase educationPhase =
+                                            new EducationPhase(
+                                                0,
+                                                datefrom,
+                                                dateto,
+                                                schoolname,
+                                                eduCountry,
+                                                eduPlaintext
+                                            );
+
+                                        educationPhases.add(educationPhase);
                                     }
                                 }
                             }
-                            if(!person.isNull("workphase")) { //returns true if string not found or maps to null
-                                //get workphase from person object
-                                JSONArray workphases = new JSONArray(person.getString("workphase"));
 
-                                for (int i = 0; i < workphases.length(); i++) {
-                                    JSONObject workphase = new JSONObject(workphases.get(i).toString());
+                            //get workphase from person object
+                            JSONArray workPhaseArray = person.optJSONArray("workphase");
 
-                                    //parse workphase into fields
-                                    if (!workphase.isNull("datefrom")) {
-                                        String datefrom_work = workphase.getString("datefrom");
-                                        date_froms_work.add(datefrom_work);
-                                    }
-                                    if (!workphase.isNull("dateto")) {
-                                        String dateto_work = workphase.getString("dateto");
-                                        date_tos_work.add(dateto_work);
-                                    }
-                                    if (!workphase.isNull("function")) {
-                                        String function = workphase.getString("function");
-                                        functions.add(function);
-                                    }
-                                    if (!workphase.isNull("company")) {
-                                        String company = workphase.getString("company");
-                                        companies.add(company);
-                                    }
-                                    if (!workphase.isNull("country")) {
-                                        String country_work = workphase.getString("country");
-                                        countries_work.add(country_work);
-                                    }
-                                    /* Demo value changes output from Array to Value, uncomment when switch to production api key
-                                    if (!workphase.isNull("skill")) {
-                                        JSONArray skill_work = workphase.getJSONArray("skill");
-                                        String skill_work_arr[] = new String[skill_work.length()];
-                                        for (int j = 0; j < skill_work.length(); j++) {
-                                            skill_work_arr[j] = skill_work.getString(j);
+                            if (workPhaseArray != null) {
+                                for (int i = 0; i < workPhaseArray.length(); i++) {
+                                    JSONObject workPhaseJSON = workPhaseArray.optJSONObject(i);
+                                    if (workPhaseJSON != null) {
+                                        //parse workphase into fields
+                                        String datefrom = workPhaseJSON.optString("datefrom");
+                                        String dateto = workPhaseJSON.optString("dateto");
+                                        String function = workPhaseJSON.optString("function");
+                                        String company = workPhaseJSON.optString("company");
+                                        String workCountry = workPhaseJSON.optString("country");
+
+                                        /* Demo value changes output from Array to Value, uncomment when switch to production api key
+                                        if (!workphase.isNull("skill")) {
+                                            JSONArray skill_work = workphase.getJSONArray("skill");
+                                            String skill_work_arr[] = new String[skill_work.length()];
+                                            for (int j = 0; j < skill_work.length(); j++) {
+                                                skill_work_arr[j] = skill_work.getString(j);
+                                            }
+                                            skills_work.add(skill_work_arr);
                                         }
-                                        skills_work.add(skill_work_arr);
+                                        */
+
+                                        String workPlaintext = workPhaseJSON.optString("plaintext");
+
+                                        WorkPhase workPhase =
+                                            new WorkPhase(
+                                                0,
+                                                datefrom,
+                                                dateto,
+                                                function,
+                                                company,
+                                                workCountry,
+                                                workPlaintext
+                                            );
+
+                                        workPhases.add(workPhase);
                                     }
-                                    */
-                                    if (!workphase.isNull("plaintext")) {
-                                        String plaintext_work = workphase.getString("plaintext");
-                                        plaintexts_work.add(plaintext_work);
-                                    }
                                 }
                             }
 
-                            if(!person.isNull("otherinfo")) { //returns true if string not found or maps to null
-                                //get otherinfo from person object
-                                JSONObject otherinfo = new JSONObject(person.getString("otherinfo"));
-
-                                //parse otherinfo into fields
-                                if(!otherinfo.isNull("interests")) {
-                                    String interests = otherinfo.getString("interests");
-                                }
-                                if(!otherinfo.isNull("publications")) {
-                                    String publications = otherinfo.getString("publications");
-                                }
+                            JSONObject otherinfo = person.optJSONObject("otherinfo");
+                            if (otherinfo != null) {
+                                interests = otherinfo.optString("interests", FALLBACK);
+                                publications = otherinfo.optString("publications", FALLBACK);
                             }
 
-                            if(!person.isNull("auxiliary")) { //returns true if string not found or maps to null
-                                //get auxiliary from person object
-                                JSONObject auxiliary = new JSONObject(person.getString("auxiliary"));
-
-                                //parse auxiliary into fields
-                                if(!auxiliary.isNull("plaintext")) {
-                                    String plaintext_aux = auxiliary.getString("plaintext");
-                                }
+                            JSONObject auxiliary = person.optJSONObject("auxiliary");
+                            if (auxiliary != null) {
+                                plaintext = auxiliary.optString("plaintext", FALLBACK);
                             }
+
+                            Contact contact =
+                                new Contact(
+                                    0,
+                                    firstname,
+                                    lastname,
+                                    title,
+                                    address,
+                                    postcode,
+                                    city,
+                                    state,
+                                    country,
+                                    email,
+                                    phonenumber,
+                                    homepage,
+                                    interests,
+                                    publications,
+                                    plaintext
+                                );
+
+                            Resume resume = new Resume(contact, educationPhases, workPhases);
+                            resumeViewModel.insert(resume);
 
                             String out = firstname + " " + lastname + ":\n" +
                                     phonenumber + "\n" +
-                                    email + "\n\n" +
-                                    "Education: " + schoolnames.get(0) + "\n\n" +
-                                    "Experience: " + functions.get(0) + " at " + companies.get(0)+ "\n\n";
+                                    email + "\n\n";
                             textView.setText(out);
                         }
                         catch (Exception e){
@@ -312,22 +309,20 @@ public class ResumeParseActivity extends AppCompatActivity {
                         }
                     }
                 },
-                new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
-                String body;
-                //get status code here
-                final String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                try {
-                    body = new String(error.networkResponse.data,"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    // exception
-                }
-                textView.setText("Whoops");
-            }
-        }) {
+
+                error -> {
+                    textView.setText("That didn't work!");
+                    String body;
+                    //get status code here
+                    final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    try {
+                        body = new String(error.networkResponse.data,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        // exception
+                    }
+                    textView.setText("Whoops");
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 final Map<String, String> headers = new HashMap<>();

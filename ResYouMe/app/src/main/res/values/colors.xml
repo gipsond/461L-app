@@ -6,4 +6,8 @@
 
     <!--Database-->
     <color name="buttonLabel">#D3D3D3</color>
+
+    <!--Database Display-->
+    <color name="resumeHeaderBg">#EAEAEA</color>
+    <color name="resumeBg">#E0F1F9</color>
 </resources>
