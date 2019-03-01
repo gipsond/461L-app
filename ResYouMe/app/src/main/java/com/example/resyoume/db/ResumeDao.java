@@ -17,6 +17,10 @@ abstract class ResumeDao {
     @Query("SELECT * FROM contacts")
     abstract LiveData<List<Resume>> getAllResumes();
 
+    @Transaction
+    @Query("SELECT * FROM contacts LIMIT 1")
+    abstract LiveData<Resume> getResume();
+
 //    Example Queries from WordDao
 //
 //    @Query("DELETE FROM word_table")

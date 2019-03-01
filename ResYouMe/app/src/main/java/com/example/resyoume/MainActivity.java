@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(db_intent);
     }
 
+    // start the Database activity
+    public void onClickDisplay(View view) {
+        Intent display_intent = new Intent(this, DisplayActivity.class);
+        startActivity(display_intent);
+    }
+
     // start the Parse activity
     public void onClickParse(View view) {
         Intent parse_intent = new Intent(this, ResumeParseActivity.class);

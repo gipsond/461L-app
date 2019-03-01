@@ -71,6 +71,9 @@ public class AboutActivity extends AppCompatActivity {
                                 else if(name.equals("errolwilliams")){
                                     errol_stats.setText(stat_string);
                                 }
+                                else if(name.equals("mantonescu101")){
+                                    mircea_stats.setText(stat_string);
+                                }
                             }
                             catch(Exception e){
                                 github_stats.setText("error");
