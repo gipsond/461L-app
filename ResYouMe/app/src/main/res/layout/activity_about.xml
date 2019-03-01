@@ -136,8 +136,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/mirceaantonescu"
+            tools:srcCompat="@drawable/mirceaantonescu" />
 
         <TextView
             android:id="@+id/mircea_text"
@@ -149,7 +149,7 @@
             android:id="@+id/mircea_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Github Commits: 0" />
+            android:text="Github Commits: 2" />
 
         <TextView
             android:id="@+id/spacer2"
