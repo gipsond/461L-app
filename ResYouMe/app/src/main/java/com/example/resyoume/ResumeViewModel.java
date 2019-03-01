@@ -2,6 +2,9 @@ package com.example.resyoume;
 
 import android.app.Application;
 
+import com.example.resyoume.db.Resume;
+import com.example.resyoume.db.ResumeRepository;
+
 import java.util.List;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -21,17 +24,17 @@ import androidx.lifecycle.LiveData;
     because the ViewModel does not survive a process shutdown.
  */
 
-public class WordViewModel extends AndroidViewModel {
-    private WordRepository repository;
-    private LiveData<List<Word>> allWords;
+public class ResumeViewModel extends AndroidViewModel {
+    private ResumeRepository repository;
+    private LiveData<List<Resume>> allResumes;
 
-    public WordViewModel(Application application) {
+    public ResumeViewModel(Application application) {
         super(application);
-        repository = new WordRepository(application);
-        allWords = repository.getAllWords();
+        repository = new ResumeRepository(application);
+        allResumes = repository.getAllResumes();
     }
 
-    LiveData<List<Word>> getAllWords() { return allWords; }
+    public LiveData<List<Resume>> getAllResumes() { return allResumes; }
 
-    public void insert(Word word) { repository.insert(word); }
+    public void insert(Resume resume) { repository.insert(resume); }
 }

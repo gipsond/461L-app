@@ -173,7 +173,7 @@ public class ResumeParseActivity extends AppCompatActivity {
                                         }
                                         */
 
-                                        addStringToListIfExists(workphase, "country", countries_work);
+                                        addStringToListIfExists(workphase, "plaintext", plaintexts_work);
 
                                     }
                                 }
