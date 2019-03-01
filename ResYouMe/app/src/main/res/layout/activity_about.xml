@@ -116,14 +116,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/jonathanmounsif"
+            tools:srcCompat="@drawable/jonathanmounsif" />
 
         <TextView
             android:id="@+id/jonathan_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Jonathan Mounsif" />
+            android:text="Name: Jonathan Mounsif\nMajor: Computer Engineering\nResponsibilities: Company Information Page" />
 
         <TextView
             android:id="@+id/jonathan_stats"
