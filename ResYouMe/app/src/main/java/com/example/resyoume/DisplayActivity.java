@@ -67,12 +67,14 @@ public class DisplayActivity extends AppCompatActivity {
         StringBuilder eduPhasesStr = new StringBuilder("Education:\n");
         for (EducationPhase educationPhase : resume.educationPhases) {
             eduPhasesStr.append(educationPhase.getPlaintext());
+            eduPhasesStr.append('\n');
         }
         educationPhasesView.setText(eduPhasesStr.toString());
 
         StringBuilder workPhasesStr = new StringBuilder("Work Experience:\n");
         for (WorkPhase workPhase : resume.workPhases) {
             workPhasesStr.append(workPhase.getPlaintext());
+            workPhasesStr.append('\n');
         }
         workPhasesView.setText(workPhasesStr.toString());
     }

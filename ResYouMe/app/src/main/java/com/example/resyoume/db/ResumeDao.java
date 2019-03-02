@@ -32,24 +32,23 @@ abstract class ResumeDao {
     @Transaction
     void insert(Resume resume) {
         Contact contact = resume.contact;
-        insertContact(contact);
-        insertEducationPhases(contact, resume.educationPhases);
-        insertWorkPhases(contact, resume.workPhases);
+        int contactId = (int)insertContact(contact);
+        System.out.println(resume.contact.getFirstName() + " id: " + contactId);
+        insertEducationPhases(contactId, resume.educationPhases);
+        insertWorkPhases(contactId, resume.workPhases);
     }
 
 
     /* Helper Methods and Queries */
 
-    private void insertWorkPhases(Contact contact, List<WorkPhase> phases) {
-        int contactId = contact.getId();
+    private void insertWorkPhases(int contactId, List<WorkPhase> phases) {
         for (WorkPhase phase : phases) {
             phase.setContactId(contactId);
         }
         insertWorkPhases(phases);
     }
 
-    private void insertEducationPhases(Contact contact, List<EducationPhase> phases) {
-        int contactId = contact.getId();
+    private void insertEducationPhases(int contactId, List<EducationPhase> phases) {
         for (EducationPhase phase : phases) {
             phase.setContactId(contactId);
         }
@@ -57,7 +56,7 @@ abstract class ResumeDao {
     }
 
     @Insert
-    abstract void insertContact(Contact contact);
+    abstract long insertContact(Contact contact);
 
     @Insert
     abstract void insertWorkPhases(List<WorkPhase> phases);
