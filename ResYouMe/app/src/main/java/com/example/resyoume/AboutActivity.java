@@ -68,7 +68,7 @@ public class AboutActivity extends AppCompatActivity {
                                 else if(name.equals("jmounsif")){
                                     jonathan_stats.setText(stat_string);
                                 }
-                                else if(name.equals("errolwilliams")){
+                                else if(name.equals("ErrolWilliams")){
                                     errol_stats.setText(stat_string);
                                 }
                                 else if(name.equals("mantonescu101")){

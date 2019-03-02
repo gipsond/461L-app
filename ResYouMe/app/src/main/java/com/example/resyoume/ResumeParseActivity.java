@@ -1,26 +1,14 @@
 package com.example.resyoume;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.util.Base64;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,34 +19,26 @@ import com.android.volley.toolbox.Volley;
 import com.example.resyoume.db.Contact;
 import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
-import com.example.resyoume.db.ResumeRepository;
 import com.example.resyoume.db.WorkPhase;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class ResumeParseActivity extends AppCompatActivity {
 
@@ -305,7 +285,10 @@ public class ResumeParseActivity extends AppCompatActivity {
                                 );
 
                             Resume resume = new Resume(contact, educationPhases, workPhases);
-                            //resumeViewModel.insert(resume);
+                            if(resumeViewModel == null){
+                                resumeViewModel = ViewModelProviders.of(ResumeParseActivity.this).get(ResumeViewModel.class);
+                            }
+                            resumeViewModel.insert(resume);
 
                             String out = firstname + " " + lastname + ":\n" +
                                     phonenumber + "\n" +

@@ -28,7 +28,7 @@
             android:id="@+id/group_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Here are the members of team Sandpiper" />
+            android:text="Here are the members of team Sandpiper\n" />
 
         <ImageView
             android:id="@+id/erick"
@@ -43,13 +43,18 @@
             android:id="@+id/erick_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Erick Shepherd\nMajor: Computer Engineering\nBio: \nResponsibilities: NFC Module\nGithub Issues: 0\nUnit Tests: 0" />
+            android:text="Name: Erick Shepherd\nMajor: Computer Engineering\nResponsibilities: NFC Module\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/erick_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Github Commits: 0" />
+
+        <TextView
+            android:id="@+id/spacer6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/david"
@@ -63,13 +68,18 @@
             android:id="@+id/david_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: David Gipson\nMajor: Computer Engineering\nResponsibilities: Database" />
+            android:text="Name: David Gipson\nMajor: Computer Engineering\nResponsibilities: Database\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/david_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Github Commits: 0" />
+
+        <TextView
+            android:id="@+id/spacer10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/james"
@@ -91,6 +101,11 @@
             android:layout_height="wrap_content"
             android:text="Github Commits: 0" />
 
+        <TextView
+            android:id="@+id/spacer7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ImageView
             android:id="@+id/errol"
             android:layout_width="match_parent"
@@ -103,13 +118,18 @@
             android:id="@+id/errol_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Errol Williams\nMajor: Computer Engineering\nBio: \nResponsibilities: Resume Upload and Parse: 0\nUnit Tests: 0" />
+            android:text="Name: Errol Williams\nMajor: Computer Engineering\nResponsibilities: Resume Upload and Parse: 0\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/errol_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Github Commits: 0" />
+
+        <TextView
+            android:id="@+id/spacer8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/jonathan"
@@ -123,13 +143,18 @@
             android:id="@+id/jonathan_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Jonathan Mounsif\nMajor: Computer Engineering\nResponsibilities: Company Information Page" />
+            android:text="Name: Jonathan Mounsif\nMajor: Computer Engineering\nResponsibilities: Company Information Page\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/jonathan_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Github Commits: 0" />
+
+        <TextView
+            android:id="@+id/spacer9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/mircea"
@@ -143,7 +168,7 @@
             android:id="@+id/mircea_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: Mircea Antonescu\nMajor: Computer Engineering\nBio: \nResponsibilities: NFC Module\nGithub Issues: 0\nUnit Tests: 0" />
+            android:text="Name: Mircea Antonescu\nMajor: Computer Engineering\nResponsibilities: NFC Module\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/mircea_stats"
@@ -160,7 +185,7 @@
             android:id="@+id/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tools used:\nAndroid Studio\nVolley\nSQLite\n\nData Used:\nRapidParser API\nFullContact API" />
+            android:text="Tools used:\nAndroid Studio for development\nVolley for API requests\nSQLite for our resume database\n\nData Used:\nRapidParser API for resume parsing\nFullContact API for company information" />
 
         <TextView
             android:id="@+id/spacer3"
