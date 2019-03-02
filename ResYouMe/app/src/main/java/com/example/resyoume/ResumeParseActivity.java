@@ -1,6 +1,7 @@
 package com.example.resyoume;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -289,6 +291,11 @@ public class ResumeParseActivity extends AppCompatActivity {
                                 resumeViewModel = ViewModelProviders.of(ResumeParseActivity.this).get(ResumeViewModel.class);
                             }
                             resumeViewModel.insert(resume);
+                            Context context = getApplicationContext();
+                            CharSequence text = "Resume added to database";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
 
                             String out = firstname + " " + lastname + ":\n" +
                                     phonenumber + "\n" +
