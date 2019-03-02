@@ -86,14 +86,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/erickshepherd"
-            tools:srcCompat="@drawable/erickshepherd" />
+            app:srcCompat="@drawable/jamessullivan"
+            tools:srcCompat="@drawable/jamessullivan" />
 
         <TextView
             android:id="@+id/james_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: James Sullivan" />
+            android:text="Name: James Sullivan\nMajor: Electrical and Computer Engineering\nResponsibilities: Resume Formatting\nGithub Issues: 0\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/james_stats"
