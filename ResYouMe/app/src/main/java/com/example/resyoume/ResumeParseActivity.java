@@ -3,8 +3,10 @@ package com.example.resyoume;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
@@ -91,9 +93,11 @@ public class ResumeParseActivity extends AppCompatActivity {
     }
 
     public void add_resume(String resume_name) {
-        resumes.add(resume_name);
-        adapter.notifyDataSetChanged();
-        resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
+        if(!resumes.contains(resume_name)) {
+            resumes.add(resume_name);
+            adapter.notifyDataSetChanged();
+            resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
+        }
     }
 
     public void parse_resume(View view){
@@ -361,6 +365,23 @@ public class ResumeParseActivity extends AppCompatActivity {
             startActivityForResult(intent, GET_REQUEST_CODE);
     }
 
+    private String uri2filename(Uri uri) {
+
+        String ret = "";
+        String scheme = uri.getScheme();
+
+        if (scheme.equals("file")) {
+            ret = uri.getLastPathSegment();
+        }
+        else if (scheme.equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                ret = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            }
+        }
+        return ret;
+    }
+
     /**
      * callback function after user selects document
      */
@@ -383,11 +404,11 @@ public class ResumeParseActivity extends AppCompatActivity {
                     InputStream in = getContentResolver().openInputStream(uri);
                     if(in != null) {
                         byte[] bytes = IOUtils.toByteArray(in);
-                        String filename = resume_dir.getPath() + "/resume_" + uri.getLastPathSegment() + ".pdf";
-                        File destination = new File(filename);
+                        String upload_filename = uri2filename(uri);
+                        File destination = new File(resume_dir,upload_filename);
                         FileOutputStream out = new FileOutputStream(destination.getPath());
                         out.write(bytes);
-                        add_resume(filename);
+                        add_resume(upload_filename);
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
