@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModelProviders;
 import io.reactivex.Single;
 
 import android.os.Bundle;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.resyoume.db.Contact;
@@ -42,6 +45,13 @@ public class DisplayActivity extends AppCompatActivity {
         final TextView publicationsView;
         final TextView educationPhasesView;
         final TextView workPhasesView;
+
+
+        LinearLayout ll = new LinearLayout(this);
+        ScrollView resumeView = new ScrollView(this);
+
+        resumeView = findViewById(R.id.resumeview);
+
 
         resumeHeader = findViewById(R.id.resumeHeader);
         addressView = findViewById(R.id.addressView);
