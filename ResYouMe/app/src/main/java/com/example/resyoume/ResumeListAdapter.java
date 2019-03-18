@@ -1,7 +1,10 @@
 package com.example.resyoume;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.ResumeViewHolder> {
 
-    class ResumeViewHolder extends RecyclerView.ViewHolder {
+    class ResumeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView resumeHeader;
         private final TextView addressView;
         private final TextView addressView2;
@@ -28,6 +31,8 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
         private final TextView publicationsView;
         private final TextView educationPhasesView;
         private final TextView workPhasesView;
+
+        private Resume resume;
 
         private ResumeViewHolder(View itemView) {
             super(itemView);
@@ -41,11 +46,24 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             publicationsView = itemView.findViewById(R.id.publicationsView);
             educationPhasesView = itemView.findViewById(R.id.educationPhasesView);
             workPhasesView = itemView.findViewById(R.id.workPhasesView);
+
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        public Resume getResume() {
+            return resume;
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Share Resume for " + resume.contact.getFirstName() + " " + resume.contact.getLastName() + "?");
+            menu.add(Menu.NONE, R.id.ctx_menu_send_by_nfc, Menu.NONE, R.string.send_by_nfc);
         }
     }
 
     private final LayoutInflater inflater;
     private List<Resume> resumes; // Cached copy of words
+    private int position;
 
     ResumeListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -62,6 +80,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
         if (resumes != null) {
             Resume current = resumes.get(position);
             Contact contact = current.contact;
+            holder.resume = current;
             holder.resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
             holder.addressView.setText(contact.getAddress());
             holder.addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
@@ -87,11 +106,34 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             // Covers the case of data not being ready yet.
             holder.resumeHeader.setText("Loading...");
         }
+
+        holder.itemView.setOnLongClickListener(view -> {
+            setPosition(holder.getLayoutPosition());
+            return false;
+        });
+    }
+
+    @Override
+    public void onViewRecycled(ResumeViewHolder holder) {
+        holder.itemView.setOnLongClickListener(null);
+        super.onViewRecycled(holder);
     }
 
     public void setResumes(List<Resume> resumes) {
         this.resumes = resumes;
         notifyDataSetChanged();
+    }
+
+    public Resume getResume(int position) {
+        return resumes.get(position);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     // getItemCount() is called many times, and when it is first called,
