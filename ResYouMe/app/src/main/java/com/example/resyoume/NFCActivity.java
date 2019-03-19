@@ -31,6 +31,11 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         if(!nfc_adapter.isEnabled()) {
             return;
         }
+        Intent intent = getIntent();
+        String contact = intent.getStringExtra("contactJSON");
+        if(contact != null){
+            message.setText(contact);
+        }
     }
 
     public void send_nfc(View view){
