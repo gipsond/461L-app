@@ -1,5 +1,7 @@
 package com.example.resyoume.db;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -60,6 +62,29 @@ public class Contact {
         this.plaintext = plaintext;
     }
 
+    public Contact(String contact){
+        try {
+            JSONObject contactJSON = new JSONObject(contact);
+            this.id = contactJSON.getInt("id");
+            this.firstName = contactJSON.getString("firstName");
+            this.lastName = contactJSON.getString("lastName");
+            this.title = contactJSON.getString("title");
+            this.address = contactJSON.getString("address");
+            this.postcode = contactJSON.getString("postcode");
+            this.city = contactJSON.getString("city");
+            this.state = contactJSON.getString("state");
+            this.country = contactJSON.getString("country");
+            this.email = contactJSON.getString("email");
+            this.phoneNumber = contactJSON.getString("phoneNumber");
+            this.homepage = contactJSON.getString("homepage");
+            this.interests = contactJSON.getString("interests");
+            this.publications = contactJSON.getString("publications");
+            this.plaintext = contactJSON.getString("plaintext");
+        }
+        catch (JSONException e) {
+
+        }
+    }
 
     /* Getters */
 
@@ -184,5 +209,27 @@ public class Contact {
 
     public void setPlaintext(String plaintext) {
         this.plaintext = plaintext;
+    }
+
+    /* JSON functions */
+
+    public String toJSONString() throws JSONException {
+        JSONObject contact = new JSONObject();
+        contact.put("id",this.id);
+        contact.put("firstName", this.firstName);
+        contact.put("lastName", this.lastName);
+        contact.put("title", this.title);
+        contact.put("address", this.address);
+        contact.put("postcode", this.postcode);
+        contact.put("city", this.city);
+        contact.put("state", this.state);
+        contact.put("country", this.country);
+        contact.put("email", this.email);
+        contact.put("phoneNumber", this.phoneNumber);
+        contact.put("homepage", this.homepage);
+        contact.put("interests", this.interests);
+        contact.put("publications", this.publications);
+        contact.put("plaintext", this.plaintext);
+        return contact.toString();
     }
 }

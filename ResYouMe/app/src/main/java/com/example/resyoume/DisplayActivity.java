@@ -1,12 +1,8 @@
 package com.example.resyoume;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProviders;
-import io.reactivex.Single;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.HorizontalScrollView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -16,7 +12,10 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
-import java.util.List;
+import org.json.JSONException;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class DisplayActivity extends AppCompatActivity {
 
@@ -87,5 +86,15 @@ public class DisplayActivity extends AppCompatActivity {
             workPhasesStr.append('\n');
         }
         workPhasesView.setText(workPhasesStr.toString());
+    }
+
+    /* NFC Functions */
+    public void shareResume(View view){
+        Intent nfc_intent = new Intent(this, NFCActivity.class);
+        try {
+            nfc_intent.putExtra("contactJSON", this.resume.contact.toJSONString());
+        }
+        catch (JSONException e) {}
+        startActivity(nfc_intent);
     }
 }
