@@ -1,9 +1,12 @@
 package com.example.resyoume;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.resyoume.db.Resume;
+
+import org.json.JSONException;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.MenuItemHoverListener;
@@ -54,7 +57,12 @@ public class DatabaseActivity extends AppCompatActivity {
             case R.id.ctx_menu_send_by_nfc: {
                 ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
                 Resume resume = rvh.getResume();
-                // TODO: Create Intent to send resume as String to NFC Activity (should be easy as pie)
+                Intent nfc_intent = new Intent(this, NFCActivity.class);
+                try {
+                    nfc_intent.putExtra("contactJSON", resume.contact.toJSONString());
+                }
+                catch (JSONException e) {}
+                startActivity(nfc_intent);
                 break;
             }
         }
