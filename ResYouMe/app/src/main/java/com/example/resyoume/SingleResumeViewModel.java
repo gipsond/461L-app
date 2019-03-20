@@ -22,4 +22,6 @@ public class SingleResumeViewModel extends AndroidViewModel {
 
     public LiveData<Resume> getResume() { return resume; }
 
+    public void insert(Resume resume) { repository.insert(resume); }
+
 }

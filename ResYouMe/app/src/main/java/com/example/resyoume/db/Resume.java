@@ -26,14 +26,16 @@ public class Resume {
         this.workPhases = workPhases;
     }
 
-    public Resume(String resumeJson){
+    public Resume(String resumeJson) {
         try {
+            // TODO: handle malformed JSON gracefully (currently crashes due to NullPointerException)
             JSONArray resume = new JSONArray(resumeJson);
             this.contact = new Contact(resume.getJSONObject(0));
             this.educationPhases = getEducationList(resume.getJSONArray(1));
             this.workPhases = getWorkList(resume.getJSONArray(2));
         }
         catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

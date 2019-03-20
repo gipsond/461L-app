@@ -11,12 +11,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.resyoume.db.Resume;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback{
     NfcAdapter nfc_adapter;
     EditText message;
     TextView response;
+    SingleResumeViewModel resumeViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         if(contact != null){
             message.setText(contact);
         }
+        resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
     }
 
     public void send_nfc(View view){
@@ -69,5 +74,12 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             NdefMessage msg = (NdefMessage) raw_messages[0];
             response.setText(new String(msg.getRecords()[0].getPayload()));
         }
+    }
+
+    public void saveResponseToDB(View view) {
+        if (resumeViewModel == null) {
+            resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+        }
+        resumeViewModel.insert(new Resume(response.getText().toString()));
     }
 }
