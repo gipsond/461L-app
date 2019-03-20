@@ -1,6 +1,8 @@
 package com.example.resyoume.db;
 
-import androidx.annotation.NonNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -36,6 +38,19 @@ public class WorkPhase {
         this.plaintext = plaintext;
     }
 
+    public WorkPhase(JSONObject workJson){
+        try {
+            this.id = workJson.getInt("id");
+            this.contactId = workJson.getInt("contactId");
+            this.dateFrom = workJson.getString("dateFrom");
+            this.dateTo = workJson.getString("dateTo");
+            this.function = workJson.getString("function");
+            this.company = workJson.getString("company");
+            this.country = workJson.getString("country");
+            this.plaintext = workJson.getString("plaintext");
+        }
+        catch (JSONException e) {}
+    }
 
     /* Getters */
 
@@ -106,4 +121,18 @@ public class WorkPhase {
         this.plaintext = plaintext;
     }
 
+    /* JSON Functions */
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject work = new JSONObject();
+        work.put("id", this.id);
+        work.put("contactId", this.contactId);
+        work.put("dateFrom", this.dateFrom);
+        work.put("dateTo", this.dateTo);
+        work.put("function", this.function);
+        work.put("company", this.company);
+        work.put("country", this.country);
+        work.put("plaintext", this.plaintext);
+        return work;
+    }
 }

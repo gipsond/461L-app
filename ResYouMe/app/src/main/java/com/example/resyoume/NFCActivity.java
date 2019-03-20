@@ -32,7 +32,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             return;
         }
         Intent intent = getIntent();
-        String contact = intent.getStringExtra("contactJSON");
+        String contact = intent.getStringExtra("resumeJSON");
         if(contact != null){
             message.setText(contact);
         }

@@ -1,5 +1,8 @@
 package com.example.resyoume.db;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -34,6 +37,18 @@ public class EducationPhase {
         this.plaintext = plaintext;
     }
 
+    public EducationPhase(JSONObject educationJson){
+        try {
+            this.id = educationJson.getInt("id");
+            this.contactId = educationJson.getInt("contactId");
+            this.dateFrom = educationJson.getString("dateFrom");
+            this.dateTo = educationJson.getString("dateTo");
+            this.schoolName = educationJson.getString("schoolName");
+            this.country = educationJson.getString("country");
+            this.plaintext = educationJson.getString("plaintext");
+        }
+        catch (JSONException e) {}
+    }
 
     /* Getters */
 
@@ -96,4 +111,17 @@ public class EducationPhase {
         this.plaintext = plaintext;
     }
 
+    /* JSON Functions */
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject education = new JSONObject();
+        education.put("id", this.id);
+        education.put("contactId", this.contactId);
+        education.put("dateFrom", this.dateFrom);
+        education.put("dateTo", this.dateTo);
+        education.put("schoolName", this.schoolName);
+        education.put("country", this.country);
+        education.put("plaintext", this.plaintext);
+        return education;
+    }
 }

@@ -62,28 +62,25 @@ public class Contact {
         this.plaintext = plaintext;
     }
 
-    public Contact(String contact){
+    public Contact(JSONObject contactJson){
         try {
-            JSONObject contactJSON = new JSONObject(contact);
-            this.id = contactJSON.getInt("id");
-            this.firstName = contactJSON.getString("firstName");
-            this.lastName = contactJSON.getString("lastName");
-            this.title = contactJSON.getString("title");
-            this.address = contactJSON.getString("address");
-            this.postcode = contactJSON.getString("postcode");
-            this.city = contactJSON.getString("city");
-            this.state = contactJSON.getString("state");
-            this.country = contactJSON.getString("country");
-            this.email = contactJSON.getString("email");
-            this.phoneNumber = contactJSON.getString("phoneNumber");
-            this.homepage = contactJSON.getString("homepage");
-            this.interests = contactJSON.getString("interests");
-            this.publications = contactJSON.getString("publications");
-            this.plaintext = contactJSON.getString("plaintext");
+            this.id = contactJson.getInt("id");
+            this.firstName = contactJson.getString("firstName");
+            this.lastName = contactJson.getString("lastName");
+            this.title = contactJson.getString("title");
+            this.address = contactJson.getString("address");
+            this.postcode = contactJson.getString("postcode");
+            this.city = contactJson.getString("city");
+            this.state = contactJson.getString("state");
+            this.country = contactJson.getString("country");
+            this.email = contactJson.getString("email");
+            this.phoneNumber = contactJson.getString("phoneNumber");
+            this.homepage = contactJson.getString("homepage");
+            this.interests = contactJson.getString("interests");
+            this.publications = contactJson.getString("publications");
+            this.plaintext = contactJson.getString("plaintext");
         }
-        catch (JSONException e) {
-
-        }
+        catch (JSONException e) {}
     }
 
     /* Getters */
@@ -213,7 +210,7 @@ public class Contact {
 
     /* JSON functions */
 
-    public String toJSONString() throws JSONException {
+    public JSONObject toJSONObject() throws JSONException {
         JSONObject contact = new JSONObject();
         contact.put("id",this.id);
         contact.put("firstName", this.firstName);
@@ -230,6 +227,6 @@ public class Contact {
         contact.put("interests", this.interests);
         contact.put("publications", this.publications);
         contact.put("plaintext", this.plaintext);
-        return contact.toString();
+        return contact;
     }
 }

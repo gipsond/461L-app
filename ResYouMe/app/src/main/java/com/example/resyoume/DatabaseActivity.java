@@ -9,9 +9,7 @@ import com.example.resyoume.db.Resume;
 import org.json.JSONException;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.MenuItemHoverListener;
 import androidx.appcompat.widget.Toolbar;
-
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +57,7 @@ public class DatabaseActivity extends AppCompatActivity {
                 Resume resume = rvh.getResume();
                 Intent nfc_intent = new Intent(this, NFCActivity.class);
                 try {
-                    nfc_intent.putExtra("contactJSON", resume.contact.toJSONString());
+                    nfc_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
                 }
                 catch (JSONException e) {}
                 startActivity(nfc_intent);
