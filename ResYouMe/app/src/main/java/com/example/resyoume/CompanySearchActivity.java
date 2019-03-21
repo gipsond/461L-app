@@ -23,7 +23,7 @@ import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CompanySearch extends AppCompatActivity {
+public class CompanySearchActivity extends AppCompatActivity {
 
     EditText CompanyDomainName;
     TextView CompanyInfo_TextView;

@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompanyData"></activity>
+        <activity android:name=".CompanyDataActivity"></activity>
         <activity android:name=".DisplayActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ResumeParseActivity" />
@@ -23,7 +23,7 @@
             android:name=".DatabaseActivity"
             android:label="@string/title_activity_database"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CompanySearch" />
+        <activity android:name=".CompanySearchActivity" />
         <activity android:name=".NFCActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
