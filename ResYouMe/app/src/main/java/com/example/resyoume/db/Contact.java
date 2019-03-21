@@ -229,4 +229,22 @@ public class Contact {
         contact.put("plaintext", this.plaintext);
         return contact;
     }
+
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+        Contact contact = (Contact) o;
+        return (contact.getId() == this.id && contact.getFirstName().equals(this.firstName) && contact.getLastName().equals(this.lastName)
+                && contact.getTitle().equals(this.title) && contact.getAddress().equals(this.address) && contact.getPostcode().equals(this.postcode)
+                && contact.getCity().equals(this.city) && contact.getState().equals(this.state) && contact.getCountry().equals(this.country)
+                && contact.getEmail().equals(this.email) && contact.getPhoneNumber().equals(this.phoneNumber) && contact.getHomepage().equals(this.homepage)
+                && contact.getInterests().equals(this.interests) && contact.getPublications().equals(this.publications) && contact.getPlaintext().equals(this.plaintext));
+    }
 }

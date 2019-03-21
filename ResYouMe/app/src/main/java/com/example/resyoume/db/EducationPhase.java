@@ -124,4 +124,20 @@ public class EducationPhase {
         education.put("plaintext", this.plaintext);
         return education;
     }
+
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+        EducationPhase education = (EducationPhase) o;
+        return (education.getId() == this.id && education.getContactId() == this.contactId && education.getDateFrom().equals(this.dateFrom)
+                && education.getDateTo().equals(this.dateTo) && education.getSchoolName().equals(this.schoolName) && education.getCountry().equals(this.country)
+                && education.getPlaintext().equals(this.plaintext));
+    }
 }

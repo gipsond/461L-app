@@ -135,4 +135,20 @@ public class WorkPhase {
         work.put("plaintext", this.plaintext);
         return work;
     }
+
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+        WorkPhase work = (WorkPhase) o;
+        return (work.getId() == this.id && work.getContactId() == this.contactId && work.getDateFrom().equals(this.dateFrom)
+                && work.getDateTo().equals(this.dateTo) && work.getFunction().equals(this.function) && work.getCountry().equals(this.country)
+                && work.getPlaintext().equals(this.plaintext) && work.getCompany().equals(this.company));
+    }
 }
