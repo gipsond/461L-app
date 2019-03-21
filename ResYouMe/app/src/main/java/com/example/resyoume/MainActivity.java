@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickCompany(View view){
-        Intent company_intent = new Intent(this, CompanyInfo.class);
+        Intent company_intent = new Intent(this, CompanySearch.class);
         startActivity(company_intent);
     }
 

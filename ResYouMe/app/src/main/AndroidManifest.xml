@@ -22,7 +22,7 @@
             android:name=".DatabaseActivity"
             android:label="@string/title_activity_database"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CompanyInfo" />
+        <activity android:name=".CompanySearch" />
         <activity android:name=".NFCActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
