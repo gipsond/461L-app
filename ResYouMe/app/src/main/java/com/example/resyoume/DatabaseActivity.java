@@ -3,6 +3,10 @@ package com.example.resyoume;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.resyoume.db.Resume;
 
@@ -14,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DatabaseActivity extends AppCompatActivity {
+public class DatabaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ResumeViewModel resumeViewModel;
     private RecyclerView recyclerView;
@@ -35,6 +39,14 @@ public class DatabaseActivity extends AppCompatActivity {
         resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
         resumeViewModel.getAllResumes().observe(this, adapter::setResumes);
 
+        Spinner spinner = (Spinner) findViewById(R.id.style_spinner);
+        spinner.setOnItemSelectedListener(this);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> style_adapter = ArrayAdapter.createFromResource(this, R.array.styles, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        style_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(style_adapter);
     }
 
     /**
@@ -78,4 +90,14 @@ public class DatabaseActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    // style selector function
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        Object item = parent.getItemAtPosition(pos);
+        String name = parent.getItemAtPosition(pos).toString();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
 }
