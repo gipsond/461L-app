@@ -38,6 +38,9 @@ public class EducationPhase {
     }
 
     public EducationPhase(JSONObject educationJson){
+        if(educationJson == null){
+            return;
+        }
         try {
             this.id = educationJson.getInt("id");
             this.contactId = educationJson.getInt("contactId");
@@ -48,6 +51,10 @@ public class EducationPhase {
             this.plaintext = educationJson.getString("plaintext");
         }
         catch (JSONException e) {}
+    }
+
+    public EducationPhase(){
+
     }
 
     /* Getters */
@@ -136,8 +143,65 @@ public class EducationPhase {
             return false;
         }
         EducationPhase education = (EducationPhase) o;
-        return (education.getId() == this.id && education.getContactId() == this.contactId && education.getDateFrom().equals(this.dateFrom)
-                && education.getDateTo().equals(this.dateTo) && education.getSchoolName().equals(this.schoolName) && education.getCountry().equals(this.country)
-                && education.getPlaintext().equals(this.plaintext));
+
+        if(education.getId() != this.id){return false;}
+
+        if(education.getContactId() != this.contactId){return false;}
+
+        if(education.getDateFrom() == null || this.dateFrom == null){
+            if(!(education.getDateFrom() == null && this.dateFrom == null)){
+                return false;
+            }
+        }
+        else{
+            if(!education.getDateFrom().equals(this.dateFrom)){
+                return false;
+            }
+        }
+
+        if(education.getDateTo() == null || this.dateTo == null){
+            if(!(education.getDateTo() == null && this.dateTo == null)){
+                return false;
+            }
+        }
+        else{
+            if(!education.getDateTo().equals(this.dateTo)){
+                return false;
+            }
+        }
+
+        if(education.getSchoolName() == null || this.schoolName == null){
+            if(!(education.getSchoolName() == null && this.schoolName == null)){
+                return false;
+            }
+        }
+        else{
+            if(!education.getSchoolName().equals(this.schoolName)){
+                return false;
+            }
+        }
+
+        if(education.getCountry() == null || this.country == null){
+            if(!(education.getCountry() == null && this.country== null)){
+                return false;
+            }
+        }
+        else{
+            if(!education.getCountry().equals(this.country)){
+                return false;
+            }
+        }
+
+        if(education.getPlaintext() == null || this.plaintext == null){
+            if(!(education.getPlaintext() == null && this.plaintext == null)){
+                return false;
+            }
+        }
+        else{
+            if(!education.getPlaintext().equals(this.plaintext)){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -39,6 +39,9 @@ public class WorkPhase {
     }
 
     public WorkPhase(JSONObject workJson){
+        if(workJson == null){
+            return;
+        }
         try {
             this.id = workJson.getInt("id");
             this.contactId = workJson.getInt("contactId");
@@ -50,6 +53,10 @@ public class WorkPhase {
             this.plaintext = workJson.getString("plaintext");
         }
         catch (JSONException e) {}
+    }
+
+    public WorkPhase(){
+
     }
 
     /* Getters */
@@ -147,8 +154,76 @@ public class WorkPhase {
             return false;
         }
         WorkPhase work = (WorkPhase) o;
-        return (work.getId() == this.id && work.getContactId() == this.contactId && work.getDateFrom().equals(this.dateFrom)
-                && work.getDateTo().equals(this.dateTo) && work.getFunction().equals(this.function) && work.getCountry().equals(this.country)
-                && work.getPlaintext().equals(this.plaintext) && work.getCompany().equals(this.company));
+
+        if(work.getId() != this.id){return false;}
+
+        if(work.getContactId() != this.contactId){return false;}
+
+        if(work.getDateFrom() == null || this.dateFrom == null){
+            if(!(work.getDateFrom() == null && this.dateFrom == null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getDateFrom().equals(this.dateFrom)){
+                return false;
+            }
+        }
+
+        if(work.getDateTo() == null || this.dateTo == null){
+            if(!(work.getDateTo() == null && this.dateTo == null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getDateTo().equals(this.dateTo)){
+                return false;
+            }
+        }
+
+        if(work.getFunction() == null || this.function == null){
+            if(!(work.getFunction() == null && this.function == null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getFunction().equals(this.function)){
+                return false;
+            }
+        }
+
+        if(work.getCompany() == null || this.company == null){
+            if(!(work.getCompany() == null && this.company == null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getCompany().equals(this.company)){
+                return false;
+            }
+        }
+
+        if(work.getCountry() == null || this.country == null){
+            if(!(work.getCountry() == null && this.country== null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getCountry().equals(this.country)){
+                return false;
+            }
+        }
+
+        if(work.getPlaintext() == null || this.plaintext == null){
+            if(!(work.getPlaintext() == null && this.plaintext == null)){
+                return false;
+            }
+        }
+        else{
+            if(!work.getPlaintext().equals(this.plaintext)){
+                return false;
+            }
+        }
+        return true;
     }
 }

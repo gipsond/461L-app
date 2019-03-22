@@ -63,6 +63,9 @@ public class Contact {
     }
 
     public Contact(JSONObject contactJson){
+        if(contactJson == null){
+            return;
+        }
         try {
             this.id = contactJson.getInt("id");
             this.firstName = contactJson.getString("firstName");
@@ -81,6 +84,10 @@ public class Contact {
             this.plaintext = contactJson.getString("plaintext");
         }
         catch (JSONException e) {}
+    }
+
+    public Contact(){
+
     }
 
     /* Getters */
@@ -230,6 +237,7 @@ public class Contact {
         return contact;
     }
 
+    // doesnt handle null fields
     public boolean equals(Object o){
         if(this == o){
             return true;
@@ -241,10 +249,162 @@ public class Contact {
             return false;
         }
         Contact contact = (Contact) o;
-        return (contact.getId() == this.id && contact.getFirstName().equals(this.firstName) && contact.getLastName().equals(this.lastName)
-                && contact.getTitle().equals(this.title) && contact.getAddress().equals(this.address) && contact.getPostcode().equals(this.postcode)
-                && contact.getCity().equals(this.city) && contact.getState().equals(this.state) && contact.getCountry().equals(this.country)
-                && contact.getEmail().equals(this.email) && contact.getPhoneNumber().equals(this.phoneNumber) && contact.getHomepage().equals(this.homepage)
-                && contact.getInterests().equals(this.interests) && contact.getPublications().equals(this.publications) && contact.getPlaintext().equals(this.plaintext));
+
+        if(contact.id != this.id){return false;}
+
+        if(contact.getFirstName() == null || this.firstName == null){
+            if(!(contact.getFirstName() == null && this.firstName == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getFirstName().equals(this.firstName)){
+                return false;
+            }
+        }
+
+        if(contact.getLastName() == null || this.lastName == null){
+            if(!(contact.getLastName() == null && this.lastName == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getLastName().equals(this.lastName)){
+                return false;
+            }
+        }
+
+        if(contact.getTitle() == null || this.title == null){
+            if(!(contact.getTitle() == null && this.title == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getTitle().equals(this.title)){
+                return false;
+            }
+        }
+
+        if(contact.getAddress() == null || this.address == null){
+            if(!(contact.getAddress() == null && this.address == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getAddress().equals(this.address)){
+                return false;
+            }
+        }
+
+        if(contact.getPostcode() == null || this.postcode == null){
+            if(!(contact.getPostcode() == null && this.postcode == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getPostcode().equals(this.postcode)){
+                return false;
+            }
+        }
+
+        if(contact.getCity() == null || this.city == null){
+            if(!(contact.getCity() == null && this.city == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getCity().equals(this.city)){
+                return false;
+            }
+        }
+
+        if(contact.getState() == null || this.state == null){
+            if(!(contact.getState() == null && this.state == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getState().equals(this.state)){
+                return false;
+            }
+        }
+
+        if(contact.getCountry() == null || this.country == null){
+            if(!(contact.getCountry() == null && this.country == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getCountry().equals(this.country)){
+                return false;
+            }
+        }
+
+        if(contact.getEmail() == null || this.email == null){
+            if(!(contact.getEmail() == null && this.email == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getEmail().equals(this.email)){
+                return false;
+            }
+        }
+
+        if(contact.getPhoneNumber() == null || this.phoneNumber == null){
+            if(!(contact.getPhoneNumber() == null && this.phoneNumber == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getPhoneNumber().equals(this.phoneNumber)){
+                return false;
+            }
+        }
+
+        if(contact.getHomepage() == null || this.homepage == null){
+            if(!(contact.getHomepage() == null && this.homepage == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getHomepage().equals(this.homepage)){
+                return false;
+            }
+        }
+
+        if(contact.getInterests() == null || this.interests == null){
+            if(!(contact.getInterests() == null && this.interests == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getInterests().equals(this.interests)){
+                return false;
+            }
+        }
+
+        if(contact.getPublications() == null || this.publications == null){
+            if(!(contact.getPublications() == null && this.publications == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getPublications().equals(this.publications)){
+                return false;
+            }
+        }
+
+        if(contact.getPlaintext() == null || this.plaintext == null){
+            if(!(contact.getPlaintext() == null && this.plaintext == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getPlaintext().equals(this.plaintext)){
+                return false;
+            }
+        }
+        return true;
     }
 }

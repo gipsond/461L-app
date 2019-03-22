@@ -26,17 +26,28 @@ public class Resume {
         this.workPhases = workPhases;
     }
 
-    public Resume(String resumeJson) {
+    public Resume(JSONArray resume) {
+        if(resume == null){
+            return;
+        }
         try {
             // TODO: handle malformed JSON gracefully (currently crashes due to NullPointerException)
-            JSONArray resume = new JSONArray(resumeJson);
-            this.contact = new Contact(resume.getJSONObject(0));
-            this.educationPhases = getEducationList(resume.getJSONArray(1));
-            this.workPhases = getWorkList(resume.getJSONArray(2));
+            if(resume.length() == 3) {
+                JSONObject contact = resume.getJSONObject(0);
+                JSONArray education = resume.getJSONArray(1);
+                JSONArray work = resume.getJSONArray(2);
+                this.contact = new Contact(resume.getJSONObject(0));
+                this.educationPhases = getEducationList(resume.getJSONArray(1));
+                this.workPhases = getWorkList(resume.getJSONArray(2));
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Resume(){
+
     }
 
     public JSONArray toJSONArray() throws JSONException {
@@ -83,5 +94,69 @@ public class Resume {
             work.put(item);
         }
         return work;
+    }
+
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+        Resume resume = (Resume) o;
+
+        if(resume.contact == null || this.contact == null){
+            if(!(resume.contact == null && this.contact == null)){
+                return false;
+            }
+        }
+        else{
+            if(!resume.contact.equals(this.contact)){
+                return false;
+            }
+        }
+
+        if(resume.educationPhases == null || this.educationPhases == null){
+            if(!(resume.educationPhases == null && this.educationPhases == null)){
+                return false;
+            }
+        }
+        else{
+            if(resume.educationPhases.size() == this.educationPhases.size()){
+                int x;
+                for(x = 0; x < this.educationPhases.size(); x++){
+                    if(!resume.educationPhases.get(x).equals(this.educationPhases.get(x))){
+                        return false;
+                    }
+                }
+            }
+            else{
+                return false;
+            }
+        }
+
+        if(resume.workPhases == null || this.workPhases == null){
+            if(!(resume.workPhases == null && this.workPhases == null)){
+                return false;
+            }
+        }
+        else{
+            if(resume.workPhases.size() == this.workPhases.size()){
+                int x;
+                for(x = 0; x < this.workPhases.size(); x++){
+                    if(!resume.workPhases.get(x).equals(this.workPhases.get(x))){
+                        return false;
+                    }
+                }
+            }
+            else{
+                return false;
+            }
+        }
+
+        return true;
     }
 }

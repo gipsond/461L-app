@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.example.resyoume.db.Resume;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -26,13 +30,16 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
+        TextView status = (TextView) findViewById(R.id.NFCStatus);
         message = (EditText) findViewById(R.id.SendText);
         response = (TextView) findViewById(R.id.ReceiveText);
         nfc_adapter = NfcAdapter.getDefaultAdapter(this);
         if(nfc_adapter == null){
+            status.setText("Could not access NFC adapter");
             return;
         }
         if(!nfc_adapter.isEnabled()) {
+            status.setText("NFC adapter is disabled");
             return;
         }
         Intent intent = getIntent();
@@ -76,10 +83,23 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
     }
 
-    public void saveResponseToDB(View view) {
+    public void saveResponseToDB(View view) throws JSONException {
         if (resumeViewModel == null) {
             resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         }
-        resumeViewModel.insert(new Resume(response.getText().toString()));
+        // only insert the resume if all of the response types are correct and array size is 3
+        try{
+            JSONArray responseJson = new JSONArray(response.getText().toString());
+            if(responseJson.length() == 3){
+                JSONObject contact = responseJson.getJSONObject(0);
+                JSONArray education = responseJson.getJSONArray(1);
+                JSONArray work = responseJson.getJSONArray(2);
+                Resume resume = new Resume(responseJson);
+                resumeViewModel.insert(resume);
+            }
+        }
+        catch(Exception e){
+            //e.printStackTrace();
+        }
     }
 }
