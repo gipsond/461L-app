@@ -43,9 +43,9 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             return;
         }
         Intent intent = getIntent();
-        String contact = intent.getStringExtra("resumeJSON");
-        if(contact != null){
-            message.setText(contact);
+        String resume = intent.getStringExtra("resumeJSON");
+        if(resume != null){
+            message.setText(resume);
         }
         resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
     }

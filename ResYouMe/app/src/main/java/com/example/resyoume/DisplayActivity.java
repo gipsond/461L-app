@@ -12,6 +12,7 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,17 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
         singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
-        singleResumeViewModel.getResume().observe(this, this::setResume);
+        //singleResumeViewModel.getResume().observe(this, this::setResume);
+        Intent intent = getIntent();
+        String resumeString = intent.getStringExtra("resumeJSON");
+        if(resumeString != null){
+            try {
+                JSONArray resumeJson = new JSONArray(resumeString);
+                Resume resume = new Resume(resumeJson);
+                setResume(resume);
+            }
+            catch (JSONException e) {}
+        }
     }
 
     private void setResume(Resume resume) {

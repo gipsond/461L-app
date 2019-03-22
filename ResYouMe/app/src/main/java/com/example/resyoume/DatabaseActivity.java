@@ -63,6 +63,17 @@ public class DatabaseActivity extends AppCompatActivity {
                 startActivity(nfc_intent);
                 break;
             }
+            case R.id.ctx_menu_display:{
+                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
+                Resume resume = rvh.getResume();
+                Intent display_intent = new Intent(this, DisplayActivity.class);
+                try {
+                    display_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
+                }
+                catch (JSONException e) {}
+                startActivity(display_intent);
+                break;
+            }
         }
         return super.onContextItemSelected(item);
     }

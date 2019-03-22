@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="ctx_menu_send_by_nfc" type="id"></item>
+    <item name="ctx_menu_display" type="id"></item>
 </resources>
