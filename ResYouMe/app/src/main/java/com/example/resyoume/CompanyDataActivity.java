@@ -2,8 +2,12 @@ package com.example.resyoume;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +17,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -29,6 +37,8 @@ public class CompanyDataActivity extends AppCompatActivity {
     private TextInputLayout textInputURL;
     private TextInputLayout textInputAdditionalInfo;
     JSONObject CompanyInfo;
+    String domainName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +46,15 @@ public class CompanyDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_data);
         textInputURL = findViewById(R.id.text_input_URL);
         textInputAdditionalInfo = findViewById(R.id.text_input_additionalInfo);
-        CompanyInfo = new JSONObject();
     }
-    private void getCompanyInfo(String domainName) {
+
+    // See https://stackoverflow.com/questions/28120029/how-can-i-return-value-from-function-onresponse-of-volley
+    // for details on callback code
+    public interface VolleyCallback{
+        void onSuccess(JSONObject result);
+    }
+
+    public void getCompanyInfo(final VolleyCallback callback) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String url = "https://api.fullcontact.com/v3/company.enrich";
@@ -49,12 +65,13 @@ public class CompanyDataActivity extends AppCompatActivity {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, body, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    // Save to CompanyInfo
+                    callback.onSuccess(response);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //onBackPressed();
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    onBackPressed();
                 }
             }) {
                 @Override
@@ -70,12 +87,18 @@ public class CompanyDataActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     public void saveButton(View v) {
         String url = textInputURL.getEditText().getText().toString();
-        getCompanyInfo(url);
+        String additionalInfo = textInputAdditionalInfo.getEditText().getText().toString();
+        domainName = url;
+        getCompanyInfo(new VolleyCallback(){
+            @Override
+            public void onSuccess(JSONObject result){
+                CompanyInfo = result;
+                // result contains the JSONObject received from the company API
+                // From here send CompanyInfo + additionalInfo to database?
+            }
+        });
         Toast.makeText(this, "Data Saved" , Toast.LENGTH_SHORT).show();
-        // CompanyInfo stores the JSON received from the CompanyAPI
-        // Add to the database/NFC here?
     }
 }
