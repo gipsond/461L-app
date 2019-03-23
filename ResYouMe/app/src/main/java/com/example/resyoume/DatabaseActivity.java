@@ -22,6 +22,7 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
 
     private ResumeViewModel resumeViewModel;
     private RecyclerView recyclerView;
+    private String style;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,26 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                 ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
                 Resume resume = rvh.getResume();
                 Intent display_intent = new Intent(this, DisplayActivity.class);
+                switch(style){
+                    case "Style 1":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                    case "Style 2":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                    case "Style 3":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                    case "Style 4":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                    case "Style 5":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                    case "Style 6":{
+                        display_intent = new Intent(this, DisplayActivity.class);
+                    }
+                }
                 try {
                     display_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
                 }
@@ -93,8 +114,8 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
     // style selector function
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-        Object item = parent.getItemAtPosition(pos);
         String name = parent.getItemAtPosition(pos).toString();
+        this.style = name;
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
