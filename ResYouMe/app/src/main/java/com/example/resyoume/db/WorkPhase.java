@@ -43,8 +43,8 @@ public class WorkPhase {
             return;
         }
         try {
-            this.id = workJson.getInt("id");
-            this.contactId = workJson.getInt("contactId");
+            this.id = 0;
+            this.contactId = 0;
             this.dateFrom = workJson.getString("dateFrom");
             this.dateTo = workJson.getString("dateTo");
             this.function = workJson.getString("function");

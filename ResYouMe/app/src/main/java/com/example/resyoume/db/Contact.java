@@ -67,7 +67,7 @@ public class Contact {
             return;
         }
         try {
-            this.id = contactJson.getInt("id");
+            this.id = 0;
             this.firstName = contactJson.getString("firstName");
             this.lastName = contactJson.getString("lastName");
             this.title = contactJson.getString("title");

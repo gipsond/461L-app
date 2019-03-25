@@ -42,8 +42,8 @@ public class EducationPhase {
             return;
         }
         try {
-            this.id = educationJson.getInt("id");
-            this.contactId = educationJson.getInt("contactId");
+            this.id = 0;
+            this.contactId = 0;
             this.dateFrom = educationJson.getString("dateFrom");
             this.dateTo = educationJson.getString("dateTo");
             this.schoolName = educationJson.getString("schoolName");
