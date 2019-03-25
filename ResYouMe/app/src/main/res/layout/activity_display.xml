@@ -27,7 +27,7 @@
             android:orientation="vertical"
 
             <TextView
-                android:id="@+id/resumeHeader"
+                android:id="@+id/resumeHeader2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addressView"
+                android:id="@+id/addressView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/resumeHeader" />
+                app:layout_constraintTop_toBottomOf="@+id/resumeHeader2" />
 
             <TextView
                 android:id="@+id/addressView2"
@@ -64,10 +64,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addressView" />
+                app:layout_constraintTop_toBottomOf="@+id/addressView2" />
 
             <TextView
-                android:id="@+id/emailView"
+                android:id="@+id/emailView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/addressView2" />
 
             <TextView
-                android:id="@+id/phoneView"
+                android:id="@+id/phoneView2"
                 android:layout_width="match_parent"
                 android:layout_height="17dp"
                 android:layout_marginStart="8dp"
@@ -91,10 +91,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailView" />
+                app:layout_constraintTop_toBottomOf="@+id/emailView2" />
 
             <TextView
-                android:id="@+id/websiteView"
+                android:id="@+id/websiteView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -104,7 +104,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneView" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneView2" />
 
             <TextView
                 android:id="@+id/publicationsView"
@@ -156,7 +156,7 @@
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/websiteView" />
+                app:layout_constraintTop_toBottomOf="@+id/websiteView2" />
 
         </LinearLayout>
 

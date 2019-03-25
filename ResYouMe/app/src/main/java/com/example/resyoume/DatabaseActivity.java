@@ -83,21 +83,27 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                 switch(style){
                     case "Style 1":{
                         display_intent = new Intent(this, DisplayActivity.class);
+                        break;
                     }
                     case "Style 2":{
-                        display_intent = new Intent(this, DisplayActivity.class);
+                        display_intent = new Intent(this, DisplayActivityCard.class);
+                        break;
                     }
                     case "Style 3":{
                         display_intent = new Intent(this, DisplayActivity.class);
+                        break;
                     }
                     case "Style 4":{
                         display_intent = new Intent(this, DisplayActivity.class);
+                        break;
                     }
                     case "Style 5":{
                         display_intent = new Intent(this, DisplayActivity.class);
+                        break;
                     }
                     case "Style 6":{
                         display_intent = new Intent(this, DisplayActivity.class);
+                        break;
                     }
                 }
                 try {

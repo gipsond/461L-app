@@ -63,12 +63,12 @@ public class DisplayActivity extends AppCompatActivity {
         resumeView = findViewById(R.id.resumeview);
 
 
-        resumeHeader = findViewById(R.id.resumeHeader);
-        addressView = findViewById(R.id.addressView);
+        resumeHeader = findViewById(R.id.resumeHeader2);
+        addressView = findViewById(R.id.addressView2);
         addressView2 = findViewById(R.id.addressView2);
-        emailView = findViewById(R.id.emailView);
-        phoneView = findViewById(R.id.phoneView);
-        websiteView = findViewById(R.id.websiteView);
+        emailView = findViewById(R.id.emailView2);
+        phoneView = findViewById(R.id.phoneView2);
+        websiteView = findViewById(R.id.websiteView2);
         interestsView = findViewById(R.id.interestsView);
         publicationsView = findViewById(R.id.publicationsView);
         educationPhasesView = findViewById(R.id.educationPhasesView);

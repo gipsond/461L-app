@@ -6,14 +6,14 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/resumeHeader"
+        android:id="@+id/resumeHeader2"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/resumeHeaderBg" />
 
     <TextView
-        android:id="@+id/addressView"
+        android:id="@+id/addressView2"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,21 +27,21 @@
         android:background="@color/resumeBg" />
 
     <TextView
-        android:id="@+id/emailView"
+        android:id="@+id/emailView2"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/resumeBg" />
 
     <TextView
-        android:id="@+id/phoneView"
+        android:id="@+id/phoneView2"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/resumeBg" />
 
     <TextView
-        android:id="@+id/websiteView"
+        android:id="@+id/websiteView2"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
