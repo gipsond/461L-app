@@ -58,7 +58,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){
         TextView status = (TextView) findViewById(R.id.NFCStatus);
-        status.setText("Device found. Sending message...");
+        //status.setText("Device found. Sending message...");
         String to_send = message.getText().toString();
         NdefRecord record = NdefRecord.createMime("application/vnd.com.example.android.beam", to_send.getBytes());
         NdefMessage msg = new NdefMessage(record);
