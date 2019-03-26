@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DisplayActivityCard"></activity>
         <activity android:name=".CompanyDataActivity" />
-        <activity android:name=".DisplayActivity" />
+        <activity android:name=".BasicDisplay" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ResumeParseActivity" />
         <activity
