@@ -88,17 +88,32 @@ public class CompanyDataActivity extends AppCompatActivity {
         }
     }
     public void saveButton(View v) {
-        String url = textInputURL.getEditText().getText().toString();
         String additionalInfo = textInputAdditionalInfo.getEditText().getText().toString();
-        domainName = url;
         getCompanyInfo(new VolleyCallback(){
             @Override
             public void onSuccess(JSONObject result){
-                CompanyInfo = result;
-                // result contains the JSONObject received from the company API
-                // From here send CompanyInfo + additionalInfo to database?
+                String CompanyName = null, Location = null, Twitter = null, Website = null, Bio = null, Linkedin = null;
+                try {
+                    CompanyName = result.getString("name");
+                    Location = result.getString("location");
+                    Twitter = result.getString("twitter");
+                    Website = result.getString("website");
+                    Bio = result.getString("bio");
+                    Linkedin = result.getString("linkedin");
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "JSON Error" , Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+                // Make Company object
+                /*
+                Company compnay = new Company(CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
+                            if(companyViewModel == null){
+                                companyViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(companyViewModel.class);
+                            }
+                            companyViewModel.insert(company);
+                 */
+                Toast.makeText(getApplicationContext(), "Data Saved" , Toast.LENGTH_SHORT).show();
             }
         });
-        Toast.makeText(this, "Data Saved" , Toast.LENGTH_SHORT).show();
     }
 }
