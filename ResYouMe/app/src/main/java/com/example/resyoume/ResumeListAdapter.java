@@ -35,12 +35,12 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
 
         private ResumeViewHolder(View itemView) {
             super(itemView);
-            resumeHeader = itemView.findViewById(R.id.resumeHeader2);
-            addressView = itemView.findViewById(R.id.addressView2);
-            addressView2 = itemView.findViewById(R.id.addressView2);
-            emailView = itemView.findViewById(R.id.emailView2);
-            phoneView = itemView.findViewById(R.id.phoneView2);
-            websiteView = itemView.findViewById(R.id.websiteView2);
+            resumeHeader = itemView.findViewById(R.id.resumeHeader);
+            addressView = itemView.findViewById(R.id.addressView);
+            addressView2 = itemView.findViewById(R.id.addressView);
+            emailView = itemView.findViewById(R.id.emailView);
+            phoneView = itemView.findViewById(R.id.phoneView);
+            websiteView = itemView.findViewById(R.id.websiteView);
             interestsView = itemView.findViewById(R.id.interestsView);
             publicationsView = itemView.findViewById(R.id.publicationsView);
             educationPhasesView = itemView.findViewById(R.id.educationPhasesView);

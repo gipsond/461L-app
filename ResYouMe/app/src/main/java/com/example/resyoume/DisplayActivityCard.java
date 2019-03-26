@@ -54,15 +54,15 @@ public class DisplayActivityCard extends AppCompatActivity {
         LinearLayout ll = new LinearLayout(this);
         ScrollView resumeView = new ScrollView(this);
 
-        resumeView = findViewById(R.id.resumeview2);
+        resumeView = findViewById(R.id.resumeview);
 
 
-        resumeHeader = findViewById(R.id.resumeHeader2);
-        addressView = findViewById(R.id.addressView2);
-        addressView2 = findViewById(R.id.addressView2_2);
-        emailView = findViewById(R.id.emailView2);
-        phoneView = findViewById(R.id.phoneView2);
-        websiteView = findViewById(R.id.websiteView2);
+        resumeHeader = findViewById(R.id.resumeHeader);
+        addressView = findViewById(R.id.addressView);
+        addressView2 = findViewById(R.id.addressView2);
+        emailView = findViewById(R.id.emailView);
+        phoneView = findViewById(R.id.phoneView);
+        websiteView = findViewById(R.id.websiteView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
