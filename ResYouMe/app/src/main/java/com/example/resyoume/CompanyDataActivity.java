@@ -1,6 +1,9 @@
 package com.example.resyoume;
 
+import com.example.resyoume.db.CompanyInfo;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Application;
 import android.content.Context;
@@ -38,7 +41,7 @@ public class CompanyDataActivity extends AppCompatActivity {
     private TextInputLayout textInputAdditionalInfo;
     JSONObject CompanyInfo;
     String domainName;
-
+    private CompanyInfoViewModel companyInfoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +108,13 @@ public class CompanyDataActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 // Make Company object
-                /*
-                Company compnay = new Company(CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
-                            if(companyViewModel == null){
-                                companyViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(companyViewModel.class);
+                
+                CompanyInfo company = new CompanyInfo(0, CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
+                            if(companyInfoViewModel == null){
+                                companyInfoViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(CompanyInfoViewModel.class);
                             }
-                            companyViewModel.insert(company);
-                 */
+                            companyInfoViewModel.insert(company);
+
                 Toast.makeText(getApplicationContext(), "Data Saved" , Toast.LENGTH_SHORT).show();
             }
         });
