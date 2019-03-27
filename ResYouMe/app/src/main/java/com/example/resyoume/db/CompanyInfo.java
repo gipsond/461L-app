@@ -41,7 +41,7 @@ public class CompanyInfo {
     }
 
     /**
-     *
+     * Creates a CompanyInfo object from OUR JSON format (not FullContact's)
      * @param companyInfoJson
      */
     public CompanyInfo(JSONObject companyInfoJson) {
@@ -59,6 +59,18 @@ public class CompanyInfo {
             String additionalInfo = companyInfoJson.getString("additionalInfo");
             this.additionalInfo = additionalInfo != null ? additionalInfo : "";
         } catch (JSONException e) {}
+    }
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject companyInfoJson = new JSONObject();
+        companyInfoJson.put("name", this.companyName);
+        companyInfoJson.put("location", this.location);
+        companyInfoJson.put("twitter", this.twitter);
+        companyInfoJson.put("website", this.website);
+        companyInfoJson.put("bio", this.bio);
+        companyInfoJson.put("linkedin", this.linkedIn);
+        companyInfoJson.put("additionalInfo", this.additionalInfo);
+        return companyInfoJson;
     }
 
     public int getId() {
