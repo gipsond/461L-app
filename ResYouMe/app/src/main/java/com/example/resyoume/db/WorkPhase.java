@@ -155,10 +155,6 @@ public class WorkPhase {
         }
         WorkPhase work = (WorkPhase) o;
 
-        if(work.getId() != this.id){return false;}
-
-        if(work.getContactId() != this.contactId){return false;}
-
         if(work.getDateFrom() == null || this.dateFrom == null){
             if(!(work.getDateFrom() == null && this.dateFrom == null)){
                 return false;

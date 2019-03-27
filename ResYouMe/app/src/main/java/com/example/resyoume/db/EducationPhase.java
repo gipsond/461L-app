@@ -144,10 +144,6 @@ public class EducationPhase {
         }
         EducationPhase education = (EducationPhase) o;
 
-        if(education.getId() != this.id){return false;}
-
-        if(education.getContactId() != this.contactId){return false;}
-
         if(education.getDateFrom() == null || this.dateFrom == null){
             if(!(education.getDateFrom() == null && this.dateFrom == null)){
                 return false;

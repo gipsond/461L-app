@@ -250,8 +250,6 @@ public class Contact {
         }
         Contact contact = (Contact) o;
 
-        if(contact.id != this.id){return false;}
-
         if(contact.getFirstName() == null || this.firstName == null){
             if(!(contact.getFirstName() == null && this.firstName == null)){
                 return false;
