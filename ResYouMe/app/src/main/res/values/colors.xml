@@ -10,4 +10,6 @@
     <!--Database Display-->
     <color name="resumeHeaderBg">#EAEAEA</color>
     <color name="resumeBg">#E0F1F9</color>
+
+    <color name="resumeColor">#84D5E5</color>
 </resources>
