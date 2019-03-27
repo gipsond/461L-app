@@ -12,12 +12,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Contact.class, WorkPhase.class, EducationPhase.class}, version = 1, exportSchema = false)
+@Database(entities = {Contact.class, WorkPhase.class, EducationPhase.class, CompanyInfo.class}, version = 1, exportSchema = false)
 public abstract class ResumeRoomDatabase extends RoomDatabase {
 
     /* Singleton Interface */
 
     public abstract ResumeDao resumeDao();
+    public abstract CompanyInfoDao companyInfoDao();
 
     private static volatile ResumeRoomDatabase INSTANCE;
 
@@ -48,9 +49,13 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
 
     private static class InitializeDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final ResumeDao dao;
+        private final ResumeDao resumeDao;
+        private final CompanyInfoDao companyInfoDao;
 
-        InitializeDbAsync(ResumeRoomDatabase db) { dao = db.resumeDao(); }
+        InitializeDbAsync(ResumeRoomDatabase db) {
+            resumeDao = db.resumeDao();
+            companyInfoDao = db.companyInfoDao();
+        }
 
         @Override
         protected Void doInBackground(final Void... params) {
@@ -100,7 +105,7 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
                 )
             );
 
-            dao.insert(new Resume(contact, educationPhases, workPhases));
+            resumeDao.insert(new Resume(contact, educationPhases, workPhases));
 
             return null;
         }
