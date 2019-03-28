@@ -14,7 +14,7 @@ import com.example.resyoume.db.WorkPhase;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class BasicDisplay extends DisplayActivity {
+public class DisplayBasic extends DisplayActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

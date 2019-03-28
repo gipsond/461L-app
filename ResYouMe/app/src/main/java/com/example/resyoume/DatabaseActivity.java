@@ -79,10 +79,10 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
             case R.id.ctx_menu_display:{
                 ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
                 Resume resume = rvh.getResume();
-                Intent display_intent = new Intent(this, BasicDisplay.class);
+                Intent display_intent = new Intent(this, DisplayBasic.class);
                 switch(style){
                     case "Style 1":{
-                        display_intent = new Intent(this, BasicDisplay.class);
+                        display_intent = new Intent(this, DisplayBasic.class);
                         break;
                     }
                     case "Style 2":{
@@ -90,19 +90,19 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                         break;
                     }
                     case "Style 3":{
-                        display_intent = new Intent(this, DisplayActivity.class);
+                        display_intent = new Intent(this, DisplayMccombs.class);
                         break;
                     }
                     case "Style 4":{
-                        display_intent = new Intent(this, DisplayActivity.class);
+                        display_intent = new Intent(this, DisplayCLA.class);
                         break;
                     }
                     case "Style 5":{
-                        display_intent = new Intent(this, DisplayActivity.class);
+                        display_intent = new Intent(this, DisplayBasic.class);
                         break;
                     }
                     case "Style 6":{
-                        display_intent = new Intent(this, DisplayActivity.class);
+                        display_intent = new Intent(this, DisplayBasic.class);
                         break;
                     }
                 }
