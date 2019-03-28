@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class CompanyDataActivity extends AppCompatActivity {
     }
     public void saveButton(View v) {
         String additionalInfo = textInputAdditionalInfo.getEditText().getText().toString();
-        getCompanyInfo(new VolleyCallback(){
+        getCompanyInfo(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject result){
                 String CompanyName = null, Location = null, Twitter = null, Website = null, Bio = null, Linkedin = null;
@@ -109,11 +110,11 @@ public class CompanyDataActivity extends AppCompatActivity {
                 }
                 // Make Company object
                 
-                CompanyInfo company = new CompanyInfo(0, CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
-                            if(companyInfoViewModel == null){
-                                companyInfoViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(CompanyInfoViewModel.class);
-                            }
-                            companyInfoViewModel.insert(company);
+                CompanyInfo company = new CompanyInfo(0, new Date(), CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
+                if (companyInfoViewModel == null) {
+                    companyInfoViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(CompanyInfoViewModel.class);
+                }
+                companyInfoViewModel.insert(company);
 
                 Toast.makeText(getApplicationContext(), "Data Saved" , Toast.LENGTH_SHORT).show();
             }
