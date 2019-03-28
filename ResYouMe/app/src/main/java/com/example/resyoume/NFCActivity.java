@@ -107,7 +107,10 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
         // only insert the resume if all of the response types are correct and array size is 3
         try {
+
             JSONObject responseJson = new JSONObject(response.getText().toString());
+            CharSequence toastText = "Invalid; couldn't save to database.";
+
             if (responseJson.has("type")
                     && responseJson.getString("type").equals("resume")
                     && responseJson.has("contact")
@@ -116,20 +119,23 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
                 Resume resume = new Resume(responseJson);
                 resumeViewModel.insert(resume);
-                Context context = getApplicationContext();
-                CharSequence text = "Resume added to database";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                toastText = "Resume added to database";
 
             } else if (responseJson.has("type")
-                && responseJson.getString("type").equals("companyInfo")
-                && responseJson.has("name")) {
+                    && responseJson.getString("type").equals("companyInfo")
+                    && responseJson.has("name")) {
 
                 CompanyInfo companyInfo = new CompanyInfo(responseJson);
                 companyInfoViewModel.insert(companyInfo);
+                toastText = "CompanyInfo added to database";
 
             }
+
+            int duration = Toast.LENGTH_SHORT;
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, toastText, duration);
+            toast.show();
+
         }
         catch (Exception e) {
             // TODO: don't silently fail; at least do something
