@@ -20,12 +20,12 @@ public class JSONUnitTests {
     /* Contact tests */
     @Test
     public void contact_to_json() throws JSONException {
-        Contact contact = new Contact(1, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact contact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
                     "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         JSONObject contactJson = contact.toJSONObject();
         JSONObject expected = new JSONObject();
-        expected.put("id", 1);
+        expected.put("id", 0);
         expected.put("firstName", "Erick");
         expected.put("lastName", "Shepherd");
         expected.put("title", "");
@@ -46,7 +46,7 @@ public class JSONUnitTests {
     @Test
     public void json_to_contact() throws JSONException {
         JSONObject contactJson = new JSONObject();
-        contactJson.put("id", 1);
+        contactJson.put("id", 0);
         contactJson.put("firstName", "Erick");
         contactJson.put("lastName", "Shepherd");
         contactJson.put("title", "");
@@ -62,7 +62,7 @@ public class JSONUnitTests {
         contactJson.put("publications", "");
         contactJson.put("plaintext", "");
         Contact actual = new Contact(contactJson);
-        Contact expected = new Contact(1, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact expected = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         assertEquals("Contacts are not equal", expected, actual);
@@ -86,12 +86,12 @@ public class JSONUnitTests {
     /* EducationPhase tests */
     @Test
     public void education_to_json() throws JSONException {
-        EducationPhase actualEdu = new EducationPhase(1, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
-        actualEdu.setContactId(2);
+        EducationPhase actualEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
+        actualEdu.setContactId(0);
         JSONObject actual = actualEdu.toJSONObject();
         JSONObject expected = new JSONObject();
-        expected.put("id", 1);
-        expected.put("contactId", 2);
+        expected.put("id", 0);
+        expected.put("contactId", 0);
         expected.put("dateFrom", "8/17/15");
         expected.put("dateTo", "5/25/19");
         expected.put("schoolName", "University of Texas at Austin");
@@ -103,8 +103,8 @@ public class JSONUnitTests {
     @Test
     public void json_to_education() throws JSONException {
         JSONObject actualJson = new JSONObject();
-        actualJson.put("id", 1);
-        actualJson.put("contactId", 2);
+        actualJson.put("id", 0);
+        actualJson.put("contactId", 0);
         actualJson.put("dateFrom", "8/17/15");
         actualJson.put("dateTo", "5/25/19");
         actualJson.put("schoolName", "University of Texas at Austin");
@@ -112,7 +112,7 @@ public class JSONUnitTests {
         actualJson.put("plaintext", "");
         EducationPhase actual = new EducationPhase(actualJson);
         EducationPhase expected = new EducationPhase(1, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
-        expected.setContactId(2);
+        expected.setContactId(0);
         assertEquals("EducationPhases are not equal", expected, actual);
     }
 
@@ -134,12 +134,12 @@ public class JSONUnitTests {
     /* WorkPhase tests */
     @Test
     public void work_to_json() throws JSONException {
-        WorkPhase actualWork = new WorkPhase(1, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
-        actualWork.setContactId(2);
+        WorkPhase actualWork = new WorkPhase(0, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
+        actualWork.setContactId(0);
         JSONObject actual = actualWork.toJSONObject();
         JSONObject expected = new JSONObject();
-        expected.put("id", 1);
-        expected.put("contactId", 2);
+        expected.put("id", 0);
+        expected.put("contactId", 0);
         expected.put("dateFrom", "1/1/19");
         expected.put("dateTo", "4/1/19");
         expected.put("function", "testing");
@@ -152,8 +152,8 @@ public class JSONUnitTests {
     @Test
     public void json_to_work() throws JSONException {
         JSONObject actualJson = new JSONObject();
-        actualJson.put("id", 1);
-        actualJson.put("contactId", 2);
+        actualJson.put("id", 0);
+        actualJson.put("contactId", 0);
         actualJson.put("dateFrom", "1/1/19");
         actualJson.put("dateTo", "4/1/19");
         actualJson.put("function", "testing");
@@ -161,8 +161,8 @@ public class JSONUnitTests {
         actualJson.put("country", "US");
         actualJson.put("plaintext", "");
         WorkPhase actual = new WorkPhase(actualJson);
-        WorkPhase expected = new WorkPhase(1, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
-        expected.setContactId(2);
+        WorkPhase expected = new WorkPhase(0, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
+        expected.setContactId(0);
         assertEquals("WorkPhases are not equal", expected, actual);
     }
 
@@ -185,17 +185,17 @@ public class JSONUnitTests {
     @Test
     public void resume_to_json() throws JSONException {
         // set up the test resume and get its json array
-        Contact contact = new Contact(1, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact contact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
-        EducationPhase actualEdu = new EducationPhase(1, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
-        actualEdu.setContactId(2);
-        EducationPhase actualEdu2 = new EducationPhase(2, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
-        actualEdu2.setContactId(3);
-        WorkPhase actualWork = new WorkPhase(1, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
-        actualWork.setContactId(2);
-        WorkPhase actualWork2 = new WorkPhase(2, "4/1/19", "7/1/19", "verification", "ResYouMe", "US", "");
-        actualWork2.setContactId(3);
+        EducationPhase actualEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
+        actualEdu.setContactId(0);
+        EducationPhase actualEdu2 = new EducationPhase(0, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
+        actualEdu2.setContactId(0);
+        WorkPhase actualWork = new WorkPhase(0, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
+        actualWork.setContactId(0);
+        WorkPhase actualWork2 = new WorkPhase(0, "4/1/19", "7/1/19", "verification", "ResYouMe", "US", "");
+        actualWork2.setContactId(0);
         List<EducationPhase> actualEduList = new ArrayList<EducationPhase>();
         actualEduList.add(actualEdu);
         actualEduList.add(actualEdu2);
@@ -207,7 +207,7 @@ public class JSONUnitTests {
 
         // set up the expected json array
         JSONObject expectedContact = new JSONObject();
-        expectedContact.put("id", 1);
+        expectedContact.put("id", 0);
         expectedContact.put("firstName", "Erick");
         expectedContact.put("lastName", "Shepherd");
         expectedContact.put("title", "");
@@ -224,16 +224,16 @@ public class JSONUnitTests {
         expectedContact.put("plaintext", "");
 
         JSONObject expectedEdu1 = new JSONObject();
-        expectedEdu1.put("id", 1);
-        expectedEdu1.put("contactId", 2);
+        expectedEdu1.put("id", 0);
+        expectedEdu1.put("contactId", 0);
         expectedEdu1.put("dateFrom", "8/17/15");
         expectedEdu1.put("dateTo", "5/25/19");
         expectedEdu1.put("schoolName", "University of Texas at Austin");
         expectedEdu1.put("country", "US");
         expectedEdu1.put("plaintext", "");
         JSONObject expectedEdu2 = new JSONObject();
-        expectedEdu2.put("id", 2);
-        expectedEdu2.put("contactId", 3);
+        expectedEdu2.put("id", 0);
+        expectedEdu2.put("contactId", 0);
         expectedEdu2.put("dateFrom", "8/17/19");
         expectedEdu2.put("dateTo", "5/25/23");
         expectedEdu2.put("schoolName", "University of Texas at Austin");
@@ -244,8 +244,8 @@ public class JSONUnitTests {
         expectedEduList.put(expectedEdu2);
 
         JSONObject expectedWork1 = new JSONObject();
-        expectedWork1.put("id", 1);
-        expectedWork1.put("contactId", 2);
+        expectedWork1.put("id", 0);
+        expectedWork1.put("contactId", 0);
         expectedWork1.put("dateFrom", "1/1/19");
         expectedWork1.put("dateTo", "4/1/19");
         expectedWork1.put("function", "testing");
@@ -253,8 +253,8 @@ public class JSONUnitTests {
         expectedWork1.put("country", "US");
         expectedWork1.put("plaintext", "");
         JSONObject expectedWork2 = new JSONObject();
-        expectedWork2.put("id", 2);
-        expectedWork2.put("contactId", 3);
+        expectedWork2.put("id", 0);
+        expectedWork2.put("contactId", 0);
         expectedWork2.put("dateFrom", "4/1/19");
         expectedWork2.put("dateTo", "7/1/19");
         expectedWork2.put("function", "verification");
@@ -278,7 +278,7 @@ public class JSONUnitTests {
     public void json_to_resume() throws JSONException {
         // set up the actual json array
         JSONObject actualJsonContact = new JSONObject();
-        actualJsonContact.put("id", 1);
+        actualJsonContact.put("id", 0);
         actualJsonContact.put("firstName", "Erick");
         actualJsonContact.put("lastName", "Shepherd");
         actualJsonContact.put("title", "");
@@ -295,16 +295,16 @@ public class JSONUnitTests {
         actualJsonContact.put("plaintext", "");
 
         JSONObject actualJsonEdu1 = new JSONObject();
-        actualJsonEdu1.put("id", 1);
-        actualJsonEdu1.put("contactId", 2);
+        actualJsonEdu1.put("id", 0);
+        actualJsonEdu1.put("contactId", 0);
         actualJsonEdu1.put("dateFrom", "8/17/15");
         actualJsonEdu1.put("dateTo", "5/25/19");
         actualJsonEdu1.put("schoolName", "University of Texas at Austin");
         actualJsonEdu1.put("country", "US");
         actualJsonEdu1.put("plaintext", "");
         JSONObject actualJsonEdu2 = new JSONObject();
-        actualJsonEdu2.put("id", 2);
-        actualJsonEdu2.put("contactId", 3);
+        actualJsonEdu2.put("id", 0);
+        actualJsonEdu2.put("contactId", 0);
         actualJsonEdu2.put("dateFrom", "8/17/19");
         actualJsonEdu2.put("dateTo", "5/25/23");
         actualJsonEdu2.put("schoolName", "University of Texas at Austin");
@@ -315,8 +315,8 @@ public class JSONUnitTests {
         actualJsonEduList.put(actualJsonEdu2);
 
         JSONObject actualJsonWork1 = new JSONObject();
-        actualJsonWork1.put("id", 1);
-        actualJsonWork1.put("contactId", 2);
+        actualJsonWork1.put("id", 0);
+        actualJsonWork1.put("contactId", 0);
         actualJsonWork1.put("dateFrom", "1/1/19");
         actualJsonWork1.put("dateTo", "4/1/19");
         actualJsonWork1.put("function", "testing");
@@ -324,8 +324,8 @@ public class JSONUnitTests {
         actualJsonWork1.put("country", "US");
         actualJsonWork1.put("plaintext", "");
         JSONObject actualJsonWork2 = new JSONObject();
-        actualJsonWork2.put("id", 2);
-        actualJsonWork2.put("contactId", 3);
+        actualJsonWork2.put("id", 0);
+        actualJsonWork2.put("contactId", 0);
         actualJsonWork2.put("dateFrom", "4/1/19");
         actualJsonWork2.put("dateTo", "7/1/19");
         actualJsonWork2.put("function", "verification");
@@ -343,17 +343,17 @@ public class JSONUnitTests {
         Resume actual = new Resume(actualJson);
 
         // set up the test resume and get its json array
-        Contact expectedContact = new Contact(1, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact expectedContact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
-        EducationPhase expectedEdu = new EducationPhase(1, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
-        expectedEdu.setContactId(2);
-        EducationPhase expectedEdu2 = new EducationPhase(2, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
-        expectedEdu2.setContactId(3);
-        WorkPhase expectedWork = new WorkPhase(1, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
-        expectedWork.setContactId(2);
-        WorkPhase expectedWork2 = new WorkPhase(2, "4/1/19", "7/1/19", "verification", "ResYouMe", "US", "");
-        expectedWork2.setContactId(3);
+        EducationPhase expectedEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
+        expectedEdu.setContactId(0);
+        EducationPhase expectedEdu2 = new EducationPhase(0, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
+        expectedEdu2.setContactId(0);
+        WorkPhase expectedWork = new WorkPhase(0, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
+        expectedWork.setContactId(0);
+        WorkPhase expectedWork2 = new WorkPhase(0, "4/1/19", "7/1/19", "verification", "ResYouMe", "US", "");
+        expectedWork2.setContactId(0);
         List<EducationPhase> expectedEduList = new ArrayList<EducationPhase>();
         expectedEduList.add(expectedEdu);
         expectedEduList.add(expectedEdu2);

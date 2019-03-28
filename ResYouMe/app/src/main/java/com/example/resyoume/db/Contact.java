@@ -262,8 +262,6 @@ public class Contact {
         }
         Contact contact = (Contact) o;
 
-        if(contact.id != this.id){return false;}
-
         if(contact.getTimestamp() == null || this.timestamp == null){
             if(!(contact.getTimestamp() == null && this.timestamp == null)){
                 return false;

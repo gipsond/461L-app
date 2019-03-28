@@ -1,5 +1,6 @@
 package com.example.resyoume;
 
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -10,6 +11,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.Resume;
@@ -48,6 +50,15 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         String resume = intent.getStringExtra("resumeJSON");
         if(resume != null){
             message.setText(resume);
+            try {
+                JSONArray responseJson = new JSONArray(resume);
+            }
+            catch (JSONException e) {}
+            status.setText("Ready to send resume");
+            nfc_adapter.setNdefPushMessageCallback(this, this);
+        }
+        else{
+            status.setText("Ready to receive resume");
         }
         resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
@@ -61,7 +72,6 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){
         TextView status = (TextView) findViewById(R.id.NFCStatus);
-        //status.setText("Device found. Sending message...");
         String to_send = message.getText().toString();
         NdefRecord record = NdefRecord.createMime("application/vnd.com.example.android.beam", to_send.getBytes());
         NdefMessage msg = new NdefMessage(record);
@@ -79,7 +89,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         Intent intent = getIntent();
         if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
             TextView status = (TextView) findViewById(R.id.NFCStatus);
-            status.setText("Message received");
+            status.setText("Resume received. Ready to save");
             Parcelable[] raw_messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) raw_messages[0];
             response.setText(new String(msg.getRecords()[0].getPayload()));
@@ -106,10 +116,15 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
                 Resume resume = new Resume(responseJson);
                 resumeViewModel.insert(resume);
+                Context context = getApplicationContext();
+                CharSequence text = "Resume added to database";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
             } else if (responseJson.has("type")
-                    && responseJson.getString("type").equals("companyInfo")
-                    && responseJson.has("name")) {
+                && responseJson.getString("type").equals("companyInfo")
+                && responseJson.has("name")) {
 
                 CompanyInfo companyInfo = new CompanyInfo(responseJson);
                 companyInfoViewModel.insert(companyInfo);
