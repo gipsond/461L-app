@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     // start the Database activity
     public void onClickDisplay(View view) {
-        Intent display_intent = new Intent(this, DisplayActivity.class);
+        Intent display_intent = new Intent(this, DisplayBasic.class);
         startActivity(display_intent);
     }
 

@@ -11,10 +11,10 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-public class BasicDisplay extends DisplayActivity {
+public class DisplayMccombs extends DisplayActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class BasicDisplay extends DisplayActivity {
         String resumeString = intent.getStringExtra("resumeJSON");
         if (resumeString != null) {
             try {
-                JSONObject resumeJson = new JSONObject(resumeString);
+                JSONArray resumeJson = new JSONArray(resumeString);
                 Resume resume = new Resume(resumeJson);
                 setResume(resume);
             } catch (JSONException e) {
@@ -33,7 +33,7 @@ public class BasicDisplay extends DisplayActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.activity_display;
+        return R.layout.activity_display_mccombs;
     }
 
     @Override
@@ -41,15 +41,14 @@ public class BasicDisplay extends DisplayActivity {
         this.resume = resume;
 
         final TextView resumeHeader;
-        final TextView addressView;
-        final TextView addressView2;
         final TextView emailView;
-        final TextView phoneView;
-        final TextView websiteView;
-        final TextView interestsView;
-        final TextView publicationsView;
-        final TextView educationPhasesView;
-        final TextView workPhasesView;
+        final TextView addressAndPhonehoneView;
+        final TextView educationView;
+        final TextView experienceView;
+        final TextView projectsView;
+        final TextView leadershipView;
+        final TextView honorsView;
+        final TextView additionalInfoView;
 
 
         LinearLayout ll = new LinearLayout(this);
@@ -59,38 +58,40 @@ public class BasicDisplay extends DisplayActivity {
 
 
         resumeHeader = findViewById(R.id.resumeHeader);
-        addressView = findViewById(R.id.addressView);
-        addressView2 = findViewById(R.id.addressView2);
         emailView = findViewById(R.id.emailView);
-        phoneView = findViewById(R.id.phoneView);
-        websiteView = findViewById(R.id.websiteView);
-        interestsView = findViewById(R.id.interestsView);
-        publicationsView = findViewById(R.id.publicationsView);
-        educationPhasesView = findViewById(R.id.educationPhasesView);
-        workPhasesView = findViewById(R.id.workPhasesView);
+        addressAndPhonehoneView = findViewById(R.id.addressAndPhoneView);
+        educationView = findViewById(R.id.educationView);
+        experienceView = findViewById(R.id.experienceView);
+        projectsView = findViewById(R.id.projectsView);
+        leadershipView = findViewById(R.id.leadershipView);
+        honorsView = findViewById(R.id.honorsView);
+        additionalInfoView = findViewById(R.id.additionalInfoView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
-        addressView.setText(contact.getAddress());
-        addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
         emailView.setText(contact.getEmail());
-        phoneView.setText(contact.getPhoneNumber());
-        websiteView.setText(contact.getHomepage());
-        interestsView.setText("Interests: " + contact.getInterests());
-        publicationsView.setText("Publications: " + contact.getPublications());
-
-        StringBuilder eduPhasesStr = new StringBuilder("Education:\n");
+        addressAndPhonehoneView.setText(contact.getAddress() + " \u2022 " +
+                contact.getCity() + ", " +
+                contact.getState() + " " +
+                contact.getPostcode() + " \u2022 " +
+                contact.getPhoneNumber());
+        StringBuilder eduPhasesStr = new StringBuilder();
         for (EducationPhase educationPhase : resume.educationPhases) {
             eduPhasesStr.append(educationPhase.getPlaintext());
             eduPhasesStr.append('\n');
         }
-        educationPhasesView.setText(eduPhasesStr.toString());
 
-        StringBuilder workPhasesStr = new StringBuilder("Work Experience:\n");
+        educationView.setText(eduPhasesStr.toString());
+
+        StringBuilder workPhasesStr = new StringBuilder();
         for (WorkPhase workPhase : resume.workPhases) {
             workPhasesStr.append(workPhase.getPlaintext());
             workPhasesStr.append('\n');
         }
-        workPhasesView.setText(workPhasesStr.toString());
+        experienceView.setText(workPhasesStr.toString());
+
+        projectsView.setText(contact.getPublications());
+
+        additionalInfoView.setText(contact.getInterests());
     }
 }

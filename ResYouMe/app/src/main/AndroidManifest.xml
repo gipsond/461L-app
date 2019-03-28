@@ -17,7 +17,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DisplayActivityCard"></activity>
         <activity android:name=".CompanyDataActivity" />
-        <activity android:name=".BasicDisplay" />
+        <activity android:name=".DisplayBasic" />
+        <activity android:name=".DisplayMccombs" />
+        <activity android:name=".DisplayCLA" />
+        <activity android:name=".DisplayECAC" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ResumeParseActivity" />
         <activity
