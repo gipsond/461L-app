@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".CompanyDataActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/text_input_URL"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:errorEnabled="true">
-
-    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/text_input_URL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Company URL (i.e. microsoft.com)"
-        />
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company URL (i.e. microsoft.com)" />
 
     </com.google.android.material.textfield.TextInputLayout>
-    
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_additionalInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
-    
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Additional Infomation"
-            android:inputType="textMultiLine"
-            />
-        
+            android:inputType="textMultiLine" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:onClick="saveButton"/>
-    
-    
+        android:onClick="saveButton"
+        android:text="Save" />
+
+
 </LinearLayout>

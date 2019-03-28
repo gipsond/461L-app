@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#42A5F5</color>
+    <color name="colorPrimaryDark">#0077c2</color>
+    <color name="colorPrimaryLight">#80d6ff</color>
+    <color name="colorAccent">#E040FB</color>
 
     <!--Database-->
     <color name="buttonLabel">#D3D3D3</color>
@@ -12,4 +13,8 @@
     <color name="resumeBg">#E0F1F9</color>
 
     <color name="resumeColor">#84D5E5</color>
+    <color name="colorBackground">#42A5F5</color>
+    <color name="colorAccentLight">#FF79FF</color>
+
+    <color name="colorAccentDark">#AA00C7</color>
 </resources>

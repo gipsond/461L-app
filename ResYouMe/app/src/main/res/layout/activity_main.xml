@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/nfc_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickNFC"
         android:text="Receive"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,11 +23,12 @@
 
     <Button
         android:id="@+id/database_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickDatabase"
         android:text="Saved Resumes"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,13 +37,12 @@
 
     <Button
         android:id="@+id/parse_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickParse"
         android:text="Parse "
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,11 +51,12 @@
 
     <Button
         android:id="@+id/company_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickCompany"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,13 +66,12 @@
 
     <Button
         android:id="@+id/about_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickAbout"
         android:text="About"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,11 +80,12 @@
 
     <Button
         android:id="@+id/companyData_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickCompanyInput"
         android:text="Company Input"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,11 +94,12 @@
 
     <Button
         android:id="@+id/saved_company_info_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/buttonLabel"
         android:onClick="onClickSavedCompanyInfo"
         android:text="Saved Company Info"
         app:layout_constraintEnd_toEndOf="parent"
