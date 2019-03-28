@@ -58,7 +58,7 @@ public class DisplayBasic extends DisplayActivity {
         resumeView = findViewById(R.id.resumeview);
 
 
-        resumeHeader = findViewById(R.id.resumeHeader);
+        resumeHeader = findViewById(R.id.nameView);
         addressView = findViewById(R.id.addressView);
         addressView2 = findViewById(R.id.addressView2);
         emailView = findViewById(R.id.emailView);

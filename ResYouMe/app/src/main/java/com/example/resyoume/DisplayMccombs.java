@@ -11,7 +11,6 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,7 +57,7 @@ public class DisplayMccombs extends DisplayActivity {
         resumeView = findViewById(R.id.resumeview);
 
 
-        resumeHeader = findViewById(R.id.resumeHeader);
+        resumeHeader = findViewById(R.id.nameView);
         emailView = findViewById(R.id.emailView);
         addressAndPhonehoneView = findViewById(R.id.addressAndPhoneView);
         educationView = findViewById(R.id.educationView);

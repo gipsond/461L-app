@@ -10,12 +10,8 @@ import android.widget.TextView;
 import com.example.resyoume.db.Contact;
 import com.example.resyoume.db.Resume;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 public class DisplayActivityCard extends DisplayActivity {
 
@@ -57,7 +53,7 @@ public class DisplayActivityCard extends DisplayActivity {
         resumeView = findViewById(R.id.resumeview);
 
 
-        resumeHeader = findViewById(R.id.resumeHeader);
+        resumeHeader = findViewById(R.id.nameView);
         addressView = findViewById(R.id.addressView);
         addressView2 = findViewById(R.id.addressView2);
         emailView = findViewById(R.id.emailView);

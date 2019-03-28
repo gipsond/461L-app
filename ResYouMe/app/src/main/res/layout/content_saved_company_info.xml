@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SavedResumesActivity"
-    tools:showIn="@layout/activity_database">
+    tools:showIn="@layout/activity_saved_company_info">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

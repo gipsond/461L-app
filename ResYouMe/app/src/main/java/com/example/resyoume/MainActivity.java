@@ -22,8 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     // start the Database activity
     public void onClickDatabase(View view) {
-        Intent db_intent = new Intent(this, DatabaseActivity.class);
+        Intent db_intent = new Intent(this, SavedResumesActivity.class);
         startActivity(db_intent);
+    }
+
+    public void onClickSavedCompanyInfo(View view) {
+        Intent savedCompanyInfoIntent = new Intent(this, SavedCompanyInfoActivity.class);
+        startActivity(savedCompanyInfoIntent);
     }
 
     // start the Database activity

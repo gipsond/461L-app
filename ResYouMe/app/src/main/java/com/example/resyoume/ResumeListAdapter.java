@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.resyoume.db.Contact;
-import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
-import com.example.resyoume.db.WorkPhase;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +35,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
 
         private ResumeViewHolder(View itemView) {
             super(itemView);
-            resumeHeader = itemView.findViewById(R.id.resumeHeader);
+            resumeHeader = itemView.findViewById(R.id.nameView);
             timestampView = itemView.findViewById(R.id.timestampView);
 //            addressView = itemView.findViewById(R.id.addressView);
 //            addressView2 = itemView.findViewById(R.id.addressView2);

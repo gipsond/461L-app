@@ -16,4 +16,5 @@
         <item>Style 5</item>
         <item>Style 6</item>
     </string-array>
+    <string name="title_activity_saved_company_info">SavedCompanyInfoActivity</string>
 </resources>

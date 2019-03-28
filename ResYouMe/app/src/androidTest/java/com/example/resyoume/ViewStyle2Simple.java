@@ -107,7 +107,7 @@ public class ViewStyle2Simple {
         }
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.resumeHeader), withText("Mr. John Doe"),
+                allOf(withId(R.id.nameView), withText("Mr. John Doe"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.resumeview),

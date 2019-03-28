@@ -6,7 +6,7 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/resumeHeader"
+        android:id="@+id/nameView"
         style="@style/word_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -2,9 +2,6 @@ package com.example.resyoume;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.resyoume.db.Contact;
@@ -12,15 +9,8 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
-import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.List;
-
-import androidx.room.util.StringUtil;
 
 public class DisplayCLA extends DisplayActivity {
     @Override
@@ -76,7 +66,7 @@ public class DisplayCLA extends DisplayActivity {
         final TextView additionalInfoView;
 
 
-        resumeHeader = findViewById(R.id.resumeHeader);
+        resumeHeader = findViewById(R.id.nameView);
         addressPhoneEmailView = findViewById(R.id.addressPhoneEmailView);
         educationViewLeft1 = findViewById(R.id.educationViewLeft1);
         educationViewRight1 = findViewById(R.id.educationViewRight1);
