@@ -92,6 +92,7 @@ public class CompanyDataActivity extends AppCompatActivity {
         }
     }
     public void saveButton(View v) {
+        domainName = textInputURL.getEditText().getText().toString();
         String additionalInfo = textInputAdditionalInfo.getEditText().getText().toString();
         getCompanyInfo(new VolleyCallback() {
             @Override
