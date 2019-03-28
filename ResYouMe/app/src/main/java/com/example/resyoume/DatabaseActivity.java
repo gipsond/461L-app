@@ -98,7 +98,7 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                         break;
                     }
                     case "Style 5":{
-                        display_intent = new Intent(this, DisplayBasic.class);
+                        display_intent = new Intent(this, DisplayECAC.class);
                         break;
                     }
                     case "Style 6":{

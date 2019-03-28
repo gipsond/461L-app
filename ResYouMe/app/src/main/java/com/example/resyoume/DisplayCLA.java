@@ -124,7 +124,7 @@ public class DisplayCLA extends DisplayActivity {
         if(resume.workPhases.size() > 1) {
             setExperiencePhase(resume.workPhases.get(1), experienceViewLeft2, experienceViewRight2, experienceView2);
         }
-        if(resume.workPhases.size() > 0) {
+        if(resume.workPhases.size() > 2) {
             setExperiencePhase(resume.workPhases.get(2), experienceViewLeft3, experienceViewRight3, experienceView3);
         }
 
@@ -151,14 +151,6 @@ public class DisplayCLA extends DisplayActivity {
         }
         right.setText(work.getDateFrom() + separator + work.getDateTo());
         center.setText(work.getPlaintext());
-    }
-    private static String leftpad(String s, int n) {
-        StringBuilder padded = new StringBuilder();
-        while(padded.length() < n-s.length()){
-            padded.append(" ");
-        }
-        padded.append(s);
-        return padded.toString();
     }
 
 }
