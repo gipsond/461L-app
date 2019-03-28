@@ -31,136 +31,167 @@
             android:orientation="vertical"
 
             <TextView
-                android:id="@+id/nameView"
+                android:id="@+id/resumeHeader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addressView"
+                android:id="@+id/phoneEmailView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameView" />
+                app:layout_constraintTop_toBottomOf="@+id/resumeHeader" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/addressViewCurrent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:textAlignment="viewStart" />
+
+                <TextView
+                    android:id="@+id/addressViewPermanent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/addressView2"
+                android:id="@+id/EducationLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
+                android:text="EDUCATION"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addressView" />
 
             <TextView
-                android:id="@+id/emailPhoneView"
+                android:id="@+id/educationView1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addressView" />
+                android:textAlignment="viewStart" />
 
             <TextView
-                android:id="@+id/phoneView"
+                android:id="@+id/educationView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailPhoneView" />
+                android:textAlignment="viewStart" />
 
             <TextView
-                android:id="@+id/websiteView"
+                android:id="@+id/ExperienceLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="EXPERIENCE" />
+
+            <TextView
+                android:id="@+id/experienceView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewStart" />
+
+
+            <TextView
+                android:id="@+id/experienceView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewStart" />
+
+
+            <TextView
+                android:id="@+id/experienceView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="viewStart" />
+
+
+            <TextView
+                android:id="@+id/additionalExperienceLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
+                android:text="ACTIVITIES"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneView" />
 
             <TextView
-                android:id="@+id/publicationsView"
+                android:id="@+id/additionalExperienceView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textAlignment="viewStart" />
 
             <TextView
-                android:id="@+id/interestsView"
+                android:id="@+id/SkillsLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="9dp"
-                android:textColor="@android:color/black"
+                android:text="SKILLS"
+                android:textAlignment="viewStart"
                 app:layout_constraintBottom_toTopOf="@+id/publicationsView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/workPhasesView"
+                android:id="@+id/skillsView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toTopOf="@+id/interestsView"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/educationPhasesView" />
 
             <TextView
-                android:id="@+id/educationPhasesView"
+                android:id="@+id/additionalLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@android:color/black"
+                android:text="ADDITIONAL INFORMATION"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/websiteView" />
+
+            <TextView
+                android:id="@+id/additionalInfoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart" />
 
         </LinearLayout>
 

@@ -56,7 +56,7 @@ public class DisplayActivityCard extends DisplayActivity {
         resumeHeader = findViewById(R.id.nameView);
         addressView = findViewById(R.id.addressView);
         addressView2 = findViewById(R.id.addressView2);
-        emailView = findViewById(R.id.emailView);
+        emailView = findViewById(R.id.emailPhoneView);
         phoneView = findViewById(R.id.phoneView);
         websiteView = findViewById(R.id.websiteView);
 

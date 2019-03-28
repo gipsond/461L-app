@@ -137,7 +137,7 @@ public class ViewStyle2Simple {
         textView4.check(matches(withText("Mountain View, CA 94043")));
 
         ViewInteraction textView5 = onView(
-                allOf(withId(R.id.emailView), withText("john.doe@example.com"),
+                allOf(withId(R.id.emailPhoneView), withText("john.doe@example.com"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.resumeview),

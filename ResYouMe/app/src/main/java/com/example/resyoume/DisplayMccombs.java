@@ -41,7 +41,7 @@ public class DisplayMccombs extends DisplayActivity {
         this.resume = resume;
 
         final TextView resumeHeader;
-        final TextView emailView;
+        final TextView emailPhoneView;
         final TextView addressAndPhonehoneView;
         final TextView educationView;
         final TextView experienceView;
@@ -58,7 +58,7 @@ public class DisplayMccombs extends DisplayActivity {
 
 
         resumeHeader = findViewById(R.id.nameView);
-        emailView = findViewById(R.id.emailView);
+        emailPhoneView = findViewById(R.id.emailPhoneView);
         addressAndPhonehoneView = findViewById(R.id.addressAndPhoneView);
         educationView = findViewById(R.id.educationView);
         experienceView = findViewById(R.id.experienceView);
@@ -69,7 +69,7 @@ public class DisplayMccombs extends DisplayActivity {
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
-        emailView.setText(contact.getEmail());
+        emailPhoneView.setText(contact.getEmail());
         addressAndPhonehoneView.setText(contact.getAddress() + " \u2022 " +
                 contact.getCity() + ", " +
                 contact.getState() + " " +

@@ -26,6 +26,7 @@
         <activity android:name=".DisplayMccombs" />
         <activity android:name=".DisplayCLA" />
         <activity android:name=".DisplayECAC" />
+        <activity android:name=".DisplayFunctional" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ResumeParseActivity" />
         <activity

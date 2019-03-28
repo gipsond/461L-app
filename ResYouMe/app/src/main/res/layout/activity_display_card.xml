@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/addressView" />
 
             <TextView
-                android:id="@+id/emailView"
+                android:id="@+id/emailPhoneView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailView" />
+                app:layout_constraintTop_toBottomOf="@+id/emailPhoneView" />
 
             <TextView
                 android:id="@+id/websiteView"
