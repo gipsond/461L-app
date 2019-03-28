@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.Resume;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
     EditText message;
     TextView response;
     SingleResumeViewModel resumeViewModel;
+    CompanyInfoViewModel companyInfoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             message.setText(resume);
         }
         resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+        companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
     }
 
     public void send_nfc(View view){
@@ -83,22 +86,38 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
     }
 
-    public void saveResponseToDB(View view) throws JSONException {
+    public void saveResponseToDB(View view) {
         if (resumeViewModel == null) {
             resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         }
+
+        if (companyInfoViewModel == null) {
+            companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
+        }
+
         // only insert the resume if all of the response types are correct and array size is 3
-        try{
-            JSONArray responseJson = new JSONArray(response.getText().toString());
-            if(responseJson.length() == 3){
-                JSONObject contact = responseJson.getJSONObject(0);
-                JSONArray education = responseJson.getJSONArray(1);
-                JSONArray work = responseJson.getJSONArray(2);
+        try {
+            JSONObject responseJson = new JSONObject(response.getText().toString());
+            if (responseJson.has("type")
+                    && responseJson.getString("type").equals("resume")
+                    && responseJson.has("contact")
+                    && responseJson.has("educationPhases")
+                    && responseJson.has("workPhases")) {
+
                 Resume resume = new Resume(responseJson);
                 resumeViewModel.insert(resume);
+
+            } else if (responseJson.has("type")
+                    && responseJson.getString("type").equals("companyInfo")
+                    && responseJson.has("name")) {
+
+                CompanyInfo companyInfo = new CompanyInfo(responseJson);
+                companyInfoViewModel.insert(companyInfo);
+
             }
         }
-        catch(Exception e){
+        catch (Exception e) {
+            // TODO: don't silently fail; at least do something
             //e.printStackTrace();
         }
     }

@@ -26,19 +26,19 @@ public class Resume {
         this.workPhases = workPhases;
     }
 
-    public Resume(JSONArray resume) {
+    public Resume(JSONObject resume) {
         if(resume == null){
             return;
         }
         try {
             // TODO: handle malformed JSON gracefully (currently crashes due to NullPointerException)
-            if(resume.length() == 3) {
-                JSONObject contact = resume.getJSONObject(0);
-                JSONArray education = resume.getJSONArray(1);
-                JSONArray work = resume.getJSONArray(2);
-                this.contact = new Contact(resume.getJSONObject(0));
-                this.educationPhases = getEducationList(resume.getJSONArray(1));
-                this.workPhases = getWorkList(resume.getJSONArray(2));
+            if (resume.length() == 3) {
+                JSONObject contact = resume.getJSONObject("contact");
+                JSONArray education = resume.getJSONArray("educationPhases");
+                JSONArray work = resume.getJSONArray("workPhases");
+                this.contact = new Contact(contact);
+                this.educationPhases = getEducationList(education);
+                this.workPhases = getWorkList(work);
             }
         }
         catch (Exception e) {
@@ -50,11 +50,12 @@ public class Resume {
 
     }
 
-    public JSONArray toJSONArray() throws JSONException {
-        JSONArray resume = new JSONArray();
-        resume.put(this.contact.toJSONObject());
-        resume.put(this.getEducationArray());
-        resume.put(this.getWorkArray());
+    public JSONObject toJSONObject() throws JSONException {
+        JSONObject resume = new JSONObject();
+        resume.put("contact", this.contact.toJSONObject());
+        resume.put("educationPhases", this.getEducationArray());
+        resume.put("workPhases", this.getWorkArray());
+        resume.put("type", "resume");
         return resume;
     }
 

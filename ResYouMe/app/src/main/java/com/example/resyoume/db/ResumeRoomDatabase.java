@@ -4,15 +4,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Contact.class, WorkPhase.class, EducationPhase.class, CompanyInfo.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class ResumeRoomDatabase extends RoomDatabase {
 
     /* Singleton Interface */
@@ -62,6 +65,7 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
             Contact contact =
                 new Contact(
                     0,
+                    new Date(),
                     "John", "Doe",
                     "Mr.",
                     "1600 Amphitheatre Parkway", "94043", "Mountain View", "CA", "United States",

@@ -12,6 +12,7 @@ import com.example.resyoume.db.Resume;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -25,7 +26,7 @@ public class DisplayActivityCard extends DisplayActivity {
         String resumeString = intent.getStringExtra("resumeJSON");
         if(resumeString != null){
             try {
-                JSONArray resumeJson = new JSONArray(resumeString);
+                JSONObject resumeJson = new JSONObject(resumeString);
                 Resume resume = new Resume(resumeJson);
                 setResume(resume);
             }
@@ -76,7 +77,7 @@ public class DisplayActivityCard extends DisplayActivity {
     public void shareResume(View view){
         Intent nfc_intent = new Intent(this, NFCActivity.class);
         try {
-            nfc_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
+            nfc_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
         }
         catch (JSONException e) {}
         startActivity(nfc_intent);

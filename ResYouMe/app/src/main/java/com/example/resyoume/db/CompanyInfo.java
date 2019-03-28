@@ -3,6 +3,8 @@ package com.example.resyoume.db;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -14,6 +16,8 @@ public class CompanyInfo {
     @NonNull
     private int id;
 
+    private Date timestamp;
+
     private String companyName;
     private String location;
     private String twitter;
@@ -23,6 +27,7 @@ public class CompanyInfo {
     private String additionalInfo;
 
     public CompanyInfo(int id,
+                       Date timestamp,
                        String companyName,
                        String location,
                        String twitter,
@@ -31,6 +36,7 @@ public class CompanyInfo {
                        String linkedIn,
                        String additionalInfo) {
         this.id = id;
+        this.timestamp = timestamp;
         this.companyName = companyName;
         this.location = location;
         this.twitter = twitter;
@@ -50,6 +56,7 @@ public class CompanyInfo {
         }
         try {
             this.id = 0;
+            this.timestamp = new Date();
             this.companyName = companyInfoJson.getString("name");
             this.location = companyInfoJson.getString("location");
             this.twitter = companyInfoJson.getString("twitter");
@@ -63,6 +70,7 @@ public class CompanyInfo {
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject companyInfoJson = new JSONObject();
+        companyInfoJson.put("type", "companyInfo");
         companyInfoJson.put("name", this.companyName);
         companyInfoJson.put("location", this.location);
         companyInfoJson.put("twitter", this.twitter);

@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -274,6 +275,7 @@ public class ResumeParseActivity extends AppCompatActivity {
                             Contact contact =
                                 new Contact(
                                     0,
+                                    new Date(),
                                     firstname,
                                     lastname,
                                     title,

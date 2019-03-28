@@ -70,7 +70,7 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                 Resume resume = rvh.getResume();
                 Intent nfc_intent = new Intent(this, NFCActivity.class);
                 try {
-                    nfc_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
+                    nfc_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
                 }
                 catch (JSONException e) {}
                 startActivity(nfc_intent);
@@ -107,7 +107,7 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                     }
                 }
                 try {
-                    display_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
+                    display_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
                 }
                 catch (JSONException e) {}
                 startActivity(display_intent);

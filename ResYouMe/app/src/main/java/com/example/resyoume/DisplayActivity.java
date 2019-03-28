@@ -40,7 +40,7 @@ public abstract class DisplayActivity extends AppCompatActivity {
     public void shareResume(View view) {
         Intent nfc_intent = new Intent(this, NFCActivity.class);
         try {
-            nfc_intent.putExtra("resumeJSON", resume.toJSONArray().toString());
+            nfc_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
         } catch (JSONException e) {
         }
         startActivity(nfc_intent);

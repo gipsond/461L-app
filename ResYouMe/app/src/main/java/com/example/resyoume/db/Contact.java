@@ -2,6 +2,9 @@ package com.example.resyoume.db;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,6 +14,8 @@ public class Contact {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
+
+    private Date timestamp;
 
     private String firstName;
     private String lastName;
@@ -39,6 +44,7 @@ public class Contact {
     /* Constructors */
 
     public Contact(int id,
+                   Date timestamp,
                    String firstName, String lastName,
                    String title,
                    String address, String postcode, String city, String state, String country,
@@ -46,6 +52,7 @@ public class Contact {
                    String interests, String publications,
                    String plaintext) {
         this.id = id;
+        this.timestamp = timestamp;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -68,6 +75,7 @@ public class Contact {
         }
         try {
             this.id = 0;
+            this.timestamp = new Date();
             this.firstName = contactJson.getString("firstName");
             this.lastName = contactJson.getString("lastName");
             this.title = contactJson.getString("title");
@@ -86,7 +94,7 @@ public class Contact {
         catch (JSONException e) {}
     }
 
-    public Contact(){
+    public Contact() {
 
     }
 
@@ -95,6 +103,8 @@ public class Contact {
     public int getId() {
         return id;
     }
+
+    public Date getTimestamp() { return timestamp; }
 
     public String getFirstName() {
         return firstName;
@@ -158,6 +168,8 @@ public class Contact {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -251,6 +263,17 @@ public class Contact {
         Contact contact = (Contact) o;
 
         if(contact.id != this.id){return false;}
+
+        if(contact.getTimestamp() == null || this.timestamp == null){
+            if(!(contact.getTimestamp() == null && this.timestamp == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getTimestamp().equals(this.timestamp)){
+                return false;
+            }
+        }
 
         if(contact.getFirstName() == null || this.firstName == null){
             if(!(contact.getFirstName() == null && this.firstName == null)){
