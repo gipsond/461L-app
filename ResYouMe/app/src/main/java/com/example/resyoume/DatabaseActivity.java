@@ -107,6 +107,7 @@ public class DatabaseActivity extends AppCompatActivity implements AdapterView.O
                     }
                 }
                 try {
+                    System.out.println(resume.toJSONObject().toString());
                     display_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
                 }
                 catch (JSONException e) {}

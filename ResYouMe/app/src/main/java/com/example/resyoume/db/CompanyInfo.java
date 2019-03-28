@@ -89,6 +89,10 @@ public class CompanyInfo {
         this.id = id;
     }
 
+    public Date getTimestamp() { return timestamp; }
+
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+
     public String getCompanyName() {
         return companyName;
     }

@@ -13,6 +13,7 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
+import java.util.Date;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,30 +22,32 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
 
     class ResumeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView resumeHeader;
-        private final TextView addressView;
-        private final TextView addressView2;
-        private final TextView emailView;
-        private final TextView phoneView;
-        private final TextView websiteView;
-        private final TextView interestsView;
-        private final TextView publicationsView;
-        private final TextView educationPhasesView;
-        private final TextView workPhasesView;
+        private final TextView timestampView;
+//        private final TextView addressView;
+//        private final TextView addressView2;
+//        private final TextView emailView;
+//        private final TextView phoneView;
+//        private final TextView websiteView;
+//        private final TextView interestsView;
+//        private final TextView publicationsView;
+//        private final TextView educationPhasesView;
+//        private final TextView workPhasesView;
 
         private Resume resume;
 
         private ResumeViewHolder(View itemView) {
             super(itemView);
             resumeHeader = itemView.findViewById(R.id.resumeHeader);
-            addressView = itemView.findViewById(R.id.addressView);
-            addressView2 = itemView.findViewById(R.id.addressView);
-            emailView = itemView.findViewById(R.id.emailView);
-            phoneView = itemView.findViewById(R.id.phoneView);
-            websiteView = itemView.findViewById(R.id.websiteView);
-            interestsView = itemView.findViewById(R.id.interestsView);
-            publicationsView = itemView.findViewById(R.id.publicationsView);
-            educationPhasesView = itemView.findViewById(R.id.educationPhasesView);
-            workPhasesView = itemView.findViewById(R.id.workPhasesView);
+            timestampView = itemView.findViewById(R.id.timestampView);
+//            addressView = itemView.findViewById(R.id.addressView);
+//            addressView2 = itemView.findViewById(R.id.addressView2);
+//            emailView = itemView.findViewById(R.id.emailView);
+//            phoneView = itemView.findViewById(R.id.phoneView);
+//            websiteView = itemView.findViewById(R.id.websiteView);
+//            interestsView = itemView.findViewById(R.id.interestsView);
+//            publicationsView = itemView.findViewById(R.id.publicationsView);
+//            educationPhasesView = itemView.findViewById(R.id.educationPhasesView);
+//            workPhasesView = itemView.findViewById(R.id.workPhasesView);
 
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -82,25 +85,30 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             Contact contact = current.contact;
             holder.resume = current;
             holder.resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
-            holder.addressView.setText(contact.getAddress());
-            holder.addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
-            holder.emailView.setText(contact.getEmail());
-            holder.phoneView.setText(contact.getPhoneNumber());
-            holder.websiteView.setText(contact.getHomepage());
-            holder.interestsView.setText(contact.getInterests());
-            holder.publicationsView.setText(contact.getPublications());
 
-            StringBuilder eduPhasesStr = new StringBuilder();
-            for (EducationPhase educationPhase : current.educationPhases) {
-                eduPhasesStr.append(educationPhase.getPlaintext());
-            }
-            holder.educationPhasesView.setText(eduPhasesStr.toString());
+            Date timestamp = current.contact.getTimestamp();
+            String timestampString = OurDateFormatter.formatDate(timestamp);
+            holder.timestampView.setText(timestampString);
 
-            StringBuilder workPhasesStr = new StringBuilder();
-            for (WorkPhase workPhase : current.workPhases) {
-                workPhasesStr.append(workPhase.getPlaintext());
-            }
-            holder.workPhasesView.setText(workPhasesStr.toString());
+//            holder.addressView.setText(contact.getAddress());
+//            holder.addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
+//            holder.emailView.setText(contact.getEmail());
+//            holder.phoneView.setText(contact.getPhoneNumber());
+//            holder.websiteView.setText(contact.getHomepage());
+//            holder.interestsView.setText(contact.getInterests());
+//            holder.publicationsView.setText(contact.getPublications());
+
+//            StringBuilder eduPhasesStr = new StringBuilder();
+//            for (EducationPhase educationPhase : current.educationPhases) {
+//                eduPhasesStr.append(educationPhase.getPlaintext());
+//            }
+//            holder.educationPhasesView.setText(eduPhasesStr.toString());
+//
+//            StringBuilder workPhasesStr = new StringBuilder();
+//            for (WorkPhase workPhase : current.workPhases) {
+//                workPhasesStr.append(workPhase.getPlaintext());
+//            }
+//            holder.workPhasesView.setText(workPhasesStr.toString());
 
         } else {
             // Covers the case of data not being ready yet.

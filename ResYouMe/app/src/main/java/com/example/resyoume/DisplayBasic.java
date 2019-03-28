@@ -37,7 +37,7 @@ public class DisplayBasic extends DisplayActivity {
     }
 
     @Override
-    protected void setResume(Resume resume){
+    protected void setResume(Resume resume) {
         this.resume = resume;
 
         final TextView resumeHeader;

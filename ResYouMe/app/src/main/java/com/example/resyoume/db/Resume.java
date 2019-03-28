@@ -27,19 +27,18 @@ public class Resume {
     }
 
     public Resume(JSONObject resume) {
+        System.out.println(resume.toString());
         if(resume == null){
             return;
         }
         try {
             // TODO: handle malformed JSON gracefully (currently crashes due to NullPointerException)
-            if (resume.length() == 3) {
-                JSONObject contact = resume.getJSONObject("contact");
-                JSONArray education = resume.getJSONArray("educationPhases");
-                JSONArray work = resume.getJSONArray("workPhases");
-                this.contact = new Contact(contact);
-                this.educationPhases = getEducationList(education);
-                this.workPhases = getWorkList(work);
-            }
+            JSONObject contact = resume.getJSONObject("contact");
+            JSONArray education = resume.getJSONArray("educationPhases");
+            JSONArray work = resume.getJSONArray("workPhases");
+            this.contact = new Contact(contact);
+            this.educationPhases = getEducationList(education);
+            this.workPhases = getWorkList(work);
         }
         catch (Exception e) {
             e.printStackTrace();
