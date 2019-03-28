@@ -81,23 +81,23 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
                 Resume resume = rvh.getResume();
                 Intent display_intent = new Intent(this, DisplayBasic.class);
                 switch(style){
-                    case "Style 1":{
+                    case "Basic":{
                         display_intent = new Intent(this, DisplayBasic.class);
                         break;
                     }
-                    case "Style 2":{
+                    case "Card":{
                         display_intent = new Intent(this, DisplayActivityCard.class);
                         break;
                     }
-                    case "Style 3":{
+                    case "McCombs":{
                         display_intent = new Intent(this, DisplayMccombs.class);
                         break;
                     }
-                    case "Style 4":{
+                    case "CLA":{
                         display_intent = new Intent(this, DisplayCLA.class);
                         break;
                     }
-                    case "Style 5":{
+                    case "ECAC":{
                         display_intent = new Intent(this, DisplayECAC.class);
                         break;
                     }
