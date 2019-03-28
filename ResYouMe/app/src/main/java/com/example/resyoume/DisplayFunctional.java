@@ -13,6 +13,7 @@ import com.example.resyoume.db.WorkPhase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class DisplayFunctional extends DisplayActivity {
@@ -23,7 +24,7 @@ public class DisplayFunctional extends DisplayActivity {
         String resumeString = intent.getStringExtra("resumeJSON");
         if (resumeString != null) {
             try {
-                JSONArray resumeJson = new JSONArray(resumeString);
+                JSONObject resumeJson = new JSONObject(resumeString);
                 Resume resume = new Resume(resumeJson);
                 setResume(resume);
             } catch (JSONException e) {

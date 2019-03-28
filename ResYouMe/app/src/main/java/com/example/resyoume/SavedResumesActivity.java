@@ -101,7 +101,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
                         display_intent = new Intent(this, DisplayECAC.class);
                         break;
                     }
-                    case "Style 6":{
+                    case "Functional":{
                         display_intent = new Intent(this, DisplayBasic.class);
                         break;
                     }
