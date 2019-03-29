@@ -71,6 +71,7 @@ public class CompanySearchActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    CompanyInfo_TextView.setText("Invalid URL. Please check the spelling and try again.");
                     //onBackPressed();
                 }
             }) {
