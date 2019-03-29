@@ -47,6 +47,9 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
         Intent intent = getIntent();
         String data = intent.getStringExtra("resumeJSON");
+        if(data == null){
+            data = intent.getStringExtra("companyInfoJSON");
+        }
         if(data != null){
             message.setText(data);
             try {
@@ -58,7 +61,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                     status.setText("Ready to send the resume of " + name);
                 }
                 else{
-                    String name = dataJson.getString("companyName");
+                    String name = dataJson.getString("name");
                     status.setText("Ready to send the company information of " + name);
                 }
 
@@ -67,7 +70,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             nfc_adapter.setNdefPushMessageCallback(this, this);
         }
         else{
-            status.setText("Ready to receive resume");
+            status.setText("Ready to receive resume or company information");
         }
         resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
@@ -92,10 +95,21 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         Intent intent = getIntent();
         if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
             TextView status = (TextView) findViewById(R.id.NFCStatus);
-            status.setText("Resume received. Ready to save");
             Parcelable[] raw_messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) raw_messages[0];
-            response.setText(new String(msg.getRecords()[0].getPayload()));
+            String received = new String(msg.getRecords()[0].getPayload());
+            try {
+                JSONObject receivedJson = new JSONObject(received);
+                String type = receivedJson.getString("type");
+                if(type.equals("resume")){
+                    status.setText("Resume received. Ready to save");
+                }
+                else{
+                    status.setText("Company Info received. Ready to save");
+                }
+            }
+            catch (JSONException e) {}
+            response.setText(received);
         }
     }
 

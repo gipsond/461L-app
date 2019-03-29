@@ -40,15 +40,6 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
 
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
         companyInfoViewModel.getAllCompanyInfo().observe(this, adapter::setCompanyInfo);
-
-        Spinner spinner = (Spinner) findViewById(R.id.style_spinner);
-        spinner.setOnItemSelectedListener(this);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> style_adapter = ArrayAdapter.createFromResource(this, R.array.styles, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        style_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(style_adapter);
     }
 
     /**
@@ -71,7 +62,7 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
                 CompanyInfo companyInfo = civh.getCompanyInfo();
                 Intent nfc_intent = new Intent(this, NFCActivity.class);
                 try {
-                    nfc_intent.putExtra("resumeJSON", companyInfo.toJSONObject().toString());
+                    nfc_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
                 }
                 catch (JSONException e) {}
                 startActivity(nfc_intent);
