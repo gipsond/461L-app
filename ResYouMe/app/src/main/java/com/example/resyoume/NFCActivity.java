@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.Resume;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,14 +46,24 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             return;
         }
         Intent intent = getIntent();
-        String resume = intent.getStringExtra("resumeJSON");
-        if(resume != null){
-            message.setText(resume);
+        String data = intent.getStringExtra("resumeJSON");
+        if(data != null){
+            message.setText(data);
             try {
-                JSONArray responseJson = new JSONArray(resume);
+                JSONObject dataJson = new JSONObject(data);
+                String type = dataJson.getString("type");
+                if(type.equals("resume")){
+                    JSONObject contactJson = dataJson.getJSONObject("contact");
+                    String name = contactJson.getString("firstName") + " " + contactJson.getString("lastName");
+                    status.setText("Ready to send the resume of " + name);
+                }
+                else{
+                    String name = dataJson.getString("companyName");
+                    status.setText("Ready to send the company information of " + name);
+                }
+
             }
             catch (JSONException e) {}
-            status.setText("Ready to send resume");
             nfc_adapter.setNdefPushMessageCallback(this, this);
         }
         else{
@@ -62,12 +71,6 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
         resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
-    }
-
-    public void send_nfc(View view){
-        TextView status = (TextView) findViewById(R.id.NFCStatus);
-        status.setText("Callback set. Looking for other device...");
-        nfc_adapter.setNdefPushMessageCallback(this, this);
     }
 
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){

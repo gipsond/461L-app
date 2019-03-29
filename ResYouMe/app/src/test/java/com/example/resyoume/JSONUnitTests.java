@@ -20,7 +20,7 @@ public class JSONUnitTests {
     /* Contact tests */
     @Test
     public void contact_to_json() throws JSONException {
-        Contact contact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact contact = new Contact(0, null,"Erick", "Shepherd", "", "123 road st", "12345",
                     "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         JSONObject contactJson = contact.toJSONObject();
@@ -62,7 +62,7 @@ public class JSONUnitTests {
         contactJson.put("publications", "");
         contactJson.put("plaintext", "");
         Contact actual = new Contact(contactJson);
-        Contact expected = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact expected = new Contact(0, actual.getTimestamp(),"Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         assertEquals("Contacts are not equal", expected, actual);
@@ -73,6 +73,7 @@ public class JSONUnitTests {
         JSONObject contactJson = new JSONObject();
         Contact actual = new Contact(contactJson);
         Contact expected = new Contact();
+        expected.setTimestamp(actual.getTimestamp());
         assertEquals("Contacts are not equal", expected, actual);
     }
 
@@ -185,7 +186,7 @@ public class JSONUnitTests {
     @Test
     public void resume_to_json() throws JSONException {
         // set up the test resume and get its json array
-        Contact contact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact contact = new Contact(0, null, "Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         EducationPhase actualEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
@@ -203,7 +204,7 @@ public class JSONUnitTests {
         actualWorkList.add(actualWork);
         actualWorkList.add(actualWork2);
         Resume actualResume = new Resume(contact, actualEduList, actualWorkList);
-        JSONArray actual = actualResume.toJSONArray();
+        JSONObject actual = actualResume.toJSONObject();
 
         // set up the expected json array
         JSONObject expectedContact = new JSONObject();
@@ -265,10 +266,11 @@ public class JSONUnitTests {
         expectedWorkList.put(expectedWork1);
         expectedWorkList.put(expectedWork2);
 
-        JSONArray expected = new JSONArray();
-        expected.put(expectedContact);
-        expected.put(expectedEduList);
-        expected.put(expectedWorkList);
+        JSONObject expected = new JSONObject();
+        expected.put("contact", expectedContact);
+        expected.put("educationPhases", expectedEduList);
+        expected.put("workPhases", expectedWorkList);
+        expected.put("type", "resume");
 
         // compare the two json strings
         assertEquals("JSON Objects are not equal", expected.toString(), actual.toString());
@@ -336,14 +338,14 @@ public class JSONUnitTests {
         actualJsonWorkList.put(actualJsonWork1);
         actualJsonWorkList.put(actualJsonWork2);
 
-        JSONArray actualJson = new JSONArray();
-        actualJson.put(actualJsonContact);
-        actualJson.put(actualJsonEduList);
-        actualJson.put(actualJsonWorkList);
+        JSONObject actualJson = new JSONObject();
+        actualJson.put("contact", actualJsonContact);
+        actualJson.put("educationPhases", actualJsonEduList);
+        actualJson.put("workPhases", actualJsonWorkList);
         Resume actual = new Resume(actualJson);
 
         // set up the test resume and get its json array
-        Contact expectedContact = new Contact(0, "Erick", "Shepherd", "", "123 road st", "12345",
+        Contact expectedContact = new Contact(0, actual.contact.getTimestamp(),"Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
                 "erick.com", "android design", "", "");
         EducationPhase expectedEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
@@ -367,7 +369,7 @@ public class JSONUnitTests {
 
     @Test
     public void empty_json_to_resume(){
-        JSONArray resumeJson = new JSONArray();
+        JSONObject resumeJson = new JSONObject();
         Resume actual = new Resume(resumeJson);
         Resume expected = new Resume();
         assertEquals("Resumes are not equal", expected, actual);
