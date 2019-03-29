@@ -20,8 +20,7 @@ import androidx.test.runner.AndroidJUnit4;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -32,29 +31,20 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CompanySearchCorrectAddressTest {
+public class SendCompanyInfo {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void companySearchCorrectAddressTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+    public void sendCompanyInfo() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.company_button), withText("Search"),
+                allOf(withId(R.id.saved_company_info_button), withText("Saved Company Info"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                3),
+                                6),
                         isDisplayed()));
         appCompatButton.perform(click());
 
@@ -67,47 +57,57 @@ public class CompanySearchCorrectAddressTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.CompanyDomainName),
-                        childAtPosition(
+        ViewInteraction linearLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.recyclerview),
                                 childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                0),
+                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                        0)),
+                        0),
                         isDisplayed()));
-        appCompatEditText.perform(click());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.CompanyDomainName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("google.com"), closeSoftKeyboard());
-
-        pressBack(); // delete this line for test to pass
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.button), withText("Search"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
+        linearLayout.perform(longClick());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.CompanyInfo), withText("Company Name: Google\nCompany Location: 1600 Amphitheatre Parkway  Mountain View California, 94043 United States\nCompany Bio: Google's mission is to organize the world's information and make it universally accessible and useful.\nCompany Website: http://www.google.com\nCompany Linkedin: https://www.linkedin.com/company/google\nCompany Twitter: https://twitter.com/google"),
+                allOf(withId(android.R.id.title), withText("Send"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("com.android.internal.view.menu.ListMenuItemView")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.perform(click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.NFCStatus), withText("Ready to send the company information of Eustace's Ranch"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                1),
+                                0),
                         isDisplayed()));
-        textView.check(matches(withText("Company Name: Google Company Location: 1600 Amphitheatre Parkway  Mountain View California, 94043 United States Company Bio: Google's mission is to organize the world's information and make it universally accessible and useful. Company Website: http://www.google.com Company Linkedin: https://www.linkedin.com/company/google Company Twitter: https://twitter.com/google")));
+        textView2.check(matches(withText("Ready to send the company information of Eustace's Ranch")));
+
+        pressBack();
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pressBack();
     }
 
     private static Matcher<View> childAtPosition(

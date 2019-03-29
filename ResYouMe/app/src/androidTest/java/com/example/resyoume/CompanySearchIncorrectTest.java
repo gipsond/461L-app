@@ -78,8 +78,6 @@ public class CompanySearchIncorrectTest {
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("google"), closeSoftKeyboard());
 
-        pressBack();
-
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.button), withText("Search"),
                         childAtPosition(
