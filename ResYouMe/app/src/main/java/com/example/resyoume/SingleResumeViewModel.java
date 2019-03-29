@@ -5,8 +5,6 @@ import android.app.Application;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.ResumeRepository;
 
-import java.util.List;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 

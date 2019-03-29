@@ -111,6 +111,20 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
 
             resumeDao.insert(new Resume(contact, educationPhases, workPhases));
 
+            companyInfoDao.insert(
+                    new CompanyInfo(
+                            0,
+                            new Date(),
+                            "Eustace's Ranch",
+                            "Nowhere, KS",
+                            "@BaggeRancher",
+                            "https://www.eustace.ranch/index.html",
+                            "Eustace built up his ranch from the ground up, driven by a passion for farming and his wife Muriel. He hates stupid dogs.",
+                            "https://www.linkedin.com/company/bagge-ranch",
+                            "This is an example set of company info for testing the database.")
+            );
+
+
             return null;
         }
     }
