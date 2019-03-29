@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.resyoume.db.CompanyInfo;
 
@@ -32,7 +36,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
                 CompanyInfo companyInfo = new CompanyInfo(companyInfoJson);
                 setCompanyInfo(companyInfo);
             } catch (JSONException e) {
-                // TODO: don't ignore silently
+                Toast.makeText(getApplicationContext(), "JSON Error occurred" , Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -43,6 +47,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         try {
             nfc_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
         } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "JSON Error occurred" , Toast.LENGTH_SHORT).show();
         }
         startActivity(nfc_intent);
     }
@@ -50,6 +55,24 @@ public class DisplayCompanyInfo extends AppCompatActivity {
     private void setCompanyInfo(CompanyInfo companyInfo) {
         this.companyInfo = companyInfo;
 
-        // TODO: implement setting of TextViews to fields
+        final TextView companyName = findViewById(R.id.nameView);
+        final TextView companyLocation = findViewById(R.id.locationView);
+        final TextView companyTwitter = findViewById(R.id.twitterView);
+        final TextView companyWebsite = findViewById(R.id.websiteView);
+        final TextView companyBio = findViewById(R.id.bioView);
+        final TextView companyLinkedin = findViewById(R.id.linkedinView);
+        final TextView companyAdditionalInfo = findViewById(R.id.additionalInfoView);
+
+        LinearLayout ll = new LinearLayout(this);
+        ScrollView companyView = new ScrollView(this);
+        companyView = findViewById(R.id.companyView);
+
+        companyName.setText(companyInfo.getCompanyName());
+        companyLocation.setText(companyInfo.getLocation());
+        companyTwitter.setText(companyInfo.getTwitter());
+        companyWebsite.setText(companyInfo.getWebsite());
+        companyBio.setText(companyInfo.getBio());
+        companyLinkedin.setText(companyInfo.getLinkedIn());
+        companyAdditionalInfo.setText(companyInfo.getAdditionalInfo());
     }
 }
