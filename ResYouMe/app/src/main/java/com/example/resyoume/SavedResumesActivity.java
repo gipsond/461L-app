@@ -107,7 +107,6 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
                     }
                 }
                 try {
-                    System.out.println(resume.toJSONObject().toString());
                     display_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
                 }
                 catch (JSONException e) {}

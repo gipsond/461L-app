@@ -73,7 +73,6 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
                 CompanyInfo companyInfo = civh.getCompanyInfo();
                 Intent display_intent = new Intent(this, DisplayCompanyInfo.class);
                 try {
-                    System.out.println(companyInfo.toJSONObject().toString());
                     display_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
                 }
                 catch (JSONException e) {}

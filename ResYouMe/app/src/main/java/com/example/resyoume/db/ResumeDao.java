@@ -33,7 +33,6 @@ abstract class ResumeDao {
     void insert(Resume resume) {
         Contact contact = resume.contact;
         int contactId = (int)insertContact(contact);
-        System.out.println(resume.contact.getFirstName() + " id: " + contactId);
         insertEducationPhases(contactId, resume.educationPhases);
         insertWorkPhases(contactId, resume.workPhases);
     }
