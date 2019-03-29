@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -69,10 +71,21 @@ public class DisplayCompanyInfo extends AppCompatActivity {
 
         companyName.setText(companyInfo.getCompanyName());
         companyLocation.setText(companyInfo.getLocation());
-        companyTwitter.setText(companyInfo.getTwitter());
-        companyWebsite.setText(companyInfo.getWebsite());
+
+        String twitterLink = "<a href=\"" + companyInfo.getTwitter() +"\">Twitter</a>";
+        companyTwitter.setText(Html.fromHtml(twitterLink));
+        companyTwitter.setMovementMethod(LinkMovementMethod.getInstance());
+
+        String websiteLink = "<a href=\"" + companyInfo.getWebsite() +"\">Website</a>";
+        companyWebsite.setText(Html.fromHtml(websiteLink));
+        companyWebsite.setMovementMethod(LinkMovementMethod.getInstance());
+
         companyBio.setText(companyInfo.getBio());
-        companyLinkedin.setText(companyInfo.getLinkedIn());
+
+        String linkedInLink = "<a href=\"" + companyInfo.getLinkedIn() +"\">LinkedIn</a>";
+        companyLinkedin.setText(Html.fromHtml(linkedInLink));
+        companyLinkedin.setMovementMethod(LinkMovementMethod.getInstance());
+
         companyAdditionalInfo.setText(companyInfo.getAdditionalInfo());
     }
 }
