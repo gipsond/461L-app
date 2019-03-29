@@ -39,6 +39,7 @@
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
                 android:textSize="24sp"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,6 +52,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameView" />
@@ -62,6 +64,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="EDUCATION"
+                android:textColor="@android:color/black"
                 android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -78,6 +81,7 @@
 
             <TextView
                 android:id="@+id/educationView1"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -88,6 +92,7 @@
 
             <TextView
                 android:id="@+id/ExperienceLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="WORK EXPERIENCE" />
@@ -102,24 +107,28 @@
 
             <TextView
                 android:id="@+id/experienceView1"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
 
             <TextView
                 android:id="@+id/experienceView2"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
 
             <TextView
                 android:id="@+id/experienceView3"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
 
             <TextView
                 android:id="@+id/academicExperienceLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ACADEMIC EXPERIENCE" />
@@ -134,11 +143,13 @@
 
             <TextView
                 android:id="@+id/academicExperienceView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/SkillsLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -161,6 +172,7 @@
 
             <TextView
                 android:id="@+id/skillsView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -174,6 +186,7 @@
 
             <TextView
                 android:id="@+id/additionalLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -186,6 +199,7 @@
 
             <TextView
                 android:id="@+id/additionalInfoView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

@@ -14,7 +14,7 @@
         <item>McCombs</item>
         <item>CLA</item>
         <item>ECAC</item>
-        <item>Style 6</item>
+        <item>Functional</item>
     </string-array>
     <string name="title_activity_saved_company_info">SavedCompanyInfoActivity</string>
 </resources>

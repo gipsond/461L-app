@@ -32,6 +32,7 @@
 
             <TextView
                 android:id="@+id/resumeHeader"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -45,6 +46,7 @@
 
             <TextView
                 android:id="@+id/phoneEmailView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -63,6 +65,7 @@
 
                 <TextView
                     android:id="@+id/addressViewCurrent"
+                    android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".5"
@@ -70,6 +73,7 @@
 
                 <TextView
                     android:id="@+id/addressViewPermanent"
+                    android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".5"
@@ -78,6 +82,7 @@
 
             <TextView
                 android:id="@+id/EducationLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -91,24 +96,28 @@
 
             <TextView
                 android:id="@+id/educationView1"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
 
             <TextView
                 android:id="@+id/educationView2"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
 
             <TextView
                 android:id="@+id/ExperienceLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="EXPERIENCE" />
 
             <TextView
                 android:id="@+id/experienceView1"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
@@ -116,6 +125,7 @@
 
             <TextView
                 android:id="@+id/experienceView2"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
@@ -123,6 +133,7 @@
 
             <TextView
                 android:id="@+id/experienceView3"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
@@ -130,6 +141,7 @@
 
             <TextView
                 android:id="@+id/additionalExperienceLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -143,12 +155,14 @@
 
             <TextView
                 android:id="@+id/additionalExperienceView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="viewStart" />
 
             <TextView
                 android:id="@+id/SkillsLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -163,6 +177,7 @@
 
             <TextView
                 android:id="@+id/skillsView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -177,6 +192,7 @@
 
             <TextView
                 android:id="@+id/additionalLabel"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -189,6 +205,7 @@
 
             <TextView
                 android:id="@+id/additionalInfoView"
+                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart" />
