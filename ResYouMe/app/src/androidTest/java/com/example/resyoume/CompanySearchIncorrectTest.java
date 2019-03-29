@@ -91,14 +91,14 @@ public class CompanySearchIncorrectTest {
         appCompatButton2.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.CompanyInfo), withText("Company Info..."),
+                allOf(withId(R.id.CompanyInfo), withText("Invalid URL. Please check the spelling and try again."),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 1),
                         isDisplayed()));
-        textView.check(matches(withText("Company Info...")));
+        textView.check(matches(withText("Invalid URL. Please check the spelling and try again.")));
     }
 
     private static Matcher<View> childAtPosition(
