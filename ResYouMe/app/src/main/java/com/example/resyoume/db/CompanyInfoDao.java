@@ -9,13 +9,13 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 @Dao
-abstract class CompanyInfoDao {
+public abstract class CompanyInfoDao {
 
     @Transaction
     @Query("SELECT * FROM company_info")
     abstract LiveData<List<CompanyInfo>> getAllCompanyInfo();
 
     @Insert
-    abstract long insert(CompanyInfo companyInfo);
+    public abstract long insert(CompanyInfo companyInfo);
 
 }

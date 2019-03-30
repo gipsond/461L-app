@@ -25,7 +25,7 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
 
     private static volatile ResumeRoomDatabase INSTANCE;
 
-    static ResumeRoomDatabase getDatabase(final Context context) {
+    public static ResumeRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (ResumeRoomDatabase.class) {
                 if (INSTANCE == null) {

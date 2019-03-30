@@ -17,7 +17,14 @@ public class ResumeRepository {
     private LiveData<List<CompanyInfo>> allCompanyInfo;
 
     public ResumeRepository(Application application) {
-        ResumeRoomDatabase db = ResumeRoomDatabase.getDatabase(application);
+        this(ResumeRoomDatabase.getDatabase(application));
+    }
+
+    /**
+     * For testing purposes. Use ResumeRepository(Application).
+     * @param db from ResumeRoomDatabase.getDatabase(Application) unless mocking
+     */
+    public ResumeRepository(ResumeRoomDatabase db) {
         resumeDao = db.resumeDao();
         companyInfoDao = db.companyInfoDao();
         allResumes = resumeDao.getAllResumes();

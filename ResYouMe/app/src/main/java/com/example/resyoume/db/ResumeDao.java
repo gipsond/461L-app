@@ -9,7 +9,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 @Dao
-abstract class ResumeDao {
+public abstract class ResumeDao {
 
     /* Main Queries */
 
@@ -30,7 +30,7 @@ abstract class ResumeDao {
 //    LiveData<List<Word>> getAllWords();
 
     @Transaction
-    void insert(Resume resume) {
+    public void insert(Resume resume) {
         Contact contact = resume.contact;
         int contactId = (int)insertContact(contact);
         insertEducationPhases(contactId, resume.educationPhases);
