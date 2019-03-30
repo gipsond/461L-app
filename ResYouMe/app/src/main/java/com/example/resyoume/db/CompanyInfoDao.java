@@ -13,7 +13,7 @@ public abstract class CompanyInfoDao {
 
     @Transaction
     @Query("SELECT * FROM company_info")
-    abstract LiveData<List<CompanyInfo>> getAllCompanyInfo();
+    public abstract LiveData<List<CompanyInfo>> getAllCompanyInfo();
 
     @Insert
     public abstract long insert(CompanyInfo companyInfo);

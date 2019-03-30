@@ -38,9 +38,6 @@ android {
         exclude 'org/apache/http/client/version.properties'
     }
 
-
-    testOptions.unitTests.returnDefaultValues = true
-
 }
 
 configurations {

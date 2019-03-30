@@ -15,11 +15,11 @@ public abstract class ResumeDao {
 
     @Transaction
     @Query("SELECT * FROM contacts")
-    abstract LiveData<List<Resume>> getAllResumes();
+    public abstract LiveData<List<Resume>> getAllResumes();
 
     @Transaction
     @Query("SELECT * FROM contacts LIMIT 1")
-    abstract LiveData<Resume> getResume();
+    public abstract LiveData<Resume> getResume();
 
 //    Example Queries from WordDao
 //
