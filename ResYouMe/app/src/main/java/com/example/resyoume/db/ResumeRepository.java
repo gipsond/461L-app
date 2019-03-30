@@ -28,7 +28,7 @@ public class ResumeRepository {
         resumeDao = db.resumeDao();
         companyInfoDao = db.companyInfoDao();
         allResumes = resumeDao.getAllResumes();
-        singleResume = resumeDao.getResume();
+        singleResume = resumeDao.getOldestResume();
         allCompanyInfo = companyInfoDao.getAllCompanyInfo();
     }
 

@@ -12,7 +12,7 @@ import androidx.room.Transaction;
 public abstract class CompanyInfoDao {
 
     @Transaction
-    @Query("SELECT * FROM company_info")
+    @Query("SELECT * FROM company_info ORDER BY timestamp DESC")
     public abstract LiveData<List<CompanyInfo>> getAllCompanyInfo();
 
     @Insert

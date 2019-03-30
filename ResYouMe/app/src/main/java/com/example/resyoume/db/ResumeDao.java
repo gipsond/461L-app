@@ -14,12 +14,12 @@ public abstract class ResumeDao {
     /* Main Queries */
 
     @Transaction
-    @Query("SELECT * FROM contacts")
+    @Query("SELECT * FROM contacts ORDER BY timestamp ASC")
     public abstract LiveData<List<Resume>> getAllResumes();
 
     @Transaction
-    @Query("SELECT * FROM contacts LIMIT 1")
-    public abstract LiveData<Resume> getResume();
+    @Query("SELECT * FROM contacts ORDER BY timestamp ASC LIMIT 1")
+    public abstract LiveData<Resume> getOldestResume();
 
 //    Example Queries from WordDao
 //

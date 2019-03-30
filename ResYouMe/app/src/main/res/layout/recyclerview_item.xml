@@ -13,7 +13,7 @@
         android:layout_weight="0"
         android:background="@color/resumeBg"
         android:text="Example Text"
-        android:textSize="24sp" />
+        android:autoSizeTextType="uniform" />
 
     <TextView
         android:id="@+id/timestampView"

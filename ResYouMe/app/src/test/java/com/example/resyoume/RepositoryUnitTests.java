@@ -46,7 +46,7 @@ public class RepositoryUnitTests {
         when(mockDB.companyInfoDao()).thenReturn(mockCompanyInfoDao);
 
         when(mockResumeDao.getAllResumes()).thenReturn(mockLiveAllResumes);
-        when(mockResumeDao.getResume()).thenReturn(mockLiveResume);
+        when(mockResumeDao.getOldestResume()).thenReturn(mockLiveResume);
         when(mockCompanyInfoDao.getAllCompanyInfo()).thenReturn(mockLiveCompanyInfo);
 
         repoUnderTest = new ResumeRepository(mockDB);
@@ -116,7 +116,7 @@ public class RepositoryUnitTests {
         assertEquals(mockLiveResume, repoUnderTest.getSingleResume());
 
         // Change data returned from DAO
-        when(mockResumeDao.getResume()).thenReturn(differentMockLiveResume);
+        when(mockResumeDao.getOldestResume()).thenReturn(differentMockLiveResume);
 
         // Repo's data should stay the same
         assertEquals(mockLiveResume, repoUnderTest.getSingleResume());
