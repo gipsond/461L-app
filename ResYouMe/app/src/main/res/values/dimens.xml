@@ -4,4 +4,7 @@
     <!--Database-->
     <dimen name="small_padding">6dp</dimen>
     <dimen name="big_padding">16dp</dimen>
+    <dimen name="iconwidth">300dp</dimen>
+    <dimen name="iconheight">200dp</dimen>
+    <item name="icon" type="dimen">50%</item>
 </resources>
