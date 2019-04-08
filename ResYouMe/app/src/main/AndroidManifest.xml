@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayCompanyInfo"></activity>
+        <activity android:name=".SetRatingAndNote"></activity>
+        <activity android:name=".DisplayCompanyInfo" />
         <activity
             android:name=".SavedCompanyInfoActivity"
             android:label="@string/title_activity_saved_company_info"

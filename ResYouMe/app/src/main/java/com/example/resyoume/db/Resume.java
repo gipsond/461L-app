@@ -11,6 +11,12 @@ import androidx.room.Embedded;
 import androidx.room.Relation;
 
 public class Resume {
+    //@Embedded
+    public Integer rating;
+
+    @Embedded
+    public String notes;
+
     @Embedded
     public Contact contact;
 
@@ -36,6 +42,8 @@ public class Resume {
             JSONArray education = resume.getJSONArray("educationPhases");
             JSONArray work = resume.getJSONArray("workPhases");
             this.contact = new Contact(contact);
+            this.rating = resume.getInt("rating");
+            this.notes = resume.getString("notes");
             this.educationPhases = getEducationList(education);
             this.workPhases = getWorkList(work);
         }
@@ -51,6 +59,8 @@ public class Resume {
     public JSONObject toJSONObject() throws JSONException {
         JSONObject resume = new JSONObject();
         resume.put("contact", this.contact.toJSONObject());
+        resume.put("rating", this.rating);
+        resume.put("notes", this.notes);
         resume.put("educationPhases", this.getEducationArray());
         resume.put("workPhases", this.getWorkArray());
         resume.put("type", "resume");
