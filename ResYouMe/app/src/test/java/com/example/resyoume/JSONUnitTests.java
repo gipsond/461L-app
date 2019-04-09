@@ -22,7 +22,7 @@ public class JSONUnitTests {
     public void contact_to_json() throws JSONException {
         Contact contact = new Contact(0, null,"Erick", "Shepherd", "", "123 road st", "12345",
                     "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
-                "erick.com", "android design", "", "");
+                "erick.com", "android design", "", "", null, null);
         JSONObject contactJson = contact.toJSONObject();
         JSONObject expected = new JSONObject();
         expected.put("id", 0);
@@ -61,17 +61,17 @@ public class JSONUnitTests {
         contactJson.put("interests", "android design");
         contactJson.put("publications", "");
         contactJson.put("plaintext", "");
-        Contact actual = new Contact(contactJson);
+        Contact actual = new Contact(contactJson, true);
         Contact expected = new Contact(0, actual.getTimestamp(),"Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
-                "erick.com", "android design", "", "");
+                "erick.com", "android design", "", "", null, null);
         assertEquals("Contacts are not equal", expected, actual);
     }
 
     @Test
     public void empty_json_to_contact(){
         JSONObject contactJson = new JSONObject();
-        Contact actual = new Contact(contactJson);
+        Contact actual = new Contact(contactJson, true);
         Contact expected = new Contact();
         expected.setTimestamp(actual.getTimestamp());
         assertEquals("Contacts are not equal", expected, actual);
@@ -79,7 +79,7 @@ public class JSONUnitTests {
 
     @Test
     public void null_json_to_contact(){
-        Contact actual = new Contact(null);
+        Contact actual = new Contact(null, true);
         Contact expected = new Contact();
         assertEquals("Contacts are not equal", expected, actual);
     }
@@ -188,7 +188,7 @@ public class JSONUnitTests {
         // set up the test resume and get its json array
         Contact contact = new Contact(0, null, "Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
-                "erick.com", "android design", "", "");
+                "erick.com", "android design", "", "", null, null);
         EducationPhase actualEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
         actualEdu.setContactId(0);
         EducationPhase actualEdu2 = new EducationPhase(0, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
@@ -342,12 +342,12 @@ public class JSONUnitTests {
         actualJson.put("contact", actualJsonContact);
         actualJson.put("educationPhases", actualJsonEduList);
         actualJson.put("workPhases", actualJsonWorkList);
-        Resume actual = new Resume(actualJson);
+        Resume actual = new Resume(actualJson, true);
 
         // set up the test resume and get its json array
         Contact expectedContact = new Contact(0, actual.contact.getTimestamp(),"Erick", "Shepherd", "", "123 road st", "12345",
                 "Austin", "TX", "US", "erickshepherd@mail.com", "123-456-7890",
-                "erick.com", "android design", "", "");
+                "erick.com", "android design", "", "", null, null);
         EducationPhase expectedEdu = new EducationPhase(0, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
         expectedEdu.setContactId(0);
         EducationPhase expectedEdu2 = new EducationPhase(0, "8/17/19", "5/25/23", "University of Texas at Austin", "US", "");
@@ -370,14 +370,14 @@ public class JSONUnitTests {
     @Test
     public void empty_json_to_resume(){
         JSONObject resumeJson = new JSONObject();
-        Resume actual = new Resume(resumeJson);
+        Resume actual = new Resume(resumeJson, true);
         Resume expected = new Resume();
         assertEquals("Resumes are not equal", expected, actual);
     }
 
     @Test
     public void null_json_to_resume(){
-        Resume actual = new Resume(null);
+        Resume actual = new Resume(null, true);
         Resume expected = new Resume();
         assertEquals("Resumes are not equal", expected, actual);
     }

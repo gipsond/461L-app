@@ -289,7 +289,9 @@ public class ResumeParseActivity extends AppCompatActivity {
                                     homepage,
                                     interests,
                                     publications,
-                                    plaintext
+                                    plaintext,
+                                        null,
+                                        null
                                 );
 
                             Resume resume = new Resume(contact, educationPhases, workPhases);

@@ -22,4 +22,6 @@ public class SingleResumeViewModel extends AndroidViewModel {
 
     public void insert(Resume resume) { repository.insert(resume); }
 
+    public void update(Resume resume) { repository.update(resume);}
+
 }

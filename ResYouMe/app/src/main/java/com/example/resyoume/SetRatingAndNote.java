@@ -11,11 +11,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class SetRatingAndNote extends AppCompatActivity {
 
     EditText ratingUI;
     EditText notesUI;
+
+    private SingleResumeViewModel singleResumeViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +36,20 @@ public class SetRatingAndNote extends AppCompatActivity {
                 JSONObject dataJson = new JSONObject(data);
                 String type = dataJson.getString("type");
                 if (type.equals("resume")) {
-                    int rating = dataJson.getInt("rating");
-                    String notes = dataJson.getString("notes");
+                    System.out.println(dataJson);
+                    JSONObject contactJson = dataJson.getJSONObject("contact");
+                    int rating = contactJson.getInt("rating");
+                    String notes = contactJson.getString("notes");
+                    System.out.println(rating + " " + notes);
                     ratingUI.setText(String.valueOf(rating));
                     notesUI.setText(notes);
                 } else {
                 }
             } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
+        singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
     }
 
     public void saveRNToDB(View view){
@@ -52,7 +60,7 @@ public class SetRatingAndNote extends AppCompatActivity {
                 JSONObject dataJson = new JSONObject(data);
                 String type = dataJson.getString("type");
                 if (type.equals("resume")) {
-                    Resume resume = new Resume(dataJson);
+                    Resume resume = new Resume(dataJson, false);
                     int ratingInt = Integer.parseInt(ratingUI.getText().toString());
                     if(ratingInt > 5){
                         ratingInt = 5;
@@ -62,8 +70,12 @@ public class SetRatingAndNote extends AppCompatActivity {
                         ratingInt = 0;
                         ratingUI.setText("0");
                     }
-                    resume.rating = ratingInt;
-                    resume.notes = notesUI.getText().toString();
+                    resume.contact.setRating(ratingInt);
+                    resume.contact.setNotes(notesUI.getText().toString());
+                    if (singleResumeViewModel == null) {
+                        singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+                    }
+                    singleResumeViewModel.update(resume);
                 } else {
                 }
             } catch (JSONException e) {

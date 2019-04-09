@@ -134,7 +134,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                     && responseJson.has("educationPhases")
                     && responseJson.has("workPhases")) {
 
-                Resume resume = new Resume(responseJson);
+                Resume resume = new Resume(responseJson, true);
                 resumeViewModel.insert(resume);
                 toastText = "Resume added to database";
 

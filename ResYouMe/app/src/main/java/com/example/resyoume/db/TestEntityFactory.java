@@ -17,7 +17,9 @@ public class TestEntityFactory {
                         "john.doe@example.com", "987 555 1234", "linkedin.com/john-example-doe",
                         "Being average, watching grass grow, watching paint dry",
                         "101 Ways to Blend In",
-                        "This user was manually input and thus has no accompanying plaintext."
+                        "This user was manually input and thus has no accompanying plaintext.",
+                        null,
+                        null
                 );
 
         List<WorkPhase> workPhases = new ArrayList<>();
@@ -68,7 +70,9 @@ public class TestEntityFactory {
                         "john.doe@example.com", "987 555 1234", "linkedin.com/john-example-doe",
                         "Being average, watching grass grow, watching paint dry",
                         "101 Ways to Blend In",
-                        "This user was manually input and thus has no accompanying plaintext."
+                        "This user was manually input and thus has no accompanying plaintext.",
+                        null,
+                        null
                 );
 
         List<WorkPhase> workPhases = new ArrayList<>();

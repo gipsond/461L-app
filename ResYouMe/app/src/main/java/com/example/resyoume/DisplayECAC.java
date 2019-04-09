@@ -21,7 +21,7 @@ public class DisplayECAC extends DisplayActivity {
         if (resumeString != null) {
             try {
                 JSONObject resumeJson = new JSONObject(resumeString);
-                Resume resume = new Resume(resumeJson);
+                Resume resume = new Resume(resumeJson, true);
                 setResume(resume);
             } catch (JSONException e) {
             }

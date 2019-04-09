@@ -40,6 +40,11 @@ public class Contact {
     // Full plaintext of resume from 'auxiliary'
     private String plaintext;
 
+    // TODO: rename Contact or refactor it to better show its purpose. It holds the data that isn't held in related arrays.
+    // Rating and notes on a resume
+    public Integer rating;
+    public String notes;
+
 
     /* Constructors */
 
@@ -50,7 +55,9 @@ public class Contact {
                    String address, String postcode, String city, String state, String country,
                    String email, String phoneNumber, String homepage,
                    String interests, String publications,
-                   String plaintext) {
+                   String plaintext,
+                   Integer rating,
+                   String notes) {
         this.id = id;
         this.timestamp = timestamp;
         this.firstName = firstName;
@@ -67,14 +74,16 @@ public class Contact {
         this.interests = interests;
         this.publications = publications;
         this.plaintext = plaintext;
+        this.rating = rating;
+        this.notes = notes;
     }
 
-    public Contact(JSONObject contactJson){
+    public Contact(JSONObject contactJson, boolean assignNewId){
         if(contactJson == null){
             return;
         }
         try {
-            this.id = 0;
+            this.id = assignNewId ? 0 : contactJson.getInt("id");
             this.timestamp = new Date();
             this.firstName = contactJson.getString("firstName");
             this.lastName = contactJson.getString("lastName");
@@ -90,6 +99,12 @@ public class Contact {
             this.interests = contactJson.getString("interests");
             this.publications = contactJson.getString("publications");
             this.plaintext = contactJson.getString("plaintext");
+
+            int possibleRating = contactJson.optInt("rating", -1);
+            this.rating = (possibleRating == -1) ? null : possibleRating;
+
+            String possibleNotes = contactJson.optString("notes");
+            this.notes = (possibleNotes == "") ? null : possibleNotes;
         }
         catch (JSONException e) {}
     }
@@ -97,6 +112,8 @@ public class Contact {
     public Contact() {
 
     }
+
+
 
     /* Getters */
 
@@ -161,6 +178,15 @@ public class Contact {
     public String getPlaintext() {
         return plaintext;
     }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
 
 
     /* Setters */
@@ -227,6 +253,16 @@ public class Contact {
         this.plaintext = plaintext;
     }
 
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+
+
     /* JSON functions */
 
     public JSONObject toJSONObject() throws JSONException {
@@ -246,6 +282,8 @@ public class Contact {
         contact.put("interests", this.interests);
         contact.put("publications", this.publications);
         contact.put("plaintext", this.plaintext);
+        contact.put("rating", this.rating);
+        contact.put("notes", this.notes);
         return contact;
     }
 
@@ -423,6 +461,28 @@ public class Contact {
         }
         else{
             if(!contact.getPlaintext().equals(this.plaintext)){
+                return false;
+            }
+        }
+
+        if(contact.getRating() == null || this.rating == null){
+            if(!(contact.getRating() == null && this.rating == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getRating().equals(this.rating)){
+                return false;
+            }
+        }
+
+        if(contact.getNotes() == null || this.notes == null){
+            if(!(contact.getNotes() == null && this.notes == null)){
+                return false;
+            }
+        }
+        else{
+            if(!contact.getNotes().equals(this.notes)){
                 return false;
             }
         }
