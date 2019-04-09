@@ -13,6 +13,34 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="buttonwithImage">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_weight">.25</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:onClick">onClickNFC</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="mainmenubutton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_weight">.75</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/buttonLabel</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
