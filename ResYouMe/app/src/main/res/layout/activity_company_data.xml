@@ -18,7 +18,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Company URL (i.e. microsoft.com)" />
+            android:hint="Company URL (i.e. microsoft.com)"
+            android:textColorHint="@color/buttonLabel"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,12 +32,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/buttonLabel"
             android:hint="Additional Infomation"
             android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:background="@android:color/transparent"
+        android:textColor="@color/buttonLabel"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="saveButton"
