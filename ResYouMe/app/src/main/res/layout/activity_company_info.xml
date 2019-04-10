@@ -34,6 +34,7 @@
             android:layout_weight=".8"
             android:onClick="onClickInfo"
             android:text="Search"
+            
             android:textSize="12sp" />
 
     </LinearLayout>
