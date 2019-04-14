@@ -135,6 +135,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                     && responseJson.has("workPhases")) {
 
                 Resume resume = new Resume(responseJson, true);
+                resume.contact.setRating(null);
+                resume.contact.setNotes(null);
                 resumeViewModel.insert(resume);
                 toastText = "Resume added to database";
 
@@ -143,6 +145,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                     && responseJson.has("name")) {
 
                 CompanyInfo companyInfo = new CompanyInfo(responseJson, true);
+                companyInfo.setRating(null);
+                companyInfo.setNotes(null);
                 companyInfoViewModel.insert(companyInfo);
                 toastText = "CompanyInfo added to database";
 
