@@ -50,6 +50,7 @@ public class DisplayBasic extends DisplayActivity {
         final TextView publicationsView;
         final TextView educationPhasesView;
         final TextView workPhasesView;
+        final TextView notesView;
 
 
         LinearLayout ll = new LinearLayout(this);
@@ -68,6 +69,7 @@ public class DisplayBasic extends DisplayActivity {
         publicationsView = findViewById(R.id.publicationsView);
         educationPhasesView = findViewById(R.id.educationPhasesView);
         workPhasesView = findViewById(R.id.workPhasesView);
+        notesView = findViewById(R.id.notesView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
@@ -78,6 +80,7 @@ public class DisplayBasic extends DisplayActivity {
         websiteView.setText(contact.getHomepage());
         interestsView.setText("Interests: " + contact.getInterests());
         publicationsView.setText("Publications: " + contact.getPublications());
+        notesView.setText("\nMy notes:\n" + contact.getNotes());
 
         StringBuilder eduPhasesStr = new StringBuilder("Education:\n");
         for (EducationPhase educationPhase : resume.educationPhases) {

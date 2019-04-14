@@ -11,10 +11,8 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 public class DisplayFunctional extends DisplayActivity {
     @Override
@@ -54,6 +52,7 @@ public class DisplayFunctional extends DisplayActivity {
         final TextView additionalExperienceView;
         final TextView skillsView;
         final TextView additionalInfoView;
+        final TextView notesView;
 
 
         LinearLayout ll = new LinearLayout(this);
@@ -74,6 +73,7 @@ public class DisplayFunctional extends DisplayActivity {
         additionalExperienceView = findViewById(R.id.additionalExperienceView);
         skillsView = findViewById(R.id.skillsView);
         additionalInfoView = findViewById(R.id.additionalInfoView);
+        notesView = findViewById(R.id.notesView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getFirstName() + " " + contact.getLastName());
@@ -103,6 +103,8 @@ public class DisplayFunctional extends DisplayActivity {
         additionalExperienceView.setText(contact.getPublications());
 
         additionalInfoView.setText(contact.getInterests());
+
+        notesView.setText("\nMy notes:\n" + contact.getNotes());
     }
 
     private void setEducationPhase(EducationPhase edu, TextView view){

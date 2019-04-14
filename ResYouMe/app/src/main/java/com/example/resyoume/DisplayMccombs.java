@@ -49,6 +49,7 @@ public class DisplayMccombs extends DisplayActivity {
         final TextView leadershipView;
         final TextView honorsView;
         final TextView additionalInfoView;
+        final TextView notesView;
 
 
         LinearLayout ll = new LinearLayout(this);
@@ -66,6 +67,7 @@ public class DisplayMccombs extends DisplayActivity {
         leadershipView = findViewById(R.id.leadershipView);
         honorsView = findViewById(R.id.honorsView);
         additionalInfoView = findViewById(R.id.additionalInfoView);
+        notesView = findViewById(R.id.notesView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getTitle() + " " + contact.getFirstName() + " " + contact.getLastName());
@@ -93,5 +95,7 @@ public class DisplayMccombs extends DisplayActivity {
         projectsView.setText(contact.getPublications());
 
         additionalInfoView.setText(contact.getInterests());
+
+        notesView.setText("\nMy notes:\n" + contact.getNotes());
     }
 }

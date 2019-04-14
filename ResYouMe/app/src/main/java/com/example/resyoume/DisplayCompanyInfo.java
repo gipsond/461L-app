@@ -64,6 +64,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         final TextView companyBio = findViewById(R.id.bioView);
         final TextView companyLinkedin = findViewById(R.id.linkedinView);
         final TextView companyAdditionalInfo = findViewById(R.id.additionalInfoView);
+        final TextView notesView = findViewById(R.id.notesView);;
 
         LinearLayout ll = new LinearLayout(this);
         ScrollView companyView = new ScrollView(this);
@@ -87,5 +88,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         companyLinkedin.setMovementMethod(LinkMovementMethod.getInstance());
 
         companyAdditionalInfo.setText(companyInfo.getAdditionalInfo());
+
+        notesView.setText("\nMy notes:\n" + companyInfo.getNotes());
     }
 }

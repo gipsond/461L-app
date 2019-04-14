@@ -48,6 +48,7 @@ public class DisplayECAC extends DisplayActivity {
         final TextView academicExperienceView;
         final TextView skillsView;
         final TextView additionalInfoView;
+        final TextView notesView;
 
 
         resumeHeader = findViewById(R.id.nameView);
@@ -60,6 +61,7 @@ public class DisplayECAC extends DisplayActivity {
         academicExperienceView = findViewById(R.id.academicExperienceView);
         skillsView = findViewById(R.id.skillsView);
         additionalInfoView = findViewById(R.id.additionalInfoView);
+        notesView = findViewById(R.id.notesView);
 
         Contact contact = resume.contact;
         resumeHeader.setText(contact.getFirstName() + " " + contact.getLastName());
@@ -87,6 +89,8 @@ public class DisplayECAC extends DisplayActivity {
         academicExperienceView.setText(contact.getPublications());
 
         additionalInfoView.setText(contact.getInterests());
+
+        notesView.setText("\nMy notes:\n" + contact.getNotes());
     }
 
     private void setEducationPhase(EducationPhase edu, TextView view){
