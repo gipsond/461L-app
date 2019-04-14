@@ -82,7 +82,9 @@ public class RepositoryUnitTests {
                 "testWebsite",
                 "testBio",
                 "testLinkedIn",
-                "testAdditionalInfo"
+                "testAdditionalInfo",
+                5,
+                "testNotes"
         );
 
         repoUnderTest.insert(testCompanyInfo);

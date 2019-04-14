@@ -26,6 +26,9 @@ public class CompanyInfo {
     private String linkedIn;
     private String additionalInfo;
 
+    public Integer rating;
+    public String notes;
+
     public CompanyInfo(int id,
                        Date timestamp,
                        String companyName,
@@ -34,7 +37,9 @@ public class CompanyInfo {
                        String website,
                        String bio,
                        String linkedIn,
-                       String additionalInfo) {
+                       String additionalInfo,
+                       Integer rating,
+                       String notes) {
         this.id = id;
         this.timestamp = timestamp;
         this.companyName = companyName;
@@ -44,18 +49,20 @@ public class CompanyInfo {
         this.bio = bio;
         this.linkedIn = linkedIn;
         this.additionalInfo = additionalInfo;
+        this.rating = rating;
+        this.notes = notes;
     }
 
     /**
      * Creates a CompanyInfo object from OUR JSON format (not FullContact's)
      * @param companyInfoJson
      */
-    public CompanyInfo(JSONObject companyInfoJson) {
+    public CompanyInfo(JSONObject companyInfoJson, boolean assignNewId) {
         if (companyInfoJson == null) {
             return;
         }
         try {
-            this.id = 0;
+            this.id = assignNewId ? 0 : companyInfoJson.getInt("id");
             this.timestamp = new Date();
             this.companyName = companyInfoJson.getString("name");
             this.location = companyInfoJson.getString("location");
@@ -63,6 +70,8 @@ public class CompanyInfo {
             this.website = companyInfoJson.getString("website");
             this.bio = companyInfoJson.getString("bio");
             this.linkedIn = companyInfoJson.getString("linkedin");
+            this.rating = companyInfoJson.getInt("rating");
+            this.notes = companyInfoJson.getString("notes");
             String additionalInfo = companyInfoJson.getString("additionalInfo");
             this.additionalInfo = additionalInfo != null ? additionalInfo : "";
         } catch (JSONException e) {}
@@ -77,6 +86,8 @@ public class CompanyInfo {
         companyInfoJson.put("website", this.website);
         companyInfoJson.put("bio", this.bio);
         companyInfoJson.put("linkedin", this.linkedIn);
+        companyInfoJson.put("rating", this.rating);
+        companyInfoJson.put("notes", this.notes);
         companyInfoJson.put("additionalInfo", this.additionalInfo);
         return companyInfoJson;
     }
@@ -147,5 +158,21 @@ public class CompanyInfo {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

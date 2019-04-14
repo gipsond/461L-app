@@ -1,8 +1,5 @@
 package com.example.resyoume;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -17,6 +14,9 @@ import com.example.resyoume.db.CompanyInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class DisplayCompanyInfo extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         if (companyInfoString != null) {
             try {
                 JSONObject companyInfoJson = new JSONObject(companyInfoString);
-                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson);
+                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson, true);
                 setCompanyInfo(companyInfo);
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Error occurred" , Toast.LENGTH_SHORT).show();

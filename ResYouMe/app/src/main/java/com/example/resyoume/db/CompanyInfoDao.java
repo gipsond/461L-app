@@ -18,4 +18,6 @@ public abstract class CompanyInfoDao {
     @Insert
     public abstract long insert(CompanyInfo companyInfo);
 
+    //@Update
+    //public abstract long update(CompanyInfo companyInfo);
 }

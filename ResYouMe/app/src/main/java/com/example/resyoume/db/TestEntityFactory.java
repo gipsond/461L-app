@@ -122,6 +122,8 @@ public class TestEntityFactory {
                 "https://www.eustace.ranch/index.html",
                 "Eustace built up his ranch from the ground up, driven by a passion for farming and his wife Muriel. He hates stupid dogs.",
                 "https://www.linkedin.com/company/bagge-ranch",
-                "This is an example set of company info for testing the database.");
+                "This is an example set of company info for testing the database.",
+                null,
+                null);
     }
 }

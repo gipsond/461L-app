@@ -23,4 +23,6 @@ public class CompanyInfoViewModel extends AndroidViewModel {
     public LiveData<List<CompanyInfo>> getAllCompanyInfo() { return allCompanyInfo; }
 
     public void insert(CompanyInfo companyInfo) { repository.insert(companyInfo); }
+
+    public void update(CompanyInfo companyInfo) { repository.update(companyInfo);}
 }

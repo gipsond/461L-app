@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
-import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.CompanyInfo;
 
 import org.json.JSONException;
@@ -77,6 +74,17 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
                 }
                 catch (JSONException e) {}
                 startActivity(display_intent);
+                break;
+            }
+            case R.id.ctx_edit_NR:{
+                CompanyInfoListAdapter.CompanyInfoViewHolder civh = (CompanyInfoListAdapter.CompanyInfoViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
+                CompanyInfo companyInfo = civh.getCompanyInfo();
+                Intent nr_intent = new Intent(this, SetRatingAndNoteCompany.class);
+                try {
+                    nr_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
+                }
+                catch (JSONException e) {}
+                startActivity(nr_intent);
                 break;
             }
         }

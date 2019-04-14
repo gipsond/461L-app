@@ -51,6 +51,11 @@ public class ResumeRepository {
         new ResumeQueryAsyncTask(resumeDao, Query.UPDATE).execute(resume);
     }
 
+    public void update(CompanyInfo companyInfo) {
+        System.out.println("Repository updating company info");
+        new CompanyInfoQueryAsyncTask(companyInfoDao, Query.UPDATE).execute(companyInfo);
+    }
+
     private enum Query {
         INSERT,
         UPDATE
@@ -72,6 +77,27 @@ public class ResumeRepository {
                 case UPDATE: dao.update(params[0]); break;
                 default:
                     throw new IllegalStateException("ResumeQueryAsyncTask has invalid Query: " + query);
+            }
+            return null;
+        }
+    }
+
+    private static class CompanyInfoQueryAsyncTask extends AsyncTask<CompanyInfo, Void, Void> {
+        private CompanyInfoDao dao;
+        private Query query;
+
+        CompanyInfoQueryAsyncTask(CompanyInfoDao dao, Query query) {
+            this.dao = dao;
+            this.query = query;
+        }
+
+        @Override
+        protected Void doInBackground(final CompanyInfo... params) {
+            switch (query) {
+                case INSERT: dao.insert(params[0]); break;
+                //case UPDATE: dao.update(params[0]); break;
+                default:
+                    throw new IllegalStateException("CompanyInfoQueryAsyncTask has invalid Query: " + query);
             }
             return null;
         }

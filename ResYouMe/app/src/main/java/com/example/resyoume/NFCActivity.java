@@ -142,7 +142,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                     && responseJson.getString("type").equals("companyInfo")
                     && responseJson.has("name")) {
 
-                CompanyInfo companyInfo = new CompanyInfo(responseJson);
+                CompanyInfo companyInfo = new CompanyInfo(responseJson, true);
                 companyInfoViewModel.insert(companyInfo);
                 toastText = "CompanyInfo added to database";
 

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.resyoume.db.Resume;
+import com.example.resyoume.db.CompanyInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,33 +15,29 @@ import org.json.JSONObject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-public class SetRatingAndNote extends AppCompatActivity {
+public class SetRatingAndNoteCompany extends AppCompatActivity {
 
     EditText ratingUI;
     EditText notesUI;
 
-    private SingleResumeViewModel singleResumeViewModel;
+    private CompanyInfoViewModel companyInfoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_rating_and_note);
-        ratingUI = (EditText) findViewById(R.id.rating);
-        notesUI = (EditText) findViewById(R.id.notes);
+        setContentView(R.layout.activity_set_rating_and_note_company);
+        ratingUI = (EditText) findViewById(R.id.ratingC);
+        notesUI = (EditText) findViewById(R.id.notesC);
         Intent intent = getIntent();
-        String data = intent.getStringExtra("resumeJSON");
-        if(data == null){
-            data = intent.getStringExtra("companyInfoJSON");
-        }
+        String data = intent.getStringExtra("companyInfoJSON");
         if(data != null) {
             try {
                 JSONObject dataJson = new JSONObject(data);
                 String type = dataJson.getString("type");
-                if (type.equals("resume")) {
+                if (type.equals("companyInfo")) {
                     System.out.println(dataJson);
-                    JSONObject contactJson = dataJson.getJSONObject("contact");
-                    int rating = contactJson.getInt("rating");
-                    String notes = contactJson.getString("notes");
+                    int rating = dataJson.getInt("rating");
+                    String notes = dataJson.getString("notes");
                     System.out.println(rating + " " + notes);
                     ratingUI.setText(String.valueOf(rating));
                     notesUI.setText(notes);
@@ -51,18 +47,18 @@ public class SetRatingAndNote extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+        companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
     }
 
-    public void saveRNToDB(View view){
+    public void saveRNCToDB(View view){
         Intent intent = getIntent();
-        String data = intent.getStringExtra("resumeJSON");
+        String data = intent.getStringExtra("companyInfoJSON");
         if(data != null) {
             try {
                 JSONObject dataJson = new JSONObject(data);
                 String type = dataJson.getString("type");
-                if (type.equals("resume")) {
-                    Resume resume = new Resume(dataJson, false);
+                if (type.equals("companyInfo")) {
+                    CompanyInfo companyInfo = new CompanyInfo(dataJson, false);
                     int ratingInt = Integer.parseInt(ratingUI.getText().toString());
                     if(ratingInt > 5){
                         ratingInt = 5;
@@ -72,12 +68,12 @@ public class SetRatingAndNote extends AppCompatActivity {
                         ratingInt = 0;
                         ratingUI.setText("0");
                     }
-                    resume.contact.setRating(ratingInt);
-                    resume.contact.setNotes(notesUI.getText().toString());
-                    if (singleResumeViewModel == null) {
-                        singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+                    companyInfo.setRating(ratingInt);
+                    companyInfo.setNotes(notesUI.getText().toString());
+                    if (companyInfoViewModel == null) {
+                        companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
                     }
-                    singleResumeViewModel.update(resume);
+                    companyInfoViewModel.update(companyInfo);
 
                     int duration = Toast.LENGTH_SHORT;
                     Context context = getApplicationContext();
