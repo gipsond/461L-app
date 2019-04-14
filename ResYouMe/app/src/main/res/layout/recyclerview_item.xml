@@ -10,10 +10,18 @@
         style="@style/word_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:autoSizeTextType="uniform"
+        android:background="@color/resumeBg"
+        android:text="Example Text" />
+
+    <TextView
+        android:id="@+id/ratingView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="0"
         android:background="@color/resumeBg"
-        android:text="Example Text"
-        android:autoSizeTextType="uniform" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/timestampView"

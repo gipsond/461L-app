@@ -21,6 +21,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
     class ResumeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView resumeHeader;
         private final TextView timestampView;
+        private final TextView ratingView;
 //        private final TextView addressView;
 //        private final TextView addressView2;
 //        private final TextView emailView;
@@ -37,6 +38,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             super(itemView);
             resumeHeader = itemView.findViewById(R.id.nameView);
             timestampView = itemView.findViewById(R.id.timestampView);
+            ratingView = itemView.findViewById(R.id.ratingView);
 //            addressView = itemView.findViewById(R.id.addressView);
 //            addressView2 = itemView.findViewById(R.id.addressView2);
 //            emailView = itemView.findViewById(R.id.emailView);
@@ -89,6 +91,9 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             String timestampString = OurDateFormatter.formatDate(timestamp);
             holder.timestampView.setText(timestampString);
 
+            if(current.contact.getRating() != null){
+                holder.ratingView.setText(String.valueOf(current.contact.getRating()));
+            }
 //            holder.addressView.setText(contact.getAddress());
 //            holder.addressView2.setText(contact.getCity() + ", " + contact.getState() + " " + contact.getPostcode());
 //            holder.emailView.setText(contact.getEmail());

@@ -59,7 +59,14 @@ public class SetRatingAndNoteCompany extends AppCompatActivity {
                 String type = dataJson.getString("type");
                 if (type.equals("companyInfo")) {
                     CompanyInfo companyInfo = new CompanyInfo(dataJson, false);
-                    int ratingInt = Integer.parseInt(ratingUI.getText().toString());
+                    int ratingInt;
+                    try{
+                        ratingInt = Integer.parseInt(ratingUI.getText().toString());
+                    }
+                    catch(Exception e){
+                        ratingInt = 0;
+                        ratingUI.setText("0");
+                    }
                     if(ratingInt > 5){
                         ratingInt = 5;
                         ratingUI.setText("5");

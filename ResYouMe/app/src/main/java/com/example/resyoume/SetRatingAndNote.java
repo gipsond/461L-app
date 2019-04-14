@@ -63,7 +63,14 @@ public class SetRatingAndNote extends AppCompatActivity {
                 String type = dataJson.getString("type");
                 if (type.equals("resume")) {
                     Resume resume = new Resume(dataJson, false);
-                    int ratingInt = Integer.parseInt(ratingUI.getText().toString());
+                    int ratingInt;
+                    try{
+                        ratingInt = Integer.parseInt(ratingUI.getText().toString());
+                    }
+                    catch(Exception e){
+                        ratingInt = 0;
+                        ratingUI.setText("0");
+                    }
                     if(ratingInt > 5){
                         ratingInt = 5;
                         ratingUI.setText("5");

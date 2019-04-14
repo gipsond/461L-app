@@ -20,6 +20,7 @@ public class CompanyInfoListAdapter extends RecyclerView.Adapter<CompanyInfoList
     class CompanyInfoViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView companyNameView;
         private final TextView timestampView;
+        private final TextView ratingView;
 
         private CompanyInfo companyInfo;
 
@@ -27,6 +28,7 @@ public class CompanyInfoListAdapter extends RecyclerView.Adapter<CompanyInfoList
             super(itemView);
             companyNameView = itemView.findViewById(R.id.nameView);
             timestampView = itemView.findViewById(R.id.timestampView);
+            ratingView = itemView.findViewById(R.id.ratingView);
 
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -69,6 +71,9 @@ public class CompanyInfoListAdapter extends RecyclerView.Adapter<CompanyInfoList
             String timestampString = OurDateFormatter.formatDate(timestamp);
             holder.timestampView.setText(timestampString);
 
+            if(current.getRating() != null){
+                holder.ratingView.setText(String.valueOf(current.getRating()));
+            }
         } else {
             // Covers the case of data not being ready yet.
             holder.companyNameView.setText("Loading...");
