@@ -60,6 +60,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
     testImplementation 'org.json:json:20180130'
 
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     ///* Architecture Components *///
     // WorkManager
     def work_version = "1.0.0-rc01"
