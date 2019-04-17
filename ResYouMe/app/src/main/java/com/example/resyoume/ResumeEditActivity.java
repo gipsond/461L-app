@@ -33,7 +33,7 @@ public class ResumeEditActivity extends AppCompatActivity {
 
     private SingleResumeViewModel singleResumeViewModel;
     private Resume newResume;
-
+    private int resumeId;
     private int titleId;
     private int firstNameId;
     private int lastNameId;
@@ -66,6 +66,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                 newResume = new Resume(resumeJson, false);
                 System.out.println(newResume.contact.getFirstName());
                 createEditableFields(newResume);
+                this.resumeId = newResume.contact.getId();
                 createSaveButton();
             } catch (JSONException e) {
             }
@@ -199,7 +200,7 @@ public class ResumeEditActivity extends AppCompatActivity {
 
         Contact contact =
                 new Contact(
-                        0,
+                        resumeId,
                         new Date(),
                         firstName,
                         lastName,
