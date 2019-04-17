@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SetRatingAndNoteCompany"></activity>
+        <activity android:name=".ResumeEditActivity"></activity>
         <activity android:name=".SetRatingAndNote" />
         <activity android:name=".DisplayCompanyInfo" />
         <activity

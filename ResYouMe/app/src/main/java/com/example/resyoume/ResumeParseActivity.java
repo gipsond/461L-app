@@ -27,6 +27,7 @@ import com.example.resyoume.db.WorkPhase;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -305,9 +306,12 @@ public class ResumeParseActivity extends AppCompatActivity {
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
 
-                            String out = firstname + " " + lastname + ":\n" +
-                                    phonenumber + "\n" +
-                                    email + "\n\n";
+                            Intent edit_intent = new Intent(view.getContext(), ResumeEditActivity.class);
+                            try {
+                                edit_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
+                            } catch (JSONException e) {
+                            }
+                            startActivity(edit_intent);
                         }
                         catch (Exception e){
                             e.printStackTrace();
