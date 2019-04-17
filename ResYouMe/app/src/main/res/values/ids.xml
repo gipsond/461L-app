@@ -3,4 +3,5 @@
     <item name="ctx_menu_send_by_nfc" type="id"></item>
     <item name="ctx_menu_display" type="id"></item>
     <item name="ctx_edit_NR" type="id"></item>
+    <item name="ctx_edit_resume" type="id"></item>
 </resources>

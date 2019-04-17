@@ -124,6 +124,17 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
                 startActivity(nr_intent);
                 break;
             }
+            case R.id.ctx_edit_resume:{
+                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
+                Resume resume = rvh.getResume();
+                Intent edit_intent = new Intent(this, ResumeEditActivity.class);
+                try {
+                    edit_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
+                }
+                catch (JSONException e) {}
+                startActivity(edit_intent);
+                break;
+            }
         }
         return super.onContextItemSelected(item);
     }

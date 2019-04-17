@@ -61,6 +61,7 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             menu.setHeaderTitle("Share Resume for " + resume.contact.getFirstName() + " " + resume.contact.getLastName() + "?");
             menu.add(Menu.NONE, R.id.ctx_menu_send_by_nfc, Menu.NONE, R.string.send_by_nfc);
             menu.add(Menu.NONE, R.id.ctx_menu_display, Menu.NONE, R.string.display_resume);
+            menu.add(Menu.NONE, R.id.ctx_edit_resume, Menu.NONE, R.string.edit_resume);
             menu.add(Menu.NONE, R.id.ctx_edit_NR, Menu.NONE, R.string.edit_NR);
         }
     }
