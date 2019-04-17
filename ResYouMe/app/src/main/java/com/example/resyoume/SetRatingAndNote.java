@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.resyoume.db.Resume;
@@ -17,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class SetRatingAndNote extends AppCompatActivity {
 
-    EditText ratingUI;
+    RatingBar ratingUI;
     EditText notesUI;
 
     private SingleResumeViewModel singleResumeViewModel;
@@ -26,7 +27,7 @@ public class SetRatingAndNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_rating_and_note);
-        ratingUI = (EditText) findViewById(R.id.rating);
+        ratingUI = (RatingBar) findViewById(R.id.ratingBar);
         notesUI = (EditText) findViewById(R.id.notes);
         Intent intent = getIntent();
         String data = intent.getStringExtra("resumeJSON");
@@ -43,7 +44,7 @@ public class SetRatingAndNote extends AppCompatActivity {
                     int rating = contactJson.getInt("rating");
                     String notes = contactJson.getString("notes");
                     System.out.println(rating + " " + notes);
-                    ratingUI.setText(String.valueOf(rating));
+                    ratingUI.setRating(rating);
                     notesUI.setText(notes);
                 } else {
                 }
@@ -63,22 +64,7 @@ public class SetRatingAndNote extends AppCompatActivity {
                 String type = dataJson.getString("type");
                 if (type.equals("resume")) {
                     Resume resume = new Resume(dataJson, false);
-                    int ratingInt;
-                    try{
-                        ratingInt = Integer.parseInt(ratingUI.getText().toString());
-                    }
-                    catch(Exception e){
-                        ratingInt = 0;
-                        ratingUI.setText("0");
-                    }
-                    if(ratingInt > 5){
-                        ratingInt = 5;
-                        ratingUI.setText("5");
-                    }
-                    if(ratingInt < 0){
-                        ratingInt = 0;
-                        ratingUI.setText("0");
-                    }
+                    int ratingInt = (int) ratingUI.getRating();
                     resume.contact.setRating(ratingInt);
                     resume.contact.setNotes(notesUI.getText().toString());
                     if (singleResumeViewModel == null) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.resyoume.db.CompanyInfo;
@@ -17,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class SetRatingAndNoteCompany extends AppCompatActivity {
 
-    EditText ratingUI;
+    RatingBar ratingUI;
     EditText notesUI;
 
     private CompanyInfoViewModel companyInfoViewModel;
@@ -26,7 +27,7 @@ public class SetRatingAndNoteCompany extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_rating_and_note_company);
-        ratingUI = (EditText) findViewById(R.id.ratingC);
+        ratingUI = (RatingBar) findViewById(R.id.ratingBarC);
         notesUI = (EditText) findViewById(R.id.notesC);
         Intent intent = getIntent();
         String data = intent.getStringExtra("companyInfoJSON");
@@ -39,7 +40,7 @@ public class SetRatingAndNoteCompany extends AppCompatActivity {
                     int rating = dataJson.getInt("rating");
                     String notes = dataJson.getString("notes");
                     System.out.println(rating + " " + notes);
-                    ratingUI.setText(String.valueOf(rating));
+                    ratingUI.setRating(rating);
                     notesUI.setText(notes);
                 } else {
                 }
@@ -59,22 +60,7 @@ public class SetRatingAndNoteCompany extends AppCompatActivity {
                 String type = dataJson.getString("type");
                 if (type.equals("companyInfo")) {
                     CompanyInfo companyInfo = new CompanyInfo(dataJson, false);
-                    int ratingInt;
-                    try{
-                        ratingInt = Integer.parseInt(ratingUI.getText().toString());
-                    }
-                    catch(Exception e){
-                        ratingInt = 0;
-                        ratingUI.setText("0");
-                    }
-                    if(ratingInt > 5){
-                        ratingInt = 5;
-                        ratingUI.setText("5");
-                    }
-                    if(ratingInt < 0){
-                        ratingInt = 0;
-                        ratingUI.setText("0");
-                    }
+                    int ratingInt = (int) ratingUI.getRating();
                     companyInfo.setRating(ratingInt);
                     companyInfo.setNotes(notesUI.getText().toString());
                     if (companyInfoViewModel == null) {
