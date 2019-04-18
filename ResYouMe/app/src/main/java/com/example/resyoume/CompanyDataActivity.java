@@ -111,7 +111,7 @@ public class CompanyDataActivity extends AppCompatActivity {
                 }
                 // Make Company object
                 
-                CompanyInfo company = new CompanyInfo(0, new Date(), CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo);
+                CompanyInfo company = new CompanyInfo(0, new Date(), CompanyName, Location, Twitter, Website, Bio, Linkedin, additionalInfo, null, null);
                 if (companyInfoViewModel == null) {
                     companyInfoViewModel = ViewModelProviders.of(CompanyDataActivity.this).get(CompanyInfoViewModel.class);
                 }

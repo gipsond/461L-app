@@ -43,12 +43,16 @@ public class ResumeRepository {
     }
 
     public void insert(CompanyInfo companyInfo) {
-        new CompanyInfoInsertAsyncTask(companyInfoDao).execute(companyInfo);
+        new CompanyInfoQueryAsyncTask(companyInfoDao, Query.INSERT).execute(companyInfo);
     }
 
     public void update(Resume resume) {
         System.out.println("Repository updating resume");
         new ResumeQueryAsyncTask(resumeDao, Query.UPDATE).execute(resume);
+    }
+
+    public void update(CompanyInfo companyInfo) {
+        new CompanyInfoQueryAsyncTask(companyInfoDao, Query.UPDATE).execute(companyInfo);
     }
 
     private enum Query {
@@ -77,14 +81,23 @@ public class ResumeRepository {
         }
     }
 
-    private static class CompanyInfoInsertAsyncTask extends AsyncTask<CompanyInfo, Void, Void> {
+    private static class CompanyInfoQueryAsyncTask extends AsyncTask<CompanyInfo, Void, Void> {
         private CompanyInfoDao dao;
+        private Query query;
 
-        CompanyInfoInsertAsyncTask(CompanyInfoDao dao) { this.dao = dao; }
+        CompanyInfoQueryAsyncTask(CompanyInfoDao dao, Query query) {
+            this.dao = dao;
+            this.query = query;
+        }
 
         @Override
         protected Void doInBackground(final CompanyInfo... params) {
-            dao.insert(params[0]);
+            switch (query) {
+                case INSERT: dao.insert(params[0]); break;
+                case UPDATE: dao.update(params[0]); break;
+                default:
+                    throw new IllegalStateException("CompanyInfoQueryAsyncTask has invalid Query: " + query);
+            }
             return null;
         }
     }

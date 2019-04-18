@@ -35,7 +35,9 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         if (companyInfoString != null) {
             try {
                 JSONObject companyInfoJson = new JSONObject(companyInfoString);
-                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson);
+                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson, false);
+                System.out.println(companyInfoJson);
+                System.out.println(companyInfo.toJSONObject());
                 setCompanyInfo(companyInfo);
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Error occurred" , Toast.LENGTH_SHORT).show();

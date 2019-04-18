@@ -7,6 +7,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 @Dao
 public abstract class CompanyInfoDao {
@@ -17,5 +18,8 @@ public abstract class CompanyInfoDao {
 
     @Insert
     public abstract long insert(CompanyInfo companyInfo);
+
+    @Update
+    public abstract int update(CompanyInfo companyInfo);
 
 }

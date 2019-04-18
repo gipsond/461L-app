@@ -95,7 +95,7 @@ public abstract class ResumeDao {
     @Insert
     abstract void insertEducationPhases(List<EducationPhase> educationPhases);
 
-    @Update()
+    @Update
     abstract int updateContact(Contact contact);
 
     @Update
