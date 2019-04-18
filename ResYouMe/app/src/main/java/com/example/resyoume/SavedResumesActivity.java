@@ -48,6 +48,13 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
         style_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(style_adapter);
+
+        Spinner sortSpinner = (Spinner) findViewById(R.id.style_sortSpinner);
+        sortSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> sortStyle_adapter = ArrayAdapter.createFromResource(this,R.array.sortStyles, android.R.layout.simple_spinner_item);
+        sortStyle_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortStyle_adapter);
+
     }
 
     /**
