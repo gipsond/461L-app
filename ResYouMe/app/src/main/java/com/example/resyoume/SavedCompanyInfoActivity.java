@@ -6,15 +6,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.example.resyoume.db.CompanyInfo;
-
-import org.json.JSONException;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.resyoume.db.CompanyInfo;
+
+import org.json.JSONException;
 
 public class SavedCompanyInfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -25,7 +25,7 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_database);
+        setContentView(R.layout.activity_company_database);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
