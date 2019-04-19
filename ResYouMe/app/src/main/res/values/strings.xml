@@ -19,8 +19,8 @@
         <item>Functional</item>
     </string-array>
     <string-array name="sortStyles">
-        <item>Stars</item>
         <item>Name</item>
+        <item>Stars</item>
         <item>Date</item>
     </string-array>
     <string name="title_activity_saved_company_info">SavedCompanyInfoActivity</string>

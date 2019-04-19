@@ -1,11 +1,14 @@
 package com.example.resyoume;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.resyoume.db.Resume;
@@ -14,15 +17,20 @@ import org.json.JSONException;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SavedResumesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.util.Comparator;
+import java.util.List;
+
+public class SavedResumesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Comparator<Resume>{
 
     private ResumeViewModel resumeViewModel;
     private RecyclerView recyclerView;
     private String style;
+    private String sortSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +58,57 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
         spinner.setAdapter(style_adapter);
 
         Spinner sortSpinner = (Spinner) findViewById(R.id.style_sortSpinner);
-        sortSpinner.setOnItemSelectedListener(this);
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortSelection = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         ArrayAdapter<CharSequence> sortStyle_adapter = ArrayAdapter.createFromResource(this,R.array.sortStyles, android.R.layout.simple_spinner_item);
         sortStyle_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortStyle_adapter);
 
+        Button sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                sortArray();
+                //sortArrayList();
+            }
+        });
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public void sortArray(){
+        List<Resume> resumes = resumeViewModel.getAllResumes().getValue();
+        if(resumes != null){
+            resumes.sort(this);
+        }
+
+//        for(Resume s : resumes){
+//            System.out.println(s.contact.getLastName());
+//        }
+//        System.out.println(recyclerView.getAdapter().getItemCount());
+//        System.out.println(sortSelection);
+
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    public int compare(Resume r1, Resume r2) {
+        if(sortSelection.equals("Name")){
+            return r1.contact.getLastName().compareTo(r2.contact.getLastName());
+        }
+        else if(sortSelection.equals("Star")){
+            return r1.contact.getRating().compareTo(r2.contact.getRating());
+        }
+        else{
+            return r1.contact.getTimestamp().compareTo(r2.contact.getTimestamp());
+        }
     }
 
     /**
