@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:id="@+id/linearLayout6"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -33,6 +33,152 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
             tools:layout_editor_absoluteX="0dp">
 
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/parse_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickParse"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/uploadicon"
+                    android:text="Parse "
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageButton
+                    android:id="@+id/parse_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickParse"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/uploadicon"
+                    android:text="Parse "
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <Button
+                    android:id="@+id/database_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickDatabase"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/listicon"
+                    android:text="Saved Resumes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
+
+                <ImageButton
+                    android:id="@+id/database_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickDatabase"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/listicon"
+                    android:text="Saved Resumes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/companyData_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickCompanyInput"
+                    android:text="Company Input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
+
+                <ImageButton
+                    android:id="@+id/companyData_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickCompanyInput"
+                    android:src="@drawable/companyinput"
+                    android:text="Company Input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/saved_company_info_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickSavedCompanyInfo"
+                    android:text="Saved Company Info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/saved_company_info_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickSavedCompanyInfo"
+                    android:src="@drawable/businesscardicon"
+                    android:text="Saved Company Info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearLayout1"
@@ -68,196 +214,8 @@
 
 
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight=".25"
-                android:orientation="horizontal"
-                android:weightSum="1.0"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
 
-                <Button
-                    android:id="@+id/saved_company_info_button"
-                    style="@style/mainmenubutton"
-                    android:onClick="onClickSavedCompanyInfo"
-                    android:text="Saved Company Info"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/saved_company_info_button"
-                    style="@style/buttonwithImage"
-                    android:src="@drawable/businesscardicon"
-                    android:onClick="onClickSavedCompanyInfo"
-                    android:text="Saved Company Info"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight=".25"
-                android:orientation="horizontal"
-                android:weightSum="1.0"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
-
-                <Button
-                    android:id="@+id/companyData_button"
-                    style="@style/mainmenubutton"
-                    android:onClick="onClickCompanyInput"
-                    android:text="Company Input"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
-
-                <ImageButton
-                    android:id="@+id/companyData_button"
-                    style="@style/buttonwithImage"
-                    android:onClick="onClickCompanyInput"
-                    android:text="Company Input"
-                    android:src="@drawable/companyinput"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
-
-
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight=".25"
-                android:orientation="horizontal"
-                android:weightSum="1.0"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
-
-
-                <Button
-                    android:id="@+id/database_button"
-                    style="@style/mainmenubutton"
-                    android:onClick="onClickDatabase"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/listicon"
-                    android:text="Saved Resumes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
-
-                <ImageButton
-                    android:id="@+id/database_button"
-                    style="@style/buttonwithImage"
-                    android:onClick="onClickDatabase"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/listicon"
-                    android:text="Saved Resumes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
-
-
-
-
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight=".25"
-                android:orientation="horizontal"
-                android:weightSum="1.0"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
-
-
-                <Button
-                    android:id="@+id/about_button"
-                    style="@style/mainmenubutton"
-                    android:onClick="onClickAbout"
-                    android:src="@drawable/abouticon"
-                    android:text="About"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-                <ImageButton
-                    android:id="@+id/about_button"
-                    style="@style/buttonwithImage"
-                    android:onClick="onClickAbout"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/abouticon"
-                    android:text="About"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
-
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight=".25"
-                android:orientation="horizontal"
-                android:weightSum="1.0"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp">
-
-                <Button
-                    android:id="@+id/parse_button"
-                    style="@style/mainmenubutton"
-                    android:onClick="onClickParse"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/uploadicon"
-                    android:text="Parse "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageButton
-                    android:id="@+id/parse_button"
-                    style="@style/buttonwithImage"
-                    android:onClick="onClickParse"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/uploadicon"
-                    android:text="Parse "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -274,8 +232,8 @@
                     style="@style/mainmenubutton"
                     android:onClick="onClickCompany"
                     android:scaleType="centerInside"
-                    android:text="Company"
-                    android:src="@drawable/searchicon" />
+                    android:src="@drawable/searchicon"
+                    android:text="Company Search" />
 
                 <ImageButton
                     android:id="@+id/company_button"
@@ -287,6 +245,44 @@
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <Button
+                    android:id="@+id/about_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickAbout"
+                    android:src="@drawable/abouticon"
+                    android:text="About Us"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <ImageButton
+                    android:id="@+id/about_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickAbout"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/abouticon"
+                    android:text="About"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+
+            </LinearLayout>
 
 
         </LinearLayout>

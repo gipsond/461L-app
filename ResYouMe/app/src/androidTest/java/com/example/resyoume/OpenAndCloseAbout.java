@@ -13,6 +13,7 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,20 +30,20 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ReceiveTest {
+public class OpenAndCloseAbout {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void receiveTest() {
+    public void openAndCloseAbout() {
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.nfc_button),
+                allOf(withId(R.id.about_button),
                         childAtPosition(
                                 allOf(withId(R.id.linearLayout1),
                                         childAtPosition(
                                                 withId(R.id.linearLayout6),
-                                                4)),
+                                                6)),
                                 1)));
         appCompatImageButton.perform(scrollTo(), click());
 
@@ -56,14 +57,15 @@ public class ReceiveTest {
         }
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.NFCStatus), withText("Ready to receive resume or company information"),
+                allOf(withId(R.id.app_decription), withText("ResYouMe is an app created with the intent of making networking events like expo easier for students and recruiters. It accomplishes this by allowing students to upload their resumes and transfer them to recruiters with NFC. ResYouMe also allows recruiters to create company business cards that can be sent to a student in exchange for their resumes and both students and recruiters can reformat and organize the documents they collect. Students can even collect additional information about companies using the FullContact API."),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
+                                allOf(withId(R.id.linearLayout),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                                0)),
+                                1),
                         isDisplayed()));
-        textView.check(matches(withText("Ready to receive resume or company information")));
+        textView.check(matches(withText("ResYouMe is an app created with the intent of making networking events like expo easier for students and recruiters. It accomplishes this by allowing students to upload their resumes and transfer them to recruiters with NFC. ResYouMe also allows recruiters to create company business cards that can be sent to a student in exchange for their resumes and both students and recruiters can reformat and organize the documents they collect. Students can even collect additional information about companies using the FullContact API.")));
 
         pressBack();
     }
