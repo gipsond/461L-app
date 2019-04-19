@@ -30,12 +30,6 @@ public class CompanySearchActivity extends AppCompatActivity {
 
     EditText CompanyDomainName;
     TextView CompanyInfo_TextView;
-    TextView CompanyName_Textview;
-    TextView CompanyBio_Textview;
-    TextView CompanyLinkedIn_Textview;
-    TextView CompanyTwitter_Textview;
-    TextView CompanyWebsite_Textview;
-    TextView CompanyLocation_Textview;
     ImageView CompanyLogo_ImageView;
 
     String testLogo = "https://img.fullcontact.com/static/a375e4f9a528272b52f38511a5de88b0_d2f5b2872106a596afe1dcf27ffaf920956e91cdd7c024e2fb707377eb6113a3";
@@ -45,13 +39,6 @@ public class CompanySearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_info);
         CompanyDomainName = (EditText) findViewById(R.id.CompanyDomainName);
         CompanyInfo_TextView = (TextView) findViewById(R.id.CompanyInfo);
-        CompanyName_Textview = (TextView) findViewById(R.id.CompanyName);
-        CompanyBio_Textview = (TextView) findViewById(R.id.CompanyBio);
-        CompanyLinkedIn_Textview = (TextView) findViewById(R.id.CompanyLinkedIn);
-        CompanyTwitter_Textview = (TextView) findViewById(R.id.CompanyTwitter);
-        CompanyWebsite_Textview = (TextView) findViewById(R.id.CompanyWebSite);
-        CompanyLocation_Textview= (TextView) findViewById(R.id.CompanyLocation);
-        CompanyLogo_ImageView = (ImageView) findViewById(R.id.CompanyLogo);
     }
 
     public void onClickInfo(View view) throws NullPointerException {
@@ -81,13 +68,24 @@ public class CompanySearchActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    CompanyInfo_TextView.setText("Company Found!");
-                    CompanyName_Textview.setText(CompanyName);
-                    CompanyLocation_Textview.setText(Location);
-                    CompanyWebsite_Textview.setText(Website);
-                    CompanyTwitter_Textview.setText(Twitter);
-                    CompanyLinkedIn_Textview.setText(Linkedin);
-                    CompanyBio_Textview.setText(Bio);
+
+                    StringBuilder companyInfoText = new StringBuilder("Company Found!");
+                    companyInfoText.append('\n');
+                    companyInfoText.append(CompanyName);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Location);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Twitter);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Website);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Bio);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Linkedin);
+                    companyInfoText.append('\n');
+                    companyInfoText.append(Logo);
+
+                    CompanyInfo_TextView.setText(companyInfoText);
 
                     Picasso.with(getApplicationContext()).load(Logo).placeholder(R.mipmap.ic_launcher)
                             .error(R.mipmap.ic_launcher)

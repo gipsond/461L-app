@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,104 +8,299 @@
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/nfc_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+    <ScrollView
+        android:id="@+id/mainMenuviewview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickNFC"
-        android:text="Receive"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/company_button" />
-
-    <Button
-        android:id="@+id/database_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickDatabase"
-        android:text="Saved Resumes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parse_button" />
-
-    <Button
-        android:id="@+id/parse_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickParse"
-        android:text="Parse "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/company_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickCompany"
-        android:text="Search"
+        android:layout_marginBottom="8dp"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyData_button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    <Button
-        android:id="@+id/about_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickAbout"
-        android:text="About"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nfc_button" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/linearLayout6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:weightSum="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            tools:layout_editor_absoluteX="0dp">
 
-    <Button
-        android:id="@+id/companyData_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickCompanyInput"
-        android:text="Company Input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
 
-    <Button
-        android:id="@+id/saved_company_info_button"
-        android:layout_width="0dp"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/nfc_button"
+                    style="@style/mainmenubutton"
+                    android:textStyle="bold"
+                    android:onClick="onClickNFC"
+                    android:textSize="20dp"
+                    android:text="Receive"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/company_button" />
+
+                <ImageButton
+                    android:id="@+id/nfc_button"
+                    style="@style/buttonwithImage"
+                    android:src="@drawable/receiveicon"
+                    android:text="Receive"
+                    android:onClick="onClickNFC"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/company_button" />
+
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/saved_company_info_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickSavedCompanyInfo"
+                    android:text="Saved Company Info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/saved_company_info_button"
+                    style="@style/buttonwithImage"
+                    android:src="@drawable/businesscardicon"
+                    android:onClick="onClickSavedCompanyInfo"
+                    android:text="Saved Company Info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/companyData_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickCompanyInput"
+                    android:text="Company Input"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
+
+                <ImageButton
+                    android:id="@+id/companyData_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickCompanyInput"
+                    android:text="Company Input"
+                    android:src="@drawable/companyinput"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_company_info_button" />
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <Button
+                    android:id="@+id/database_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickDatabase"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/listicon"
+                    android:text="Saved Resumes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
+
+                <ImageButton
+                    android:id="@+id/database_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickDatabase"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/listicon"
+                    android:text="Saved Resumes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parse_button" />
+
+
+
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <Button
+                    android:id="@+id/about_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickAbout"
+                    android:src="@drawable/abouticon"
+                    android:text="About"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <ImageButton
+                    android:id="@+id/about_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickAbout"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/abouticon"
+                    android:text="About"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/parse_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickParse"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/uploadicon"
+                    android:text="Parse "
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageButton
+                    android:id="@+id/parse_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickParse"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/uploadicon"
+                    android:text="Parse "
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight=".25"
+                android:orientation="horizontal"
+                android:weightSum="1.0"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                tools:layout_editor_absoluteX="200dp">
+
+                <Button
+                    android:id="@+id/company_button"
+                    style="@style/mainmenubutton"
+                    android:onClick="onClickCompany"
+                    android:scaleType="centerInside"
+                    android:text="Company"
+                    android:src="@drawable/searchicon" />
+
+                <ImageButton
+                    android:id="@+id/company_button"
+                    style="@style/buttonwithImage"
+                    android:onClick="onClickCompany"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/searchicon" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/buttonLabel"
-        android:onClick="onClickSavedCompanyInfo"
-        android:text="Saved Company Info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/database_button" />
+        app:barrierDirection="top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

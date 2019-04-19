@@ -78,7 +78,7 @@ public class Contact {
         this.notes = notes;
     }
 
-    public Contact(JSONObject contactJson, boolean assignNewId){
+    public Contact(JSONObject contactJson, boolean assignNewId) {
         if(contactJson == null){
             return;
         }
