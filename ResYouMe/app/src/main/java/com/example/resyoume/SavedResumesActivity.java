@@ -100,14 +100,17 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     }
 
     public int compare(Resume r1, Resume r2) {
-        if(sortSelection.equals("Name")){
+        if(sortSelection.equals("Last Name")){
             return r1.contact.getLastName().compareTo(r2.contact.getLastName());
         }
-        else if(sortSelection.equals("Star")){
-            return r1.contact.getRating().compareTo(r2.contact.getRating());
+        else if(sortSelection.equals("Stars")){
+            if(r1.contact.getRating() != null && r2.contact.getRating() != null)
+                return (r1.contact.getRating() - r2.contact.getRating())*-1;
+            else
+                return 0;
         }
         else{
-            return r1.contact.getTimestamp().compareTo(r2.contact.getTimestamp());
+            return r1.contact.getTimestamp().compareTo(r2.contact.getTimestamp())*-1;
         }
     }
 
