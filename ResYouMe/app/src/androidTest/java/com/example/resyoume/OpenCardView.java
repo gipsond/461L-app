@@ -5,25 +5,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -41,16 +41,16 @@ public class OpenCardView {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.database_button), withText("Saved Resumes"),
+    public void openCardView() {
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.database_button),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                                allOf(withId(R.id.linearLayout1),
+                                        childAtPosition(
+                                                withId(R.id.linearLayout6),
+                                                1)),
+                                1)));
+        appCompatImageButton.perform(scrollTo(), click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -67,7 +67,7 @@ public class OpenCardView {
                                 childAtPosition(
                                         withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
                                         0),
-                                1),
+                                2),
                         isDisplayed()));
         appCompatSpinner.perform(click());
 
@@ -116,66 +116,6 @@ public class OpenCardView {
                                 0),
                         isDisplayed()));
         textView2.check(matches(withText("Mr. John Doe")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.addressView), withText("1600 Amphitheatre Parkway"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView3.check(matches(withText("1600 Amphitheatre Parkway")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.addressView2), withText("Mountain View, CA 94043"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                2),
-                        isDisplayed()));
-        textView4.check(matches(withText("Mountain View, CA 94043")));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.emailPhoneView), withText("john.doe@example.com"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                3),
-                        isDisplayed()));
-        textView5.check(matches(withText("john.doe@example.com")));
-
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.phoneView), withText("987 555 1234"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                4),
-                        isDisplayed()));
-        textView6.check(matches(withText("987 555 1234")));
-
-        ViewInteraction textView7 = onView(
-                allOf(withId(R.id.websiteView), withText("linkedin.com/john-example-doe"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                5),
-                        isDisplayed()));
-        textView7.check(matches(withText("linkedin.com/john-example-doe")));
-
-        ViewInteraction linearLayout2 = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.resumeview),
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
 
         pressBack();
 

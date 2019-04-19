@@ -2,7 +2,7 @@
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1" >
 
@@ -11,33 +11,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:background="@color/colorPrimary"
+        android:paddingStart="8dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:weightSum="1.0"
         tools:context="com.google.android.gms.maps.SupportMapFragment">
 
         <EditText
             android:id="@+id/CompanyDomainName"
-            android:layout_width="313dp"
-            android:layout_height="51dp"
-            android:layout_weight=".1"
-            android:background="@color/resumeHeaderBg"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:paddingStart="4dp"
+            android:background="@color/colorPrimary"
             android:ems="10"
+            android:textColor="@color/buttonLabel"
             android:hint="Enter Company url (e.g microsoft.com)"
             android:inputType="textPersonName"
+            android:textColorHint="@color/buttonLabel"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="244dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".9"
-            android:background="@color/resumeHeaderBg"
+            android:layout_weight=".75"
             android:onClick="onClickInfo"
             android:text="Search"
-            android:textSize="14sp" />
+            style="@style/mainmenubutton"
+            android:paddingStart="12dp"
+            android:textSize="15dp"
+            />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/CompanyInfo"
         android:layout_width="match_parent"
@@ -126,20 +135,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/CompanyTwitter"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight=".0"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:gravity="top"-->
-        <!--android:text="Enter a url in the text field to search for company infomation."-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="18sp"/>-->
 </LinearLayout>
-
 
     <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->

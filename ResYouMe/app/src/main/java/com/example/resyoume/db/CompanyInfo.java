@@ -26,8 +26,8 @@ public class CompanyInfo {
     private String linkedIn;
     private String additionalInfo;
 
-    public Integer rating;
-    public String notes;
+    private Integer rating;
+    private String notes;
 
     public CompanyInfo(int id,
                        Date timestamp,
@@ -58,6 +58,7 @@ public class CompanyInfo {
      * @param companyInfoJson
      */
     public CompanyInfo(JSONObject companyInfoJson, boolean assignNewId) {
+        System.out.println(companyInfoJson);
         if (companyInfoJson == null) {
             return;
         }
@@ -70,15 +71,23 @@ public class CompanyInfo {
             this.website = companyInfoJson.getString("website");
             this.bio = companyInfoJson.getString("bio");
             this.linkedIn = companyInfoJson.getString("linkedin");
-            this.rating = companyInfoJson.getInt("rating");
-            this.notes = companyInfoJson.getString("notes");
             String additionalInfo = companyInfoJson.getString("additionalInfo");
             this.additionalInfo = additionalInfo != null ? additionalInfo : "";
-        } catch (JSONException e) {}
+
+            int possibleRating = companyInfoJson.optInt("rating", -1);
+            this.rating = (possibleRating == -1) ? null : possibleRating;
+
+            String possibleNotes = companyInfoJson.optString("notes");
+            this.notes = (possibleNotes == "") ? null : possibleNotes;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public JSONObject toJSONObject() throws JSONException {
         JSONObject companyInfoJson = new JSONObject();
+        companyInfoJson.put("id", this.id);
         companyInfoJson.put("type", "companyInfo");
         companyInfoJson.put("name", this.companyName);
         companyInfoJson.put("location", this.location);
@@ -86,9 +95,9 @@ public class CompanyInfo {
         companyInfoJson.put("website", this.website);
         companyInfoJson.put("bio", this.bio);
         companyInfoJson.put("linkedin", this.linkedIn);
+        companyInfoJson.put("additionalInfo", this.additionalInfo);
         companyInfoJson.put("rating", this.rating);
         companyInfoJson.put("notes", this.notes);
-        companyInfoJson.put("additionalInfo", this.additionalInfo);
         return companyInfoJson;
     }
 

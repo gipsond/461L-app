@@ -5,6 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -12,24 +17,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.espresso.DataInteraction;
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
-
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
@@ -41,15 +39,15 @@ public class SendResumeFAB {
 
     @Test
     public void sendResumeFAB() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.database_button), withText("Saved Resumes"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.database_button),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                                allOf(withId(R.id.linearLayout1),
+                                        childAtPosition(
+                                                withId(R.id.linearLayout6),
+                                                1)),
+                                1)));
+        appCompatImageButton.perform(scrollTo(), click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -59,23 +57,6 @@ public class SendResumeFAB {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.style_spinner),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatSpinner.perform(click());
-
-        DataInteraction appCompatCheckedTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(5);
-        appCompatCheckedTextView.perform(click());
 
         ViewInteraction linearLayout = onView(
                 allOf(childAtPosition(
@@ -106,6 +87,16 @@ public class SendResumeFAB {
             e.printStackTrace();
         }
 
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.nameView), withText("Mr. John Doe"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.resumeview),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView2.check(matches(withText("Mr. John Doe")));
+
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.ShareFAB),
                         childAtPosition(
@@ -125,7 +116,7 @@ public class SendResumeFAB {
             e.printStackTrace();
         }
 
-        ViewInteraction textView2 = onView(
+        ViewInteraction textView3 = onView(
                 allOf(withId(R.id.NFCStatus), withText("Ready to send the resume of John Doe"),
                         childAtPosition(
                                 childAtPosition(
@@ -133,7 +124,7 @@ public class SendResumeFAB {
                                         0),
                                 0),
                         isDisplayed()));
-        textView2.check(matches(withText("Ready to send the resume of John Doe")));
+        textView3.check(matches(withText("Ready to send the resume of John Doe")));
 
         pressBack();
 

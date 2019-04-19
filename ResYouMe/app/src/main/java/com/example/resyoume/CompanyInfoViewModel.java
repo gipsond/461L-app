@@ -24,5 +24,6 @@ public class CompanyInfoViewModel extends AndroidViewModel {
 
     public void insert(CompanyInfo companyInfo) { repository.insert(companyInfo); }
 
-    public void update(CompanyInfo companyInfo) { repository.update(companyInfo);}
+    public void update(CompanyInfo companyInfo) { repository.update(companyInfo); }
+
 }

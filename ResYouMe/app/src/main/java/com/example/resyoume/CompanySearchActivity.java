@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +39,6 @@ public class CompanySearchActivity extends AppCompatActivity {
     TextView CompanyLocation_Textview;
     ImageView CompanyLogo_ImageView;
 
-    String testLogo = "https://img.fullcontact.com/static/a375e4f9a528272b52f38511a5de88b0_d2f5b2872106a596afe1dcf27ffaf920956e91cdd7c024e2fb707377eb6113a3";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,6 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.espresso.DataInteraction;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -12,17 +18,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.espresso.DataInteraction;
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
-
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -41,15 +42,15 @@ public class OpenMcCombsView {
 
     @Test
     public void openMcCombsView() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.database_button), withText("Saved Resumes"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.database_button),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                                allOf(withId(R.id.linearLayout1),
+                                        childAtPosition(
+                                                withId(R.id.linearLayout6),
+                                                1)),
+                                1)));
+        appCompatImageButton.perform(scrollTo(), click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -66,7 +67,7 @@ public class OpenMcCombsView {
                                 childAtPosition(
                                         withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
                                         0),
-                                1),
+                                2),
                         isDisplayed()));
         appCompatSpinner.perform(click());
 
@@ -115,76 +116,6 @@ public class OpenMcCombsView {
                                 0),
                         isDisplayed()));
         textView2.check(matches(withText("Mr. John Doe")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.emailPhoneView), withText("john.doe@example.com"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView3.check(matches(withText("john.doe@example.com")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.addressAndPhoneView), withText("1600 Amphitheatre Parkway • Mountain View, CA 94043 • 987 555 1234"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                2),
-                        isDisplayed()));
-        textView4.check(matches(withText("1600 Amphitheatre Parkway • Mountain View, CA 94043 • 987 555 1234")));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.educationView), withText("This phase was manually input and thus has no accompanying plaintext.\n"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                5),
-                        isDisplayed()));
-        textView5.check(matches(isDisplayed()));
-
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.projectsView), withText("101 Ways to Blend In"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                11),
-                        isDisplayed()));
-        textView6.check(matches(withText("101 Ways to Blend In")));
-
-        ViewInteraction textView7 = onView(
-                allOf(withId(R.id.leadershipView),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                14),
-                        isDisplayed()));
-        textView7.check(matches(withText("")));
-
-        ViewInteraction textView8 = onView(
-                allOf(withId(R.id.honorsView),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                17),
-                        isDisplayed()));
-        textView8.check(matches(withText("")));
-
-        ViewInteraction textView9 = onView(
-                allOf(withId(R.id.additionalInfoView), withText("Being average, watching grass grow, watching paint dry"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.resumeview),
-                                        0),
-                                19),
-                        isDisplayed()));
-        textView9.check(matches(withText("Being average, watching grass grow, watching paint dry")));
 
         pressBack();
 

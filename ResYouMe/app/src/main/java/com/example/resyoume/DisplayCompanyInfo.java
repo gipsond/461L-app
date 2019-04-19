@@ -35,7 +35,9 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         if (companyInfoString != null) {
             try {
                 JSONObject companyInfoJson = new JSONObject(companyInfoString);
-                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson, true);
+                CompanyInfo companyInfo = new CompanyInfo(companyInfoJson, false);
+                System.out.println(companyInfoJson);
+                System.out.println(companyInfo.toJSONObject());
                 setCompanyInfo(companyInfo);
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Error occurred" , Toast.LENGTH_SHORT).show();
@@ -64,7 +66,7 @@ public class DisplayCompanyInfo extends AppCompatActivity {
         final TextView companyBio = findViewById(R.id.bioView);
         final TextView companyLinkedin = findViewById(R.id.linkedinView);
         final TextView companyAdditionalInfo = findViewById(R.id.additionalInfoView);
-        final TextView notesView = findViewById(R.id.notesView);;
+        final TextView notesView = findViewById(R.id.notesView);
 
         LinearLayout ll = new LinearLayout(this);
         ScrollView companyView = new ScrollView(this);
