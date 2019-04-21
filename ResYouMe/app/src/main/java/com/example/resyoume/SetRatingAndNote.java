@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.Resume;
 
 import org.json.JSONException;
@@ -22,6 +23,7 @@ public class SetRatingAndNote extends AppCompatActivity {
     EditText notesUI;
 
     private SingleResumeViewModel singleResumeViewModel;
+    private CompanyInfoViewModel companyInfoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,16 @@ public class SetRatingAndNote extends AppCompatActivity {
                     ratingUI.setRating(rating);
                     notesUI.setText(notes);
                 } else {
+                    ratingUI.setRating(dataJson.getInt("rating"));
+                    notesUI.setText(dataJson.getString("notes"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+        companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
+
     }
 
     public void saveRNToDB(View view){
@@ -71,14 +77,23 @@ public class SetRatingAndNote extends AppCompatActivity {
                         singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
                     }
                     singleResumeViewModel.update(resume);
-
-                    int duration = Toast.LENGTH_SHORT;
-                    Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "Rating and notes have been saved.", duration);
-                    toast.show();
                 } else {
+                    CompanyInfo companyInfo = new CompanyInfo(dataJson, false);
+                    companyInfo.setRating((int)ratingUI.getRating());
+                    companyInfo.setNotes(notesUI.getText().toString());
+                    if (companyInfoViewModel == null) {
+                        companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
+                    }
+                    companyInfoViewModel.update(companyInfo);
                 }
+
+                int duration = Toast.LENGTH_SHORT;
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context, "Rating and notes have been saved.", duration);
+                toast.show();
+
             } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }

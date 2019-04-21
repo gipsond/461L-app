@@ -86,7 +86,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     @TargetApi(Build.VERSION_CODES.N)
     public void sortArray(){
         List<Resume> resumes = resumeViewModel.getAllResumes().getValue();
-        if(resumes != null){
+        if (resumes != null) {
             resumes.sort(this);
         }
 
