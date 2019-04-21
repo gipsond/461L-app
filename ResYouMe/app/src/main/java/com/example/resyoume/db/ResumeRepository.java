@@ -10,11 +10,14 @@ import androidx.lifecycle.LiveData;
 public class ResumeRepository {
     private ResumeDao resumeDao;
     private CompanyInfoDao companyInfoDao;
+    private SettingsDao settingsDao;
 
     private LiveData<List<Resume>> allResumes;
     private LiveData<Resume> singleResume;
 
     private LiveData<List<CompanyInfo>> allCompanyInfo;
+
+    private LiveData<Settings> settings;
 
     public ResumeRepository(Application application) {
         this(ResumeRoomDatabase.getDatabase(application));
@@ -27,9 +30,11 @@ public class ResumeRepository {
     public ResumeRepository(ResumeRoomDatabase db) {
         resumeDao = db.resumeDao();
         companyInfoDao = db.companyInfoDao();
+        settingsDao = db.settingsDao();
         allResumes = resumeDao.getAllResumes();
         singleResume = resumeDao.getOldestResume();
         allCompanyInfo = companyInfoDao.getAllCompanyInfo();
+        settings = settingsDao.getSettings();
     }
 
     public LiveData<List<Resume>> getAllResumes() { return allResumes; }
@@ -37,6 +42,8 @@ public class ResumeRepository {
     public LiveData<Resume> getSingleResume() { return singleResume; }
 
     public LiveData<List<CompanyInfo>> getAllCompanyInfo() { return allCompanyInfo; }
+
+    public LiveData<Settings> getSettings() { return settings; }
 
     public void insert(Resume resume) {
         new ResumeQueryAsyncTask(resumeDao, Query.INSERT).execute(resume);
@@ -53,6 +60,10 @@ public class ResumeRepository {
 
     public void update(CompanyInfo companyInfo) {
         new CompanyInfoQueryAsyncTask(companyInfoDao, Query.UPDATE).execute(companyInfo);
+    }
+
+    public void update(Settings settings) {
+        new SettingsUpdateAsyncTask(settingsDao).execute(settings);
     }
 
     private enum Query {
@@ -98,6 +109,18 @@ public class ResumeRepository {
                 default:
                     throw new IllegalStateException("CompanyInfoQueryAsyncTask has invalid Query: " + query);
             }
+            return null;
+        }
+    }
+
+    private static class SettingsUpdateAsyncTask extends AsyncTask<Settings, Void, Void> {
+        private SettingsDao dao;
+
+        SettingsUpdateAsyncTask(SettingsDao dao) { this.dao = dao; }
+
+        @Override
+        protected Void doInBackground(final Settings... params) {
+            dao.update(params[0]);
             return null;
         }
     }

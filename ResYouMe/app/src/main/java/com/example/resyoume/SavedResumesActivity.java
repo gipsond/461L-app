@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.resyoume.db.Resume;
+import com.example.resyoume.db.Settings;
 
 import org.json.JSONException;
 
@@ -28,6 +29,7 @@ import java.util.List;
 public class SavedResumesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Comparator<Resume>{
 
     private ResumeViewModel resumeViewModel;
+    private SettingsViewModel settingsViewModel;
     private RecyclerView recyclerView;
     private String style;
     private String sortSelection;
@@ -47,6 +49,8 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
 
         resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
         resumeViewModel.getAllResumes().observe(this, adapter::setResumes);
+
+        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         Spinner spinner = (Spinner) findViewById(R.id.style_spinner);
         spinner.setOnItemSelectedListener(this);
@@ -73,30 +77,38 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
         sortStyle_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortStyle_adapter);
 
-        Button sortButton = findViewById(R.id.sortButton);
-        sortButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                sortArray();
-                //sortArrayList();
+        // When Settings are retrieved, set the spinner to them and sort by that.
+        settingsViewModel.getSettings().observe(this, settings -> {
+            if (settings != null) {
+                String resumeSort = settings.getResumeSort();
+                if (resumeSort != null) {
+                    int spinnerPosition = sortStyle_adapter.getPosition(resumeSort);
+                    sortSpinner.setSelection(spinnerPosition);
+                    sortArrayNoUpdate();
+                }
             }
         });
+
+
+        Button sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(view -> sortArray());
+    }
+
+    public void sortArray() {
+        sortArrayNoUpdate();
+
+        Settings settings = settingsViewModel.getSettings().getValue();
+        settings.setResumeSort(sortSelection);
+        settingsViewModel.update(settings);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    public void sortArray(){
+    private void sortArrayNoUpdate() {
         List<Resume> resumes = resumeViewModel.getAllResumes().getValue();
         if (resumes != null) {
             resumes.sort(this);
         }
-
-//        for(Resume s : resumes){
-//            System.out.println(s.contact.getLastName());
-//        }
-//        System.out.println(recyclerView.getAdapter().getItemCount());
-//        System.out.println(sortSelection);
-
-        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     public int compare(Resume r1, Resume r2) {

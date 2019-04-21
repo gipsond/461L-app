@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Contact.class, WorkPhase.class, EducationPhase.class, CompanyInfo.class}, version = 1, exportSchema = false)
+@Database(entities = {Contact.class, WorkPhase.class, EducationPhase.class, CompanyInfo.class, Settings.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class ResumeRoomDatabase extends RoomDatabase {
 
@@ -18,6 +18,7 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
 
     public abstract ResumeDao resumeDao();
     public abstract CompanyInfoDao companyInfoDao();
+    public abstract SettingsDao settingsDao();
 
     private static volatile ResumeRoomDatabase INSTANCE;
 
@@ -50,18 +51,24 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
 
         private final ResumeDao resumeDao;
         private final CompanyInfoDao companyInfoDao;
+        private final SettingsDao settingsDao;
 
         InitializeDbAsync(ResumeRoomDatabase db) {
             resumeDao = db.resumeDao();
             companyInfoDao = db.companyInfoDao();
+            settingsDao = db.settingsDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
 
+            // For testing
             resumeDao.insert(TestEntityFactory.createTestResume());
             resumeDao.insert(TestEntityFactory.createTestResumeLongName());
             companyInfoDao.insert(TestEntityFactory.createTestCompanyInfo());
+
+            // For final build
+            settingsDao.insert(new Settings(0, "Most Recent"));
 
             return null;
         }
