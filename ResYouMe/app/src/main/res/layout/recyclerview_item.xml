@@ -9,9 +9,10 @@
         android:id="@+id/nameView"
         android:textColor="@color/buttonLabel"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight=".5"
         android:autoSizeTextType="uniform"
         android:background="@color/colorPrimary"
         android:text="Example Text" />
@@ -20,9 +21,11 @@
         android:id="@+id/ratingView"
         android:textColor="@color/buttonLabel"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
+
         android:layout_height="match_parent"
-        android:layout_weight="0"
+        android:layout_weight=".1"
         android:background="@color/colorPrimary"
         android:textAlignment="center" />
 
@@ -30,9 +33,10 @@
         android:id="@+id/timestampView"
         android:textColor="@color/buttonLabel"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight=".4"
         android:background="@color/colorPrimary"
         android:text="te/st/in 12:34 DAT"
         android:textAlignment="textEnd" />

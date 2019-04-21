@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
     tools:context=".ResumeEditActivity">
 
     <ScrollView
         android:id="@+id/edit_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:theme="@style/AppTheme"
+        android:background="@color/colorPrimary"
+        >
+
 
         <LinearLayout
             android:id="@+id/edit_linear_layout"
