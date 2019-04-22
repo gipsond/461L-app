@@ -6,6 +6,8 @@ import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.ResumeDao;
 import com.example.resyoume.db.ResumeRepository;
 import com.example.resyoume.db.ResumeRoomDatabase;
+import com.example.resyoume.db.Settings;
+import com.example.resyoume.db.SettingsDao;
 import com.example.resyoume.db.TestEntityFactory;
 
 import org.junit.Before;
@@ -31,23 +33,26 @@ public class RepositoryUnitTests {
     @Mock private ResumeRoomDatabase mockDB;
 
     @Mock private ResumeDao mockResumeDao;
-
     @Mock private CompanyInfoDao mockCompanyInfoDao;
+    @Mock private SettingsDao mockSettingsDao;
 
     @Mock private ResumeRepository repoUnderTest;
 
     @Mock private LiveData<List<Resume>> mockLiveAllResumes, differentMockLiveAllResumes;
     @Mock private LiveData<Resume> mockLiveResume, differentMockLiveResume;
     @Mock private LiveData<List<CompanyInfo>> mockLiveCompanyInfo, differentMockLiveCompanyInfo;
+    @Mock private LiveData<Settings> mockLiveSettings;
 
     @Before
     public void setUp() {
         when(mockDB.resumeDao()).thenReturn(mockResumeDao);
         when(mockDB.companyInfoDao()).thenReturn(mockCompanyInfoDao);
+        when(mockDB.settingsDao()).thenReturn(mockSettingsDao);
 
         when(mockResumeDao.getAllResumes()).thenReturn(mockLiveAllResumes);
         when(mockResumeDao.getOldestResume()).thenReturn(mockLiveResume);
         when(mockCompanyInfoDao.getAllCompanyInfo()).thenReturn(mockLiveCompanyInfo);
+        when(mockSettingsDao.getSettings()).thenReturn(mockLiveSettings);
 
         repoUnderTest = new ResumeRepository(mockDB);
     }
