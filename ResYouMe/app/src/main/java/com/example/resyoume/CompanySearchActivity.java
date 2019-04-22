@@ -89,7 +89,8 @@ public class CompanySearchActivity extends AppCompatActivity {
                     CompanyLinkedIn_Textview.setText(Linkedin);
                     CompanyBio_Textview.setText(Bio);
 
-                    Picasso.with(getApplicationContext()).load(Logo).placeholder(R.mipmap.ic_launcher)
+                    Picasso.with(getApplicationContext())
+                            .load(Logo)
                             .error(R.mipmap.ic_launcher)
                             .into(CompanyLogo_ImageView, new com.squareup.picasso.Callback() {
                         @Override
