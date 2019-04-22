@@ -6,17 +6,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.resyoume.db.Contact;
 import com.example.resyoume.db.Resume;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.ResumeViewHolder> {
+public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.ResumeViewHolder> implements Filterable {
 
     class ResumeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private final TextView resumeHeader;
@@ -49,7 +52,8 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
     }
 
     private final LayoutInflater inflater;
-    private List<Resume> resumes; // Cached copy of words
+    private List<Resume> resumes;
+    private List<Resume> resumesFull;
     private int position;
 
     ResumeListAdapter(Context context) {
@@ -96,7 +100,9 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
     }
 
     public void setResumes(List<Resume> resumes) {
+        this.resumesFull = new ArrayList<>(resumes);
         this.resumes = resumes;
+        getFilter().filter(searchFilter.getLastFilter());
         notifyDataSetChanged();
     }
 
@@ -120,4 +126,52 @@ public class ResumeListAdapter extends RecyclerView.Adapter<ResumeListAdapter.Re
             return resumes.size();
         else return 0;
     }
+
+    @Override
+    public Filter getFilter() {
+        return searchFilter;
+    }
+
+    private CachingFilter searchFilter = new CachingFilter();
+
+
+    private class CachingFilter extends Filter {
+
+        private CharSequence lastFilter = "";
+
+        public CharSequence getLastFilter() {
+            return lastFilter;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Resume> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(resumesFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Resume resume : resumesFull)
+                    if (resume.getContact().getFullName().toLowerCase().contains(filterPattern))
+                        filteredList.add(resume);
+
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            lastFilter = constraint;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            resumes.clear();
+            resumes.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 }

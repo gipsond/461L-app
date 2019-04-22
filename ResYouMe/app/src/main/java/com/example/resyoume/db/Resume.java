@@ -49,6 +49,10 @@ public class Resume {
 
     }
 
+    public Contact getContact() {
+        return contact;
+    }
+
     public JSONObject toJSONObject() throws JSONException {
         JSONObject resume = new JSONObject();
         resume.put("contact", this.contact.toJSONObject());

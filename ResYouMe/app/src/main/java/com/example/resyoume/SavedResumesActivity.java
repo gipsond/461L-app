@@ -4,11 +4,14 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.resyoume.db.Resume;
@@ -31,6 +34,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     private ResumeViewModel resumeViewModel;
     private SettingsViewModel settingsViewModel;
     private RecyclerView recyclerView;
+    private ResumeListAdapter adapter;
     private String style;
     private String sortSelection;
 
@@ -43,7 +47,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
 
         this.recyclerView = findViewById(R.id.recyclerview);
         registerForContextMenu(recyclerView);
-        final ResumeListAdapter adapter = new ResumeListAdapter(this);
+        adapter = new ResumeListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -224,5 +228,30 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Search by full name...");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

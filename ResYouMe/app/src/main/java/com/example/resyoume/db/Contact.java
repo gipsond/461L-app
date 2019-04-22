@@ -131,6 +131,8 @@ public class Contact {
         return lastName;
     }
 
+    public String getFullName() { return firstName + " " + lastName; }
+
     public String getTitle() {
         return title;
     }
