@@ -7,39 +7,40 @@
 
     <TextView
         android:id="@+id/nameView"
-        android:textColor="@color/buttonLabel"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".5"
+        android:layout_weight="1"
         android:autoSizeTextType="uniform"
         android:background="@color/colorPrimary"
-        android:text="Example Text" />
+        android:text="Example Text"
+        android:textColor="@color/buttonLabel"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/ratingView"
-        android:textColor="@color/buttonLabel"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".1"
+        android:layout_weight="1.8"
         android:background="@color/colorPrimary"
-        android:textAlignment="center" />
+
+        android:textAlignment="center"
+        android:textColor="@color/buttonLabel"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/timestampView"
-        android:textColor="@color/buttonLabel"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".4"
+        android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:text="te/st/in 12:34 DAT"
-        android:textAlignment="textEnd" />
+        android:textAlignment="textEnd"
+        android:textColor="@color/buttonLabel"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <!--<TextView-->
         <!--android:id="@+id/addressView"-->
