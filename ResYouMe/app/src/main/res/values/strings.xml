@@ -23,5 +23,9 @@
         <item>Most Recent</item>
         <item>Stars</item>
     </string-array>
+    <string-array name="sortCompanyStyles">
+        <item>Name</item>
+        <item>Most Recent</item>
+    </string-array>
     <string name="title_activity_saved_company_info">SavedCompanyInfoActivity</string>
 </resources>

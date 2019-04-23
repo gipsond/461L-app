@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,6 +30,7 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
 
     private CompanyInfoViewModel companyInfoViewModel;
     private RecyclerView recyclerView;
+    private String sortCompanySelection = "Name";
     private String style;
 
     @Override
@@ -46,6 +49,22 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
         companyInfoViewModel.getAllCompanyInfo().observe(this, adapter::setCompanyInfo);
 
+        Spinner sortCompanySpinner = (Spinner) findViewById(R.id.style_sortCompanySpinner);
+        sortCompanySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortCompanySelection = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ArrayAdapter<CharSequence> sortStyle_adapter = ArrayAdapter.createFromResource(this,R.array.sortCompanyStyles, android.R.layout.simple_spinner_item);
+        sortStyle_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortCompanySpinner.setAdapter(sortStyle_adapter);
+
         Button sortButton = findViewById(R.id.sortCompanyInfo);
         sortButton.setOnClickListener(view -> sort());
     }
@@ -53,17 +72,19 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
     @TargetApi(Build.VERSION_CODES.N)
     public void sort() {
         List<CompanyInfo> companies = companyInfoViewModel.getAllCompanyInfo().getValue();
-        if (companies != null || companies.size() != 1) {
+        if (companies != null && companies.size() > 1) {
             companies.sort(this);
         }
         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
     }
 
     public int compare(CompanyInfo c1, CompanyInfo c2){
-        if(c1.getCompanyName() != null && c2.getCompanyName() != null){
+        if(sortCompanySelection.equals("Name") && (c1.getCompanyName() != null && c2.getCompanyName() != null))
             return c1.getCompanyName().compareTo(c2.getCompanyName());
-        }
-        return 0;
+        else if(sortCompanySelection.equals("Most Recent") && (c1.getTimestamp() != null && c2.getTimestamp() != null))
+            return c1.getTimestamp().compareTo(c2.getTimestamp())*-1;
+        else
+            return 0;
     }
 
     /**
