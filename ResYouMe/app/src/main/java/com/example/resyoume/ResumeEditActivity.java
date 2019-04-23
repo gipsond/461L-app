@@ -1,12 +1,8 @@
 package com.example.resyoume;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.resyoume.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.resyoume.db.Contact;
 import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
@@ -250,7 +248,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                             to,
                             school,
                             eduCountry,
-                            ""  //TODO: update to match original plaintext
+                            graduation
                     );
 
             educationPhases.add(educationPhase);
@@ -282,7 +280,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                             role,
                             company,
                             workCountry,
-                            ""  //TODO: update to match original plaintext
+                            details
                     );
 
             workPhases.add(workPhase);
