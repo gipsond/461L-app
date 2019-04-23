@@ -21,6 +21,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -35,6 +36,16 @@ public class CompanyInputBadUrlNoInfoTest {
 
     @Test
     public void companyInputBadUrlNoInfoTest() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.companyData_button), withText("Company Input"),
+                        childAtPosition(
+                                allOf(withId(R.id.linearLayout1),
+                                        childAtPosition(
+                                                withId(R.id.linearLayout6),
+                                                2)),
+                                0)));
+        appCompatButton.perform(scrollTo(), click());
+
         ViewInteraction textInputEditText = onView(
                 allOf(childAtPosition(
                         childAtPosition(
@@ -63,7 +74,7 @@ public class CompanyInputBadUrlNoInfoTest {
                         isDisplayed()));
         textInputEditText3.perform(click());
 
-        ViewInteraction appCompatButton = onView(
+        appCompatButton = onView(
                 allOf(withText("Save"),
                         childAtPosition(
                                 childAtPosition(
