@@ -38,12 +38,12 @@ public class WorkPhase {
         this.plaintext = plaintext;
     }
 
-    public WorkPhase(JSONObject workJson){
+    public WorkPhase(JSONObject workJson, boolean assignNewId) {
         if(workJson == null){
             return;
         }
         try {
-            this.id = 0;
+            this.id = assignNewId ? 0 : workJson.getInt("id");
             this.contactId = 0;
             this.dateFrom = workJson.getString("dateFrom");
             this.dateTo = workJson.getString("dateTo");

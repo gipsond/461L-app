@@ -37,12 +37,12 @@ public class EducationPhase {
         this.plaintext = plaintext;
     }
 
-    public EducationPhase(JSONObject educationJson){
+    public EducationPhase(JSONObject educationJson, boolean assignNewId){
         if(educationJson == null){
             return;
         }
         try {
-            this.id = 0;
+            this.id = assignNewId ? 0 : educationJson.getInt("id");
             this.contactId = 0;
             this.dateFrom = educationJson.getString("dateFrom");
             this.dateTo = educationJson.getString("dateTo");

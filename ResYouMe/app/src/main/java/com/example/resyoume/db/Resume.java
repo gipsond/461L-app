@@ -37,8 +37,8 @@ public class Resume {
             JSONArray education = resume.getJSONArray("educationPhases");
             JSONArray work = resume.getJSONArray("workPhases");
             this.contact = new Contact(contact, assignNewId);
-            this.educationPhases = getEducationList(education);
-            this.workPhases = getWorkList(work);
+            this.educationPhases = getEducationList(education, assignNewId);
+            this.workPhases = getWorkList(work, assignNewId);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -62,20 +62,20 @@ public class Resume {
         return resume;
     }
 
-    private List<EducationPhase> getEducationList(JSONArray educationJson) throws JSONException {
+    private List<EducationPhase> getEducationList(JSONArray educationJson, boolean assignNewId) throws JSONException {
         List<EducationPhase> education = new ArrayList<EducationPhase>();
         int x;
         for(x = 0; x < educationJson.length(); x++){
-            education.add(new EducationPhase(educationJson.getJSONObject(x)));
+            education.add(new EducationPhase(educationJson.getJSONObject(x), assignNewId));
         }
         return education;
     }
 
-    private List<WorkPhase> getWorkList(JSONArray workJson) throws JSONException {
+    private List<WorkPhase> getWorkList(JSONArray workJson, boolean assignNewId) throws JSONException {
         List<WorkPhase> work = new ArrayList<WorkPhase>();
         int x;
         for(x = 0; x < workJson.length(); x++){
-            work.add(new WorkPhase(workJson.getJSONObject(x)));
+            work.add(new WorkPhase(workJson.getJSONObject(x), assignNewId));
         }
         return work;
     }

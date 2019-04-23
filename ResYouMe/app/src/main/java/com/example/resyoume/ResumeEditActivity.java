@@ -290,6 +290,13 @@ public class ResumeEditActivity extends AppCompatActivity {
         }
 
         newResume.contact = contact;
+        for (WorkPhase phase : workPhases) {
+            try {
+                System.out.println(phase.toJSONObject());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         newResume.educationPhases = educationPhases;
         newResume.workPhases = workPhases;
     }

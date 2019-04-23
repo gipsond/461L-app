@@ -111,7 +111,7 @@ public class JSONUnitTests {
         actualJson.put("schoolName", "University of Texas at Austin");
         actualJson.put("country", "US");
         actualJson.put("plaintext", "");
-        EducationPhase actual = new EducationPhase(actualJson);
+        EducationPhase actual = new EducationPhase(actualJson, true);
         EducationPhase expected = new EducationPhase(1, "8/17/15", "5/25/19", "University of Texas at Austin", "US", "");
         expected.setContactId(0);
         assertEquals("EducationPhases are not equal", expected, actual);
@@ -120,14 +120,14 @@ public class JSONUnitTests {
     @Test
     public void empty_json_to_education(){
         JSONObject educationJson = new JSONObject();
-        EducationPhase actual = new EducationPhase(educationJson);
+        EducationPhase actual = new EducationPhase(educationJson, true);
         EducationPhase expected = new EducationPhase();
         assertEquals("EducationPhases are not equal", expected, actual);
     }
 
     @Test
     public void null_json_to_education(){
-        EducationPhase actual = new EducationPhase(null);
+        EducationPhase actual = new EducationPhase(null, true);
         EducationPhase expected = new EducationPhase();
         assertEquals("EducationPhases are not equal", expected, actual);
     }
@@ -161,7 +161,7 @@ public class JSONUnitTests {
         actualJson.put("company", "ResYouMe");
         actualJson.put("country", "US");
         actualJson.put("plaintext", "");
-        WorkPhase actual = new WorkPhase(actualJson);
+        WorkPhase actual = new WorkPhase(actualJson, true);
         WorkPhase expected = new WorkPhase(0, "1/1/19", "4/1/19", "testing", "ResYouMe", "US", "");
         expected.setContactId(0);
         assertEquals("WorkPhases are not equal", expected, actual);
@@ -170,14 +170,14 @@ public class JSONUnitTests {
     @Test
     public void empty_json_to_work(){
         JSONObject workJson = new JSONObject();
-        WorkPhase actual = new WorkPhase(workJson);
+        WorkPhase actual = new WorkPhase(workJson, true);
         WorkPhase expected = new WorkPhase();
         assertEquals("WorkPhases are not equal", expected, actual);
     }
 
     @Test
     public void null_json_to_work(){
-        WorkPhase actual = new WorkPhase(null);
+        WorkPhase actual = new WorkPhase(null, true);
         WorkPhase expected = new WorkPhase();
         assertEquals("WorkPhases are not equal", expected, actual);
     }
