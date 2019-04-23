@@ -18,7 +18,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,11 +30,9 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -154,14 +151,16 @@ public class EditTest {
 
         openEdit();
 
-        ViewInteraction editText4 = onView(
+        editText = onView(
                 allOf(childAtPosition(
                         childAtPosition(
                                 withId(R.id.edit_linear_layout),
                                 position),
-                        1),
-                        isDisplayed()));
-        editText4.check(matches(withText(testText)));
+                        1)));
+        editText.perform(scrollTo(), click());
+
+        editText.perform(scrollTo());
+        editText.check(matches(withText(testText)));
     }
 
 
