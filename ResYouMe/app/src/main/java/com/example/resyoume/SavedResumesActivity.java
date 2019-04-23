@@ -36,7 +36,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     private RecyclerView recyclerView;
     private ResumeListAdapter adapter;
     private String style;
-    private String sortSelection;
+    private String sortSelection = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,14 +110,17 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     @TargetApi(Build.VERSION_CODES.N)
     private void sortArrayNoUpdate() {
         List<Resume> resumes = resumeViewModel.getAllResumes().getValue();
-        if (resumes != null) {
+        if (resumes != null || resumes.size() == 1) {
             resumes.sort(this);
         }
     }
 
     public int compare(Resume r1, Resume r2) {
         if(sortSelection.equals("Last Name")){
-            return r1.contact.getLastName().compareTo(r2.contact.getLastName());
+            if(r1.contact.getLastName() != null && r2.contact.getRating() != null)
+                return r1.contact.getLastName().compareTo(r2.contact.getLastName());
+            else
+                return 0;
         }
         else if(sortSelection.equals("Stars")){
             if(r1.contact.getRating() != null && r2.contact.getRating() != null)
