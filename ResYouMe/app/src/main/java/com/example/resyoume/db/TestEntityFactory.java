@@ -126,4 +126,34 @@ public class TestEntityFactory {
                 null,
                 null);
     }
+
+    public static CompanyInfo createTestCompanyInfo2(){
+        return new CompanyInfo(
+                0,
+                new Date(),
+                "Bob's Bodacious Beans",
+                "Nowhere, TX",
+                "@BBBeans",
+                "https://www.Bob.beans/index.html",
+                "We Got Beans",
+                "https://www.linkedin.com/company/beanmachine",
+                "This is an example set of company info for testing the database.",
+                null,
+                null);
+    }
+
+    public static CompanyInfo createTestCompanyInfo3(){
+        return new CompanyInfo(
+                0,
+                new Date(),
+                "Milly's Masterful Mayonnaise",
+                "Nowhere, TX",
+                "@MMM",
+                "https://www.Milly.com/index.html",
+                "WE GOT SPICE",
+                "https://www.linkedin.com/company/mayonnaiseisspicy",
+                "This is an example set of company info for testing the database.",
+                null,
+                null);
+    }
 }

@@ -1,10 +1,13 @@
 package com.example.resyoume;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,10 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.resyoume.db.CompanyInfo;
+import com.example.resyoume.db.Resume;
 
 import org.json.JSONException;
 
-public class SavedCompanyInfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+
+public class SavedCompanyInfoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Comparator<CompanyInfo>{
 
     private CompanyInfoViewModel companyInfoViewModel;
     private RecyclerView recyclerView;
@@ -37,6 +45,25 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
 
         companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
         companyInfoViewModel.getAllCompanyInfo().observe(this, adapter::setCompanyInfo);
+
+        Button sortButton = findViewById(R.id.sortCompanyInfo);
+        sortButton.setOnClickListener(view -> sort());
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public void sort() {
+        List<CompanyInfo> companies = companyInfoViewModel.getAllCompanyInfo().getValue();
+        if (companies != null || companies.size() != 1) {
+            companies.sort(this);
+        }
+        Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
+    }
+
+    public int compare(CompanyInfo c1, CompanyInfo c2){
+        if(c1.getCompanyName() != null && c2.getCompanyName() != null){
+            return c1.getCompanyName().compareTo(c2.getCompanyName());
+        }
+        return 0;
     }
 
     /**

@@ -106,7 +106,7 @@ public class ResumeEditActivity extends AppCompatActivity {
         postalId = addLabelAndEdit("Postal Code", contact.getPostcode());
         countryId = addLabelAndEdit("Country", contact.getCountry());
         interestsId = addLabelAndEdit("Interests", contact.getInterests());
-        publicationsId = addLabelAndEdit("Country", contact.getPublications());
+        publicationsId = addLabelAndEdit("Publications", contact.getPublications());
 
     }
 

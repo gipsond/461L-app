@@ -19,9 +19,8 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -29,60 +28,48 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CompanyInputBadUrlNoInfoTest {
+public class SortSavedCompanies {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void companyInputBadUrlNoInfoTest() {
+    public void sortSavedCompanies() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.companyData_button), withText("Company Input"),
+                allOf(withId(R.id.saved_company_info_button), withText("Saved Company Info"),
                         childAtPosition(
                                 allOf(withId(R.id.linearLayout1),
                                         childAtPosition(
                                                 withId(R.id.linearLayout6),
-                                                2)),
+                                                3)),
                                 0)));
         appCompatButton.perform(scrollTo(), click());
 
-        ViewInteraction textInputEditText = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.text_input_URL),
-                                0),
-                        0),
-                        isDisplayed()));
-        textInputEditText.perform(click());
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        ViewInteraction textInputEditText2 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.text_input_URL),
-                                0),
-                        0),
-                        isDisplayed()));
-        textInputEditText2.perform(replaceText("bad"), closeSoftKeyboard());
-
-        ViewInteraction textInputEditText3 = onView(
-                allOf(withText("bad"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.text_input_URL),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textInputEditText3.perform(click());
-
-        appCompatButton = onView(
-                allOf(withText("Save"),
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.sortCompanyInfo), withText("Sort"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatButton.perform(click());
+        appCompatButton2.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.nameView), withText("Bob's Bodacious Beans"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.recyclerview),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("Bob's Bodacious Beans")));
     }
 
     private static Matcher<View> childAtPosition(

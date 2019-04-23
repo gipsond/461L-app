@@ -27,6 +27,7 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -34,20 +35,29 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class EditCompanyNotes {
+public class SortAndFilter {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void editCompanyNotes() {
+    public void sortAndFilter() {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.saved_company_info_button),
+                allOf(withId(R.id.database_button),
                         childAtPosition(
                                 allOf(withId(R.id.linearLayout1),
                                         childAtPosition(
                                                 withId(R.id.linearLayout6),
-                                                3)),
+                                                1)),
                                 1)));
         appCompatImageButton.perform(scrollTo(), click());
 
@@ -60,18 +70,39 @@ public class EditCompanyNotes {
             e.printStackTrace();
         }
 
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.action_search), withContentDescription("Search"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withId(R.id.search_src_text),
+                        childAtPosition(
+                                allOf(withId(R.id.search_plate),
+                                        childAtPosition(
+                                                withId(R.id.search_edit_frame),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        searchAutoComplete.perform(replaceText("John"), closeSoftKeyboard());
+
         ViewInteraction linearLayout = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.recyclerview),
                                 childAtPosition(
                                         withId(R.id.include),
                                         0)),
-                        0),
+                        1),
                         isDisplayed()));
         linearLayout.perform(longClick());
 
         ViewInteraction textView = onView(
-                allOf(withId(android.R.id.title), withText("Set Rating and Notes"),
+                allOf(withId(android.R.id.title), withText("Edit"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.android.internal.view.menu.ListMenuItemView")),
@@ -89,52 +120,34 @@ public class EditCompanyNotes {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.notesC),
-                        childAtPosition(
-                                allOf(withId(R.id.linearLayout2),
-                                        childAtPosition(
-                                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText.perform(click());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.notesC),
-                        childAtPosition(
-                                allOf(withId(R.id.linearLayout2),
-                                        childAtPosition(
-                                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.notesC), withText("test"),
-                        childAtPosition(
-                                allOf(withId(R.id.linearLayout2),
-                                        childAtPosition(
-                                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        pressBack();
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.saveRNC), withText("Save"),
+        ViewInteraction editText = onView(
+                allOf(withText("Johnathaniel"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
+                                        withId(R.id.edit_linear_layout),
+                                        2),
+                                1)));
+        editText.perform(scrollTo(), replaceText("Jonathaniel"));
+
+        ViewInteraction editText2 = onView(
+                allOf(withText("Jonathaniel"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.edit_linear_layout),
+                                        2),
                                 1),
                         isDisplayed()));
-        appCompatButton.perform(click());
+        editText2.perform(closeSoftKeyboard());
 
-        pressBack();
+        ViewInteraction button = onView(
+                allOf(withText("Save Resume"),
+                        childAtPosition(
+                                allOf(withId(R.id.edit_linear_layout),
+                                        childAtPosition(
+                                                withId(R.id.edit_scroll_view),
+                                                0)),
+                                36)));
+        button.perform(scrollTo(), click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -144,6 +157,16 @@ public class EditCompanyNotes {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.sortButton), withText("Sort"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton.perform(click());
 
         ViewInteraction linearLayout2 = onView(
                 allOf(childAtPosition(
@@ -175,14 +198,14 @@ public class EditCompanyNotes {
         }
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.notesView), withText("\nMy notes:\ntest"),
+                allOf(withId(R.id.nameView), withText("Mr. John Doe"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.companyView),
+                                        withId(R.id.resumeview),
                                         0),
-                                7),
+                                0),
                         isDisplayed()));
-        textView3.check(matches(withText("\nMy notes:\ntest")));
+        textView3.check(matches(withText("Mr. John Doe")));
 
         pressBack();
 
@@ -194,6 +217,79 @@ public class EditCompanyNotes {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.search_close_btn), withContentDescription("Clear query"),
+                        childAtPosition(
+                                allOf(withId(R.id.search_plate),
+                                        childAtPosition(
+                                                withId(R.id.search_edit_frame),
+                                                1)),
+                                1),
+                        isDisplayed()));
+        appCompatImageView.perform(click());
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.sortButton), withText("Sort"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatButton2.perform(click());
+
+        ViewInteraction linearLayout3 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.recyclerview),
+                                childAtPosition(
+                                        withId(R.id.include),
+                                        0)),
+                        0),
+                        isDisplayed()));
+        linearLayout3.perform(longClick());
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(android.R.id.title), withText("View"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("com.android.internal.view.menu.ListMenuItemView")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView4.perform(click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.nameView), withText("Mr. Jonathaniel Doemoronicostis"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.resumeview),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView5.check(matches(withText("Mr. Jonathaniel Doemoronicostis")));
+
+        pressBack();
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pressBack();
 
         pressBack();
     }

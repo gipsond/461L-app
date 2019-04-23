@@ -70,7 +70,8 @@ public class CompanyDataActivity extends AppCompatActivity {
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     final Map<String, String> headers = new HashMap<>();
                     // set up the POST request headers with security key
-                    headers.put("Authorization", "Bearer Kom1m2ezqBt2n2P46bo4dEw0uuZCNAIT");
+                    //headers.put("Authorization", "Bearer Kom1m2ezqBt2n2P46bo4dEw0uuZCNAIT");
+                    headers.put("Authorization", "Bearer fHhLhckJoW2FAwm67Iu2MRJSR42roXdV");
                     return headers;
                 }
             };

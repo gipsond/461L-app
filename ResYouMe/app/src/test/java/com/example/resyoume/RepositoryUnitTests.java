@@ -100,10 +100,16 @@ public class RepositoryUnitTests {
     @Test
     public void insertCompanyInfo_shouldInsertCompanyInfoWithDao2() {
         CompanyInfo testCompanyInfo = TestEntityFactory.createTestCompanyInfo();
+        CompanyInfo testCompanyInfo2 = TestEntityFactory.createTestCompanyInfo2();
+        CompanyInfo testCompanyInfo3 = TestEntityFactory.createTestCompanyInfo3();
 
         repoUnderTest.insert(testCompanyInfo);
+        repoUnderTest.insert(testCompanyInfo2);
+        repoUnderTest.insert(testCompanyInfo3);
 
         verify(mockCompanyInfoDao).insert(testCompanyInfo);
+        verify(mockCompanyInfoDao).insert(testCompanyInfo2);
+        verify(mockCompanyInfoDao).insert(testCompanyInfo3);
     }
 
     @Test

@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/aboutText"
-            android:text="Name: Errol Williams\nMajor: Computer Engineering\nResponsibilities: Resume Upload and Parse: 0\nGithub Issues: 3\nUnit Tests: 0" />
+            android:text="Name: Errol Williams\nMajor: Computer Engineering\nResponsibilities: Resume Upload and Parse \nGithub Issues: 3\nUnit Tests: 18" />
 
         <TextView
             android:id="@+id/errol_stats"
