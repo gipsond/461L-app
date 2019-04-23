@@ -66,6 +66,8 @@ public abstract class ResumeRoomDatabase extends RoomDatabase {
             resumeDao.insert(TestEntityFactory.createTestResume());
             resumeDao.insert(TestEntityFactory.createTestResumeLongName());
             companyInfoDao.insert(TestEntityFactory.createTestCompanyInfo());
+            companyInfoDao.insert(TestEntityFactory.createTestCompanyInfo2());
+            companyInfoDao.insert(TestEntityFactory.createTestCompanyInfo3());
 
             // For final build
             settingsDao.insert(new Settings(0, "Most Recent"));
