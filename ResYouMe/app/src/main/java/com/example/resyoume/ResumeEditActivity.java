@@ -33,7 +33,11 @@ public class ResumeEditActivity extends AppCompatActivity {
 
     private SingleResumeViewModel singleResumeViewModel;
     private Resume newResume;
+
     private int resumeId;
+    private List<Integer> workPhaseDBIDs;
+    private List<Integer> educationPhaseDBIDs;
+
     private int titleId;
     private int firstNameId;
     private int lastNameId;
@@ -58,6 +62,8 @@ public class ResumeEditActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.edit_linear_layout);
         educationPhaseIds = new ArrayList<>();
         workPhaseIds = new ArrayList<>();
+        workPhaseDBIDs = new ArrayList<>();
+        educationPhaseDBIDs = new ArrayList<>();
         Intent intent = getIntent();
         String resumeString = intent.getStringExtra("resumeJSON");
         if (resumeString != null) {
@@ -116,6 +122,7 @@ public class ResumeEditActivity extends AppCompatActivity {
             for (int i = 0; i < workPhases.size(); i++) {
                 addLabel("Job " + Integer.toString(i+1));
                 WorkPhase workPhase = workPhases.get(i);
+                workPhaseDBIDs.add(workPhases.get(i).getId());
                 workPhaseIds.add(new ArrayList<Integer>());
                 workPhaseIds.get(i).add(addLabelAndEdit("From", workPhase.getDateFrom()));
                 workPhaseIds.get(i).add(addLabelAndEdit("To", workPhase.getDateTo()));
@@ -136,6 +143,7 @@ public class ResumeEditActivity extends AppCompatActivity {
             for (int i = 0; i < educationPhases.size(); i++) {
                 addLabel("School " + Integer.toString(i+1));
                 EducationPhase educationPhase = educationPhases.get(i);
+                educationPhaseDBIDs.add(educationPhases.get(i).getId());
                 educationPhaseIds.add(new ArrayList<Integer>());
                 educationPhaseIds.get(i).add(addLabelAndEdit("From", educationPhase.getDateFrom()));
                 educationPhaseIds.get(i).add(addLabelAndEdit("To", educationPhase.getDateTo()));
@@ -237,7 +245,7 @@ public class ResumeEditActivity extends AppCompatActivity {
 
             EducationPhase educationPhase =
                     new EducationPhase(
-                            0,
+                            educationPhaseDBIDs.get(i),
                             from,
                             to,
                             school,
@@ -268,7 +276,7 @@ public class ResumeEditActivity extends AppCompatActivity {
 
             WorkPhase workPhase =
                     new WorkPhase(
-                            0,
+                            workPhaseDBIDs.get(i),
                             from,
                             to,
                             role,
