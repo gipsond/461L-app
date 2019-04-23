@@ -25,9 +25,9 @@ import androidx.lifecycle.ViewModelProviders;
 public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback{
     NfcAdapter nfc_adapter;
     EditText message;
-    TextView response;
-    SingleResumeViewModel resumeViewModel;
-    CompanyInfoViewModel companyInfoViewModel;
+    private TextView response;
+    private SingleResumeViewModel resumeViewModel;
+    private CompanyInfoViewModel companyInfoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,23 +109,23 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                 }
             }
             catch (JSONException e) {}
-            response.setText(received);
+            getResponse().setText(received);
         }
     }
 
     public void saveResponseToDB(View view) {
-        if (resumeViewModel == null) {
+        if (getResumeViewModel() == null) {
             resumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
         }
 
-        if (companyInfoViewModel == null) {
+        if (getCompanyInfoViewModel() == null) {
             companyInfoViewModel = ViewModelProviders.of(this).get(CompanyInfoViewModel.class);
         }
 
         // only insert the resume if all of the response types are correct and array size is 3
         try {
 
-            JSONObject responseJson = new JSONObject(response.getText().toString());
+            JSONObject responseJson = new JSONObject(getResponse().getText().toString());
             CharSequence toastText = "Invalid; couldn't save to database.";
 
             if (responseJson.has("type")
@@ -137,7 +137,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                 Resume resume = new Resume(responseJson, true);
                 resume.contact.setRating(null);
                 resume.contact.setNotes(null);
-                resumeViewModel.insert(resume);
+                getResumeViewModel().insert(resume);
                 toastText = "Resume added to database";
 
             } else if (responseJson.has("type")
@@ -147,7 +147,7 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                 CompanyInfo companyInfo = new CompanyInfo(responseJson, true);
                 companyInfo.setRating(null);
                 companyInfo.setNotes(null);
-                companyInfoViewModel.insert(companyInfo);
+                getCompanyInfoViewModel().insert(companyInfo);
                 toastText = "CompanyInfo added to database";
 
             }
@@ -162,5 +162,17 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             // TODO: don't silently fail; at least do something
             //e.printStackTrace();
         }
+    }
+
+    public TextView getResponse() {
+        return response;
+    }
+
+    public SingleResumeViewModel getResumeViewModel() {
+        return resumeViewModel;
+    }
+
+    public CompanyInfoViewModel getCompanyInfoViewModel() {
+        return companyInfoViewModel;
     }
 }
