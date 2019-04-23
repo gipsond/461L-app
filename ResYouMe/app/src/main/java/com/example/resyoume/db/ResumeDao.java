@@ -48,7 +48,10 @@ public abstract class ResumeDao {
             System.out.println(resume.toJSONObject());
         } catch (JSONException e) {}
         Contact contact = resume.contact;
-        int contactId = updateContact(contact);
+        int contactId = contact.getId();
+        updateContact(contact);
+
+        System.out.println(contactId);
         updateEducationPhases(contactId, resume.educationPhases);
         updateWorkPhases(contactId, resume.workPhases);
     }
@@ -73,6 +76,11 @@ public abstract class ResumeDao {
     private void updateWorkPhases(int contactId, List<WorkPhase> phases) {
         for (WorkPhase phase : phases) {
             phase.setContactId(contactId);
+            try {
+                System.out.println(phase.toJSONObject());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         updateWorkPhases(phases);
     }
@@ -80,6 +88,11 @@ public abstract class ResumeDao {
     private void updateEducationPhases(int contactId, List<EducationPhase> phases) {
         for (EducationPhase phase : phases) {
             phase.setContactId(contactId);
+            try {
+                System.out.println(phase.toJSONObject());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         updateEducationPhases(phases);
     }
