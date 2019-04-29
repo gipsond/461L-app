@@ -13,8 +13,7 @@
         android:id="@+id/resumeview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:background="@color/resumeBg"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,8 +58,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@android:color/black"
                 android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameView" />
@@ -71,9 +70,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@android:color/black"
                 android:text="EDUCATION"
                 android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,16 +88,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/educationViewRight1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -111,24 +110,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/educationViewRight2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/ExperienceLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@android:color/black"
-                android:text="EXPERIENCE" />
+                android:text="EXPERIENCE"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -140,23 +139,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/experienceViewRight1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/experienceView1"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
 
             <LinearLayout
@@ -169,24 +168,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/experienceViewRight2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
 
             <TextView
                 android:id="@+id/experienceView2"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -198,24 +197,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/experienceViewRight3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
 
             <TextView
                 android:id="@+id/experienceView3"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
 
             <TextView
@@ -242,23 +241,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/leadershipViewRight1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/leadershipView1"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -270,23 +269,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/leadershipViewRight2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/leadershipView2"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -298,23 +297,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".2"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/leadershipViewRight3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/leadershipView3"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/SkillsLabel"
@@ -352,8 +351,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@android:color/black"
                 android:text="ADDITIONAL INFORMATION"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/websiteView" />
@@ -361,8 +360,8 @@
             <TextView
                 android:id="@+id/additionalInfoView"
                 android:layout_width="match_parent"
-                android:textColor="@android:color/black"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/notesView"

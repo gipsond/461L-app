@@ -13,8 +13,7 @@
         android:id="@+id/resumeView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:background="@color/resumeBg"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +37,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
-                android:textSize="24sp"
                 android:textColor="@android:color/black"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,8 +63,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="EDUCATION"
-                android:textColor="@android:color/black"
                 android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,9 +80,9 @@
 
             <TextView
                 android:id="@+id/educationView1"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/educationView2"
@@ -92,10 +91,10 @@
 
             <TextView
                 android:id="@+id/ExperienceLabel"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="WORK EXPERIENCE" />
+                android:text="WORK EXPERIENCE"
+                android:textColor="@android:color/black" />
 
             <View
                 android:id="@+id/divider2"
@@ -107,31 +106,31 @@
 
             <TextView
                 android:id="@+id/experienceView1"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
 
             <TextView
                 android:id="@+id/experienceView2"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
 
             <TextView
                 android:id="@+id/experienceView3"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
 
             <TextView
                 android:id="@+id/academicExperienceLabel"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="ACADEMIC EXPERIENCE" />
+                android:text="ACADEMIC EXPERIENCE"
+                android:textColor="@android:color/black" />
 
             <View
                 android:id="@+id/divider3"
@@ -143,13 +142,12 @@
 
             <TextView
                 android:id="@+id/academicExperienceView"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/SkillsLabel"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -157,6 +155,7 @@
                 android:layout_marginBottom="9dp"
                 android:text="SKILLS"
                 android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
                 app:layout_constraintBottom_toTopOf="@+id/publicationsView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -172,13 +171,13 @@
 
             <TextView
                 android:id="@+id/skillsView"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -186,22 +185,22 @@
 
             <TextView
                 android:id="@+id/additionalLabel"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="ADDITIONAL INFORMATION"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/websiteView" />
 
             <TextView
                 android:id="@+id/additionalInfoView"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/notesView"

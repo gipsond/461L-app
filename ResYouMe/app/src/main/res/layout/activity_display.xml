@@ -12,8 +12,6 @@
         android:id="@+id/resumeview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/resumeBg"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
