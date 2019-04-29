@@ -2,8 +2,12 @@ package com.example.resyoume;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -27,7 +31,7 @@ import java.util.List;
 
 public class ResumeEditActivity extends AppCompatActivity {
 
-    private LinearLayout linearLayout;
+    private LinearLayout baseLayout;
 
     private SingleResumeViewModel singleResumeViewModel;
     private Resume newResume;
@@ -50,16 +54,23 @@ public class ResumeEditActivity extends AppCompatActivity {
     private int interestsId;
     private int publicationsId;
 
+    private LinearLayout educationPhaseLayout;
+    private LinearLayout workPhaseLayout;
     private ArrayList<ArrayList<Integer>> workPhaseIds;
     private ArrayList<ArrayList<Integer>> educationPhaseIds;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resume_edit);
-        linearLayout = findViewById(R.id.edit_linear_layout);
+        baseLayout = findViewById(R.id.edit_linear_layout);
         educationPhaseIds = new ArrayList<>();
         workPhaseIds = new ArrayList<>();
+        educationPhaseLayout = new LinearLayout(this);
+        educationPhaseLayout.setOrientation(LinearLayout.VERTICAL);
+        workPhaseLayout = new LinearLayout(this);
+        workPhaseLayout.setOrientation(LinearLayout.VERTICAL);
         workPhaseDBIDs = new ArrayList<>();
         educationPhaseDBIDs = new ArrayList<>();
         Intent intent = getIntent();
@@ -68,7 +79,6 @@ public class ResumeEditActivity extends AppCompatActivity {
             try {
                 JSONObject resumeJson = new JSONObject(resumeString);
                 newResume = new Resume(resumeJson, false);
-                System.out.println(newResume.contact.getFirstName());
                 createEditableFields(newResume);
                 this.resumeId = newResume.contact.getId();
                 createSaveButton();
@@ -87,74 +97,183 @@ public class ResumeEditActivity extends AppCompatActivity {
                 finish();
             }
         });
-        linearLayout.addView(btn);
+        baseLayout.addView(btn);
+    }
+
+    private void createAddEducationPhaseButton(){
+        Button btn = new Button(this);
+        btn.setText("Add EducationPhase");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewEducationPhase();
+            }
+        });
+        baseLayout.addView(btn);
+    }
+
+    private void createAddWorkPhaseButton(){
+        Button btn = new Button(this);
+        btn.setText("Add WorkPhase");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewWorkPhase();
+            }
+        });
+        baseLayout.addView(btn);
     }
 
     private void createEditableFields(Resume resume){
         editContactInfo(resume.contact);
         editEducationPhases(resume.educationPhases);
+        baseLayout.addView(educationPhaseLayout);
+        createAddEducationPhaseButton();
         editWorkPhases(resume.workPhases);
+        baseLayout.addView(workPhaseLayout);
+        createAddWorkPhaseButton();
     }
 
     private void editContactInfo(Contact contact){
-        addLabel("Contact Information");
-        titleId = addLabelAndEdit("Title", contact.getTitle());
-        firstNameId = addLabelAndEdit("First Name", contact.getFirstName());
-        lastNameId = addLabelAndEdit("Last Name", contact.getLastName());
-        emailId = addLabelAndEdit("Email Address", contact.getEmail());
-        phoneId = addLabelAndEdit("Phone Number", contact.getPhoneNumber());
-        addressId = addLabelAndEdit("Address", contact.getAddress());
-        homepageId = addLabelAndEdit("Homepage", contact.getHomepage());
-        cityId = addLabelAndEdit("City", contact.getCity());
-        stateId = addLabelAndEdit("State", contact.getState());
-        postalId = addLabelAndEdit("Postal Code", contact.getPostcode());
-        countryId = addLabelAndEdit("Country", contact.getCountry());
-        interestsId = addLabelAndEdit("Interests", contact.getInterests());
-        publicationsId = addLabelAndEdit("Publications", contact.getPublications());
+        addLabel("Contact Information", baseLayout);
+        titleId = addLabelAndEdit("Title", contact.getTitle(), baseLayout);
+        firstNameId = addLabelAndEdit("First Name", contact.getFirstName(), baseLayout);
+        lastNameId = addLabelAndEdit("Last Name", contact.getLastName(), baseLayout);
+        emailId = addLabelAndEdit("Email Address", contact.getEmail(), baseLayout);
+        phoneId = addLabelAndEdit("Phone Number", contact.getPhoneNumber(), baseLayout);
+        addressId = addLabelAndEdit("Address", contact.getAddress(), baseLayout);
+        homepageId = addLabelAndEdit("Homepage", contact.getHomepage(), baseLayout);
+        cityId = addLabelAndEdit("City", contact.getCity(), baseLayout);
+        stateId = addLabelAndEdit("State", contact.getState(), baseLayout);
+        postalId = addLabelAndEdit("Postal Code", contact.getPostcode(), baseLayout);
+        countryId = addLabelAndEdit("Country", contact.getCountry(), baseLayout);
+        interestsId = addLabelAndEdit("Interests", contact.getInterests(), baseLayout);
+        publicationsId = addLabelAndEdit("Publications", contact.getPublications(), baseLayout);
 
+    }
+
+    private void addNewWorkPhase(){
+        WorkPhase workPhase = new WorkPhase();
+        workPhaseIds.add(new ArrayList<Integer>());
+        int index = workPhaseIds.size()-1;
+        LinearLayout workLayout = new LinearLayout(this);
+        workLayout.setOrientation(LinearLayout.VERTICAL);
+        workPhaseDBIDs.add(0);
+        workPhaseIds.get(index).add(addLabelAndEdit("From", workPhase.getDateFrom(), workLayout));
+        workPhaseIds.get(index).add(addLabelAndEdit("To", workPhase.getDateTo(), workLayout));
+        workPhaseIds.get(index).add(addLabelAndEdit("Company", workPhase.getCompany(), workLayout));
+        workPhaseIds.get(index).add(addLabelAndEdit("Role", workPhase.getFunction(), workLayout));
+        workPhaseIds.get(index).add(addLabelAndEdit("Country", workPhase.getCountry(), workLayout));
+        workPhaseIds.get(index).add(addLabelAndEdit("Details", workPhase.getPlaintext(), workLayout)); //Todo: update to include position
+        Button btn = new Button(this);
+        btn.setText("Remove WorkPhase");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup layout = (ViewGroup) workLayout.getParent();
+                if(layout != null) //for safety only  as you are doing onClick
+                    workPhaseIds.remove(layout.indexOfChild(workLayout));
+                    layout.removeView(workLayout);
+            }
+        });
+        workLayout.addView(btn);
+        workPhaseLayout.addView(workLayout);
     }
 
     private void editWorkPhases(List<WorkPhase> workPhases){
         if(workPhases.size() > 0) {
-            addLabel("Work Information");
+            addLabel("Work Information", baseLayout);
             for (int i = 0; i < workPhases.size(); i++) {
-                addLabel("Job " + Integer.toString(i+1));
                 WorkPhase workPhase = workPhases.get(i);
-                workPhaseDBIDs.add(workPhases.get(i).getId());
                 workPhaseIds.add(new ArrayList<Integer>());
-                workPhaseIds.get(i).add(addLabelAndEdit("From", workPhase.getDateFrom()));
-                workPhaseIds.get(i).add(addLabelAndEdit("To", workPhase.getDateTo()));
-                workPhaseIds.get(i).add(addLabelAndEdit("Company", workPhase.getCompany()));
-                workPhaseIds.get(i).add(addLabelAndEdit("Role", workPhase.getFunction()));
-                workPhaseIds.get(i).add(addLabelAndEdit("Country", workPhase.getCountry()));
-                workPhaseIds.get(i).add(addLabelAndEdit("Details", workPhase.getPlaintext())); //Todo: update to include position
+                LinearLayout workLayout = new LinearLayout(this);
+                workLayout.setOrientation(LinearLayout.VERTICAL);
+                workPhaseDBIDs.add(workPhases.get(i).getId());
+                workPhaseIds.get(i).add(addLabelAndEdit("From", workPhase.getDateFrom(), workLayout));
+                workPhaseIds.get(i).add(addLabelAndEdit("To", workPhase.getDateTo(), workLayout));
+                workPhaseIds.get(i).add(addLabelAndEdit("Company", workPhase.getCompany(), workLayout));
+                workPhaseIds.get(i).add(addLabelAndEdit("Role", workPhase.getFunction(), workLayout));
+                workPhaseIds.get(i).add(addLabelAndEdit("Country", workPhase.getCountry(), workLayout));
+                workPhaseIds.get(i).add(addLabelAndEdit("Details", workPhase.getPlaintext(), workLayout)); //Todo: update to include position
+                Button btn = new Button(this);
+                btn.setText("Remove WorkPhase");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewGroup layout = (ViewGroup) workLayout.getParent();
+                        if(layout != null) //for safety only  as you are doing onClick
+                            workPhaseIds.remove(layout.indexOfChild(workLayout));
+                            layout.removeView(workLayout);
+                    }
+                });
+                workLayout.addView(btn);
+                workPhaseLayout.addView(workLayout);
             }
         }
 
-        //Todo: Add options to add more Workphases
+    }
 
+    private void addNewEducationPhase(){
+        EducationPhase educationPhase = new EducationPhase();
+        newResume.educationPhases.add(educationPhase);
+        educationPhaseIds.add(new ArrayList<Integer>());
+        int index = educationPhaseIds.size()-1;
+        LinearLayout educationLayout = new LinearLayout(this);
+        educationLayout.setOrientation(LinearLayout.VERTICAL);
+        educationPhaseDBIDs.add(0);
+        educationPhaseDBIDs.add(educationPhase.getId());
+        educationPhaseIds.get(index).add(addLabelAndEdit("From", educationPhase.getDateFrom(), educationLayout));
+        educationPhaseIds.get(index).add(addLabelAndEdit("To", educationPhase.getDateTo(), educationLayout));
+        educationPhaseIds.get(index).add(addLabelAndEdit("School Name", educationPhase.getSchoolName(), educationLayout));
+        educationPhaseIds.get(index).add(addLabelAndEdit("Country", educationPhase.getCountry(), educationLayout));
+        educationPhaseIds.get(index).add(addLabelAndEdit("Graduation", educationPhase.getPlaintext(), educationLayout)); //Todo: update to include graduation info
+        Button btn = new Button(this);
+        btn.setText("Remove EducationPhase");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup layout = (ViewGroup) educationLayout.getParent();
+                if(layout != null) //for safety only  as you are doing onClick
+                    educationPhaseIds.remove(layout.indexOfChild(educationLayout));
+                    layout.removeView(educationLayout);
+            }
+        });
+        educationLayout.addView(btn);
+        educationPhaseLayout.addView(educationLayout);
     }
 
     private void editEducationPhases(List<EducationPhase> educationPhases){
         if(educationPhases.size() > 0) {
-            addLabel("Education Information");
+            addLabel("Education Information", baseLayout);
             for (int i = 0; i < educationPhases.size(); i++) {
-                addLabel("School " + Integer.toString(i+1));
                 EducationPhase educationPhase = educationPhases.get(i);
+                LinearLayout educationLayout = new LinearLayout(this);
+                educationLayout.setOrientation(LinearLayout.VERTICAL);
                 educationPhaseDBIDs.add(educationPhases.get(i).getId());
                 educationPhaseIds.add(new ArrayList<Integer>());
-                educationPhaseIds.get(i).add(addLabelAndEdit("From", educationPhase.getDateFrom()));
-                educationPhaseIds.get(i).add(addLabelAndEdit("To", educationPhase.getDateTo()));
-                educationPhaseIds.get(i).add(addLabelAndEdit("School Name", educationPhase.getSchoolName()));
-                educationPhaseIds.get(i).add(addLabelAndEdit("Country", educationPhase.getCountry()));
-                educationPhaseIds.get(i).add(addLabelAndEdit("Graduation", educationPhase.getPlaintext())); //Todo: update to include graduation info
+                educationPhaseIds.get(i).add(addLabelAndEdit("From", educationPhase.getDateFrom(), educationLayout));
+                educationPhaseIds.get(i).add(addLabelAndEdit("To", educationPhase.getDateTo(), educationLayout));
+                educationPhaseIds.get(i).add(addLabelAndEdit("School Name", educationPhase.getSchoolName(), educationLayout));
+                educationPhaseIds.get(i).add(addLabelAndEdit("Country", educationPhase.getCountry(), educationLayout));
+                educationPhaseIds.get(i).add(addLabelAndEdit("Graduation", educationPhase.getPlaintext(), educationLayout)); //Todo: update to include graduation info
+                Button btn = new Button(this);
+                btn.setText("Remove EducationPhase");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewGroup layout = (ViewGroup) educationLayout.getParent();
+                        if(layout != null) //for safety only  as you are doing onClick
+                            educationPhaseIds.remove(layout.indexOfChild(educationLayout));
+                            layout.removeView(educationLayout);
+                    }
+                });
+                educationLayout.addView(btn);
+                educationPhaseLayout.addView(educationLayout);
             }
         }
-
-        //Todo: Add options to add more EducationPhases
     }
 
-    private int addLabelAndEdit(String label, String content){
+    private int addLabelAndEdit(String label, String content, LinearLayout baseLayout){
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.HORIZONTAL);
         TextView labelView = new TextView(this);
@@ -165,14 +284,16 @@ public class ResumeEditActivity extends AppCompatActivity {
         editText.setText(content);
         layout.addView(labelView);
         layout.addView(editText);
-        linearLayout.addView(layout);
+        baseLayout.addView(layout);
         return id;
     }
 
-    private void addLabel(String label){
+    private void addLabel(String label, LinearLayout layout){
         TextView labelView = new TextView(this);
         labelView.setText(label);
-        linearLayout.addView(labelView);
+        labelView.setAllCaps(true);
+        labelView.setTypeface(null, Typeface.BOLD);
+        layout.addView(labelView);
     }
 
     private void updateResumeFields(){
@@ -288,13 +409,6 @@ public class ResumeEditActivity extends AppCompatActivity {
         }
 
         newResume.contact = contact;
-        for (WorkPhase phase : workPhases) {
-            try {
-                System.out.println(phase.toJSONObject());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
         newResume.educationPhases = educationPhases;
         newResume.workPhases = workPhases;
     }
