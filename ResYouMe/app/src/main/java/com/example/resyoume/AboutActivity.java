@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,8 +16,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -36,15 +36,16 @@ public class AboutActivity extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, httpReq, null, new Response.Listener<JSONArray>() {
 
+                    TextView github_stats = (TextView) findViewById(R.id.github_stats);
+                    TextView erick_stats = (TextView) findViewById(R.id.erick_stats);
+                    TextView david_stats = (TextView) findViewById(R.id.david_stats);
+                    TextView james_stats = (TextView) findViewById(R.id.james_stats);
+                    TextView jonathan_stats = (TextView) findViewById(R.id.jonathan_stats);
+                    TextView errol_stats = (TextView) findViewById(R.id.errol_stats);
+                    TextView mircea_stats = (TextView) findViewById(R.id.mircea_stats);
+
                     @Override
                     public void onResponse(JSONArray response) {
-                        TextView github_stats = (TextView) findViewById(R.id.github_stats);
-                        TextView erick_stats = (TextView) findViewById(R.id.erick_stats);
-                        TextView david_stats = (TextView) findViewById(R.id.david_stats);
-                        TextView james_stats = (TextView) findViewById(R.id.james_stats);
-                        TextView jonathan_stats = (TextView) findViewById(R.id.jonathan_stats);
-                        TextView errol_stats = (TextView) findViewById(R.id.errol_stats);
-                        TextView mircea_stats = (TextView) findViewById(R.id.mircea_stats);
 
                         int total_commits = 0;
 
@@ -58,25 +59,7 @@ public class AboutActivity extends AppCompatActivity {
                                 String commits = contributor.getString("total");
                                 String stat_string = "Github Commits: " + commits;
                                 total_commits += Integer.parseInt(commits);
-
-                                if(name.equals("erickjshepherd")){
-                                    erick_stats.setText(stat_string);
-                                }
-                                else if(name.equals("gipsond")){
-                                    david_stats.setText(stat_string);
-                                }
-                                else if(name.equals("jmounsif")){
-                                    jonathan_stats.setText(stat_string);
-                                }
-                                else if(name.equals("ErrolWilliams")){
-                                    errol_stats.setText(stat_string);
-                                }
-                                else if(name.equals("mantonescu101")){
-                                    mircea_stats.setText(stat_string);
-                                }
-                                else if(name.equals("Kaboomtastic")){
-                                    james_stats.setText(stat_string);
-                                }
+                                setMemberInfo(name, stat_string);
                             }
                             catch(Exception e){
                                 github_stats.setText("error");
@@ -85,6 +68,27 @@ public class AboutActivity extends AppCompatActivity {
                         String totalCommitString = String.valueOf(total_commits);
                         String totalStatString = "Total Github Commits: " + totalCommitString;
                         github_stats.setText(totalStatString);
+                    }
+
+                    private void setMemberInfo(String name, String stat_string) {
+                        if(name.equals("erickjshepherd")){
+                            erick_stats.setText(stat_string);
+                        }
+                        else if(name.equals("gipsond")){
+                            david_stats.setText(stat_string);
+                        }
+                        else if(name.equals("jmounsif")){
+                            jonathan_stats.setText(stat_string);
+                        }
+                        else if(name.equals("ErrolWilliams")){
+                            errol_stats.setText(stat_string);
+                        }
+                        else if(name.equals("mantonescu101")){
+                            mircea_stats.setText(stat_string);
+                        }
+                        else if(name.equals("Kaboomtastic")){
+                            james_stats.setText(stat_string);
+                        }
                     }
                 }, new Response.ErrorListener() {
 
