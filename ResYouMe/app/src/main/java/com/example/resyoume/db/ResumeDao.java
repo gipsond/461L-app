@@ -2,6 +2,7 @@ package com.example.resyoume.db;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -74,27 +75,37 @@ public abstract class ResumeDao {
     }
 
     private void updateWorkPhases(int contactId, List<WorkPhase> phases) {
+        List<WorkPhase> oldPhases = new ArrayList<>(),
+                        newPhases = new ArrayList<>();
         for (WorkPhase phase : phases) {
             phase.setContactId(contactId);
+            List<WorkPhase> listToAddTo = phase.getId() == 0 ? newPhases : oldPhases;
+            listToAddTo.add(phase);
             try {
                 System.out.println(phase.toJSONObject());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        updateWorkPhases(phases);
+        updateWorkPhases(oldPhases);
+        insertWorkPhases(newPhases);
     }
 
     private void updateEducationPhases(int contactId, List<EducationPhase> phases) {
+        List<EducationPhase> oldPhases = new ArrayList<>(),
+                newPhases = new ArrayList<>();
         for (EducationPhase phase : phases) {
             phase.setContactId(contactId);
+            List<EducationPhase> listToAddTo = phase.getId() == 0 ? newPhases : oldPhases;
+            listToAddTo.add(phase);
             try {
                 System.out.println(phase.toJSONObject());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        updateEducationPhases(phases);
+        updateEducationPhases(oldPhases);
+        insertEducationPhases(newPhases);
     }
 
 
