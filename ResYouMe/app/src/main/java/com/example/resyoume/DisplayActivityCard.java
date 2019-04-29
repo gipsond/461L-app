@@ -1,7 +1,6 @@
 package com.example.resyoume;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -11,24 +10,8 @@ import com.example.resyoume.db.Contact;
 import com.example.resyoume.db.Resume;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DisplayActivityCard extends DisplayActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        String resumeString = intent.getStringExtra("resumeJSON");
-        if(resumeString != null){
-            try {
-                JSONObject resumeJson = new JSONObject(resumeString);
-                Resume resume = new Resume(resumeJson, true);
-                setResume(resume);
-            }
-            catch (JSONException e) {}
-        }
-    }
 
     @Override
     protected int getLayoutResourceId() {

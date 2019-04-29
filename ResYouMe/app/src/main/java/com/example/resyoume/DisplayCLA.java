@@ -1,7 +1,5 @@
 package com.example.resyoume;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.resyoume.db.Contact;
@@ -9,25 +7,7 @@ import com.example.resyoume.db.EducationPhase;
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.WorkPhase;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class DisplayCLA extends DisplayActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        String resumeString = intent.getStringExtra("resumeJSON");
-        if (resumeString != null) {
-            try {
-                JSONObject resumeJson = new JSONObject(resumeString);
-                Resume resume = new Resume(resumeJson, true);
-                setResume(resume);
-            } catch (JSONException e) {
-            }
-        }
-    }
-
 
     @Override
     protected int getLayoutResourceId() {
