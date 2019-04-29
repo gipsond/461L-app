@@ -30,9 +30,11 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -131,13 +133,7 @@ public class EditTest {
         editText3.perform(closeSoftKeyboard());
 
         ViewInteraction button = onView(
-                allOf(withText("Save Resume"),
-                        childAtPosition(
-                                allOf(withId(R.id.edit_linear_layout),
-                                        childAtPosition(
-                                                withId(R.id.edit_scroll_view),
-                                                0)),
-                                36)));
+                allOf(withText("Save Resume")));
         button.perform(scrollTo(), click());
 
         // Added a sleep statement to match the app's execution delay.
@@ -160,6 +156,50 @@ public class EditTest {
         editText.perform(scrollTo(), click());
 
         editText.perform(scrollTo());
+        editText.check(matches(withText(testText)));
+    }
+
+    private void TestPhaseAtPosition(int position, String testText){
+        if(!setUpIsDone){
+            openDatabase();
+            setUpIsDone = true;
+        }
+
+        openEdit();
+
+        ViewInteraction editText = onView(
+                childAtPosition(
+                        childAtPosition(withClassName(
+                                is("android.widget.LinearLayout")),
+                                0),position));
+
+        editText.perform(replaceText(testText));
+
+        ViewInteraction editText2 = onView(
+                allOf(withText(testText)));
+        editText2.perform(closeSoftKeyboard());
+
+        ViewInteraction button = onView(
+                allOf(withText("Save Resume")));
+        button.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        openEdit();
+
+        editText = onView(
+                childAtPosition(
+                        childAtPosition(withClassName(
+                                is("android.widget.LinearLayout")),
+                                0),position));
+
         editText.check(matches(withText(testText)));
     }
 
@@ -206,20 +246,6 @@ public class EditTest {
     @Test
     public void editPublicationsTest(){TestChildAtPosition(13, "PublicationsTest");}
 
-    @Test
-    public void editEducationDateFromTest(){TestChildAtPosition(16, "EducationFromTest");}
-
-    @Test
-    public void editEducationDateToTest(){TestChildAtPosition(17, "EducationToTest");}
-
-    @Test
-    public void editEducationSchoolNameTest(){TestChildAtPosition(18, "EducationSchoolNameTest");}
-
-    @Test
-    public void editEducationCountryTest(){TestChildAtPosition(19, "EducationCountryTest");}
-
-    @Test
-    public void editEducationGraduationTest(){TestChildAtPosition(20, "EducationGraduationTest");}
 
 
 

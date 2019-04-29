@@ -176,7 +176,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                     layout.removeView(workLayout);
             }
         });
-        workLayout.addView(btn);
+        //workLayout.addView(btn);  //No support for removal
         workPhaseLayout.addView(workLayout);
     }
 
@@ -206,7 +206,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                             layout.removeView(workLayout);
                     }
                 });
-                workLayout.addView(btn);
+                //workLayout.addView(btn);  //No support for removal
                 workPhaseLayout.addView(workLayout);
             }
         }
@@ -238,7 +238,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                     layout.removeView(educationLayout);
             }
         });
-        educationLayout.addView(btn);
+        //educationLayout.addView(btn); //No support for removal
         educationPhaseLayout.addView(educationLayout);
     }
 
@@ -267,7 +267,7 @@ public class ResumeEditActivity extends AppCompatActivity {
                             layout.removeView(educationLayout);
                     }
                 });
-                educationLayout.addView(btn);
+                //educationLayout.addView(btn);     //No support for removal
                 educationPhaseLayout.addView(educationLayout);
             }
         }
