@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.resyoume.db.CompanyInfo;
-import com.example.resyoume.db.Resume;
 
 import org.json.JSONException;
 
@@ -32,6 +31,7 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
     private RecyclerView recyclerView;
     private String sortCompanySelection = "Name";
     private String style;
+    private IntentFactory intentFactory = new IntentFactory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,40 +101,34 @@ public class SavedCompanyInfoActivity extends AppCompatActivity implements Adapt
         } catch (Exception e) {
             return super.onContextItemSelected(item);
         }
+
+        CompanyInfoListAdapter.CompanyInfoViewHolder civh = (CompanyInfoListAdapter.CompanyInfoViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
+        CompanyInfo companyInfo = civh.getCompanyInfo();
+        Extra companyExtra = null;
+        Intent intent = null;
+        try {
+            companyExtra = new Extra("companyInfoJSON",companyInfo.toJSONObject().toString());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         switch (item.getItemId()) {
             case R.id.ctx_menu_send_by_nfc: {
-                CompanyInfoListAdapter.CompanyInfoViewHolder civh = (CompanyInfoListAdapter.CompanyInfoViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                CompanyInfo companyInfo = civh.getCompanyInfo();
-                Intent nfc_intent = new Intent(this, NFCActivity.class);
-                try {
-                    nfc_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(nfc_intent);
+                intent = intentFactory.createIntent("NFC", this, companyExtra);
                 break;
             }
             case R.id.ctx_menu_display:{
-                CompanyInfoListAdapter.CompanyInfoViewHolder civh = (CompanyInfoListAdapter.CompanyInfoViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                CompanyInfo companyInfo = civh.getCompanyInfo();
-                Intent display_intent = new Intent(this, DisplayCompanyInfo.class);
-                try {
-                    display_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(display_intent);
+                intent = intentFactory.createIntent("CompanyDisplay", this, companyExtra);
                 break;
             }
             case R.id.ctx_edit_NR:{
-                CompanyInfoListAdapter.CompanyInfoViewHolder civh = (CompanyInfoListAdapter.CompanyInfoViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                CompanyInfo companyInfo = civh.getCompanyInfo();
-                Intent nr_intent = new Intent(this, SetRatingAndNoteCompany.class);
-                try {
-                    nr_intent.putExtra("companyInfoJSON", companyInfo.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(nr_intent);
+                intent = intentFactory.createIntent("CompanyNR", this, companyExtra);
                 break;
             }
+        }
+        if(intent != null){
+            startActivity(intent);
         }
         return super.onContextItemSelected(item);
     }

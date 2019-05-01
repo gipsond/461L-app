@@ -11,20 +11,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import androidx.appcompat.widget.SearchView;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.Settings;
 
 import org.json.JSONException;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Comparator;
 import java.util.List;
@@ -37,6 +36,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
     private ResumeListAdapter adapter;
     private String style;
     private String sortSelection = "";
+    private IntentFactory intentFactory = new IntentFactory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,77 +147,37 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
         } catch (Exception e) {
             return super.onContextItemSelected(item);
         }
+
+        Extra resumeExtra = null;
+        Intent intent = null;
+        ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
+        Resume resume = rvh.getResume();
+        try {
+            resumeExtra = new Extra("resumeJSON",resume.toJSONObject().toString());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
         switch (item.getItemId()) {
             case R.id.ctx_menu_send_by_nfc: {
-                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                Resume resume = rvh.getResume();
-                Intent nfc_intent = new Intent(this, NFCActivity.class);
-                try {
-                    nfc_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(nfc_intent);
+                intent = intentFactory.createIntent("NFC", this, resumeExtra);
                 break;
             }
             case R.id.ctx_menu_display:{
-                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                Resume resume = rvh.getResume();
-                Intent display_intent = new Intent(this, DisplayBasic.class);
-                switch(style){
-                    case "Basic":{
-                        display_intent = new Intent(this, DisplayBasic.class);
-                        break;
-                    }
-                    case "Card":{
-                        display_intent = new Intent(this, DisplayActivityCard.class);
-                        break;
-                    }
-                    case "McCombs":{
-                        display_intent = new Intent(this, DisplayMccombs.class);
-                        break;
-                    }
-                    case "CLA":{
-                        display_intent = new Intent(this, DisplayCLA.class);
-                        break;
-                    }
-                    case "ECAC":{
-                        display_intent = new Intent(this, DisplayECAC.class);
-                        break;
-                    }
-                    case "Functional":{
-                        display_intent = new Intent(this, DisplayFunctional.class);
-                        break;
-                    }
-                }
-                try {
-                    display_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(display_intent);
+                intent = intentFactory.createIntent(style, this, resumeExtra);
                 break;
             }
             case R.id.ctx_edit_NR:{
-                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                Resume resume = rvh.getResume();
-                Intent nr_intent = new Intent(this, SetRatingAndNote.class);
-                try {
-                    nr_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(nr_intent);
+                intent = intentFactory.createIntent("NR", this, resumeExtra);
                 break;
             }
             case R.id.ctx_edit_resume:{
-                ResumeListAdapter.ResumeViewHolder rvh = (ResumeListAdapter.ResumeViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-                Resume resume = rvh.getResume();
-                Intent edit_intent = new Intent(this, ResumeEditActivity.class);
-                try {
-                    edit_intent.putExtra("resumeJSON", resume.toJSONObject().toString());
-                }
-                catch (JSONException e) {}
-                startActivity(edit_intent);
+                intent = intentFactory.createIntent("Edit", this, resumeExtra);
                 break;
             }
+        }
+        if(intent != null){
+            startActivity(intent);
         }
         return super.onContextItemSelected(item);
     }
