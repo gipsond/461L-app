@@ -13,14 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.resyoume.db.CompanyInfo;
-import com.example.resyoume.db.Resume;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback{
     NfcAdapter nfc_adapter;
@@ -124,32 +121,17 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
         // only insert the resume if all of the response types are correct and array size is 3
         try {
-
-            JSONObject responseJson = new JSONObject(getResponse().getText().toString());
             CharSequence toastText = "Invalid; couldn't save to database.";
+            JSONObject responseJson = new JSONObject(getResponse().getText().toString());
+            String type = responseJson.getString("type");
 
-            if (responseJson.has("type")
-                    && responseJson.getString("type").equals("resume")
-                    && responseJson.has("contact")
-                    && responseJson.has("educationPhases")
-                    && responseJson.has("workPhases")) {
-
-                Resume resume = new Resume(responseJson, true);
-                resume.contact.setRating(null);
-                resume.contact.setNotes(null);
-                getResumeViewModel().insert(resume);
+            if(type.equals("resume")){
+                getResumeViewModel().insert(responseJson);
                 toastText = "Resume added to database";
-
-            } else if (responseJson.has("type")
-                    && responseJson.getString("type").equals("companyInfo")
-                    && responseJson.has("name")) {
-
-                CompanyInfo companyInfo = new CompanyInfo(responseJson, true);
-                companyInfo.setRating(null);
-                companyInfo.setNotes(null);
-                getCompanyInfoViewModel().insert(companyInfo);
+            }
+            else if(type.equals("companyInfo")){
+                getCompanyInfoViewModel().insert(responseJson);
                 toastText = "CompanyInfo added to database";
-
             }
 
             int duration = Toast.LENGTH_SHORT;

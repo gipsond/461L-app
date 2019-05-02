@@ -2,13 +2,16 @@ package com.example.resyoume;
 
 import android.app.Application;
 
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
 import com.example.resyoume.db.CompanyInfo;
 import com.example.resyoume.db.ResumeRepository;
 
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+import java.util.List;
 
 public class CompanyInfoViewModel extends AndroidViewModel {
     private ResumeRepository repository;
@@ -23,6 +26,18 @@ public class CompanyInfoViewModel extends AndroidViewModel {
     public LiveData<List<CompanyInfo>> getAllCompanyInfo() { return allCompanyInfo; }
 
     public void insert(CompanyInfo companyInfo) { repository.insert(companyInfo); }
+
+    public void insert(JSONObject companyInfoJson) throws JSONException {
+        if (companyInfoJson.has("type")
+                && companyInfoJson.getString("type").equals("companyInfo")
+                && companyInfoJson.has("name")) {
+
+            CompanyInfo companyInfo = new CompanyInfo(companyInfoJson, true);
+            companyInfo.setRating(null);
+            companyInfo.setNotes(null);
+            insert(companyInfo);
+        }
+    }
 
     public void update(CompanyInfo companyInfo) { repository.update(companyInfo); }
 
