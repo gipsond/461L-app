@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -302,23 +303,23 @@ public class Contact {
         }
         Contact other = (Contact) o;
 
-        return Utils.equalOrBothNull(other.getTimestamp(),    this.getTimestamp()   )
-            && Utils.equalOrBothNull(other.getFirstName(),    this.getFirstName()   )
-            && Utils.equalOrBothNull(other.getLastName(),     this.getLastName()    )
-            && Utils.equalOrBothNull(other.getTitle(),        this.getTitle()       )
-            && Utils.equalOrBothNull(other.getAddress(),      this.getAddress()     )
-            && Utils.equalOrBothNull(other.getPostcode(),     this.getPostcode()    )
-            && Utils.equalOrBothNull(other.getCity(),         this.getCity()        )
-            && Utils.equalOrBothNull(other.getState(),        this.getState()       )
-            && Utils.equalOrBothNull(other.getCountry(),      this.getCountry()     )
-            && Utils.equalOrBothNull(other.getEmail(),        this.getEmail()       )
-            && Utils.equalOrBothNull(other.getPhoneNumber(),  this.getPhoneNumber() )
-            && Utils.equalOrBothNull(other.getHomepage(),     this.getHomepage()    )
-            && Utils.equalOrBothNull(other.getInterests(),    this.getInterests()   )
-            && Utils.equalOrBothNull(other.getPublications(), this.getPublications())
-            && Utils.equalOrBothNull(other.getPlaintext(),    this.getPlaintext()   )
-            && Utils.equalOrBothNull(other.getRating(),       this.getRating()      )
-            && Utils.equalOrBothNull(other.getNotes(),        this.getNotes()       );
+        return Objects.equals(other.getTimestamp(), this.getTimestamp())
+            && Objects.equals(other.getFirstName(), this.getFirstName())
+            && Objects.equals(other.getLastName(), this.getLastName())
+            && Objects.equals(other.getTitle(), this.getTitle())
+            && Objects.equals(other.getAddress(), this.getAddress())
+            && Objects.equals(other.getPostcode(), this.getPostcode())
+            && Objects.equals(other.getCity(), this.getCity())
+            && Objects.equals(other.getState(), this.getState())
+            && Objects.equals(other.getCountry(), this.getCountry())
+            && Objects.equals(other.getEmail(), this.getEmail())
+            && Objects.equals(other.getPhoneNumber(), this.getPhoneNumber())
+            && Objects.equals(other.getHomepage(), this.getHomepage())
+            && Objects.equals(other.getInterests(), this.getInterests())
+            && Objects.equals(other.getPublications(), this.getPublications())
+            && Objects.equals(other.getPlaintext(), this.getPlaintext())
+            && Objects.equals(other.getRating(), this.getRating())
+            && Objects.equals(other.getNotes(), this.getNotes());
 
     }
 

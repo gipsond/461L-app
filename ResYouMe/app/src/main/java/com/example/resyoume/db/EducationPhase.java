@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "education_phases")
 public class EducationPhase {
     @PrimaryKey(autoGenerate = true)
@@ -141,10 +143,10 @@ public class EducationPhase {
         }
         EducationPhase education = (EducationPhase) o;
 
-        return Utils.equalOrBothNull(this.getDateFrom(),   education.getDateFrom()  )
-            && Utils.equalOrBothNull(this.getDateTo(),     education.getDateTo()    )
-            && Utils.equalOrBothNull(this.getSchoolName(), education.getSchoolName())
-            && Utils.equalOrBothNull(this.getCountry(),    education.getCountry()   )
-            && Utils.equalOrBothNull(this.getPlaintext(),  education.getPlaintext() );
+        return Objects.equals(this.getDateFrom(), education.getDateFrom())
+            && Objects.equals(this.getDateTo(), education.getDateTo())
+            && Objects.equals(this.getSchoolName(), education.getSchoolName())
+            && Objects.equals(this.getCountry(), education.getCountry())
+            && Objects.equals(this.getPlaintext(), education.getPlaintext());
     }
 }

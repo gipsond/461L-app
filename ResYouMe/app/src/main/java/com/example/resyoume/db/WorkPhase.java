@@ -6,6 +6,8 @@ import org.json.JSONObject;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "work_phases")
 public class WorkPhase {
     @PrimaryKey(autoGenerate = true)
@@ -152,11 +154,11 @@ public class WorkPhase {
         }
         WorkPhase work = (WorkPhase) o;
 
-        return Utils.equalOrBothNull(this.getDateFrom(),  work.getDateFrom() )
-            && Utils.equalOrBothNull(this.getDateTo(),    work.getDateTo()   )
-            && Utils.equalOrBothNull(this.getFunction(),  work.getFunction() )
-            && Utils.equalOrBothNull(this.getCompany(),   work.getCompany()  )
-            && Utils.equalOrBothNull(this.getCountry(),   work.getCountry()  )
-            && Utils.equalOrBothNull(this.getPlaintext(), work.getPlaintext());
+        return Objects.equals(this.getDateFrom(), work.getDateFrom())
+            && Objects.equals(this.getDateTo(), work.getDateTo())
+            && Objects.equals(this.getFunction(), work.getFunction())
+            && Objects.equals(this.getCompany(), work.getCompany())
+            && Objects.equals(this.getCountry(), work.getCountry())
+            && Objects.equals(this.getPlaintext(), work.getPlaintext());
     }
 }

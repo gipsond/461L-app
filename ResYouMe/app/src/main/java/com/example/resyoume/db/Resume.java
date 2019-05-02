@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
@@ -109,9 +110,9 @@ public class Resume {
         }
         Resume resume = (Resume)o;
 
-        return Utils.equalOrBothNull(this.getContact(),    resume.getContact()   )
-            && Utils.equalOrBothNull(this.educationPhases, resume.educationPhases)
-            && Utils.equalOrBothNull(this.workPhases,      resume.workPhases     );
+        return Objects.equals(this.getContact(), resume.getContact())
+            && Objects.equals(this.educationPhases, resume.educationPhases)
+            && Objects.equals(this.workPhases, resume.workPhases);
 
     }
 }
