@@ -9,7 +9,6 @@ import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +20,8 @@ import org.json.JSONObject;
 
 public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback{
     NfcAdapter nfc_adapter;
-    EditText message;
-    private TextView response;
+    //EditText message;
+    //private TextView response;
     private SingleResumeViewModel resumeViewModel;
     private CompanyInfoViewModel companyInfoViewModel;
 
@@ -31,8 +30,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
         TextView status = (TextView) findViewById(R.id.NFCStatus);
-        message = (EditText) findViewById(R.id.SendText);
-        response = (TextView) findViewById(R.id.ReceiveText);
+        //message = (EditText) findViewById(R.id.SendText);
+        //response = (TextView) findViewById(R.id.ReceiveText);
         nfc_adapter = NfcAdapter.getDefaultAdapter(this);
         if(nfc_adapter == null){
             status.setText("Could not access NFC adapter");
@@ -48,7 +47,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
             data = intent.getStringExtra("companyInfoJSON");
         }
         if(data != null){
-            message.setText(data);
+            //message.setText(data);
+            NFCDataSingleton.getInstance().setMessage(data);
             try {
                 JSONObject dataJson = new JSONObject(data);
                 String type = dataJson.getString("type");
@@ -75,7 +75,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
 
     public NdefMessage createNdefMessage(NfcEvent nfcEvent){
         TextView status = (TextView) findViewById(R.id.NFCStatus);
-        String to_send = message.getText().toString();
+        //String to_send = message.getText().toString();
+        String to_send = NFCDataSingleton.getInstance().getMessage();
         NdefRecord record = NdefRecord.createMime("application/vnd.com.example.android.beam", to_send.getBytes());
         NdefMessage msg = new NdefMessage(record);
         return msg;
@@ -106,7 +107,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
                 }
             }
             catch (JSONException e) {}
-            getResponse().setText(received);
+            //getResponse().setText(received);
+            NFCDataSingleton.getInstance().setResponse(received);
         }
     }
 
@@ -122,7 +124,8 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         // only insert the resume if all of the response types are correct and array size is 3
         try {
             CharSequence toastText = "Invalid; couldn't save to database.";
-            JSONObject responseJson = new JSONObject(getResponse().getText().toString());
+            //JSONObject responseJson = new JSONObject(getResponse().getText().toString());
+            JSONObject responseJson = new JSONObject(NFCDataSingleton.getInstance().getResponse());
             String type = responseJson.getString("type");
 
             if(type.equals("resume")){
@@ -146,9 +149,9 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
     }
 
-    public TextView getResponse() {
-        return response;
-    }
+    //public TextView getResponse() {
+        //return response;
+    //}
 
     public SingleResumeViewModel getResumeViewModel() {
         return resumeViewModel;
