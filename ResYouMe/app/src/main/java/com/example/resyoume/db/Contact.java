@@ -300,194 +300,30 @@ public class Contact {
         if(getClass() != o.getClass()){
             return false;
         }
-        Contact contact = (Contact) o;
+        Contact other = (Contact) o;
 
-        if(contact.getTimestamp() == null || this.timestamp == null){
-            if(!(contact.getTimestamp() == null && this.timestamp == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getTimestamp().equals(this.timestamp)){
-                return false;
-            }
-        }
+        return equalOrBothNull(other.getTimestamp(),    this.getTimestamp()   )
+            && equalOrBothNull(other.getFirstName(),    this.getFirstName()   )
+            && equalOrBothNull(other.getLastName(),     this.getLastName()    )
+            && equalOrBothNull(other.getTitle(),        this.getTitle()       )
+            && equalOrBothNull(other.getAddress(),      this.getAddress()     )
+            && equalOrBothNull(other.getPostcode(),     this.getPostcode()    )
+            && equalOrBothNull(other.getCity(),         this.getCity()        )
+            && equalOrBothNull(other.getState(),        this.getState()       )
+            && equalOrBothNull(other.getCountry(),      this.getCountry()     )
+            && equalOrBothNull(other.getEmail(),        this.getEmail()       )
+            && equalOrBothNull(other.getPhoneNumber(),  this.getPhoneNumber() )
+            && equalOrBothNull(other.getHomepage(),     this.getHomepage()    )
+            && equalOrBothNull(other.getInterests(),    this.getInterests()   )
+            && equalOrBothNull(other.getPublications(), this.getPublications())
+            && equalOrBothNull(other.getPlaintext(),    this.getPlaintext()   )
+            && equalOrBothNull(other.getRating(),       this.getRating()      )
+            && equalOrBothNull(other.getNotes(),        this.getNotes()       );
 
-        if(contact.getFirstName() == null || this.firstName == null){
-            if(!(contact.getFirstName() == null && this.firstName == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getFirstName().equals(this.firstName)){
-                return false;
-            }
-        }
+    }
 
-        if(contact.getLastName() == null || this.lastName == null){
-            if(!(contact.getLastName() == null && this.lastName == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getLastName().equals(this.lastName)){
-                return false;
-            }
-        }
-
-        if(contact.getTitle() == null || this.title == null){
-            if(!(contact.getTitle() == null && this.title == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getTitle().equals(this.title)){
-                return false;
-            }
-        }
-
-        if(contact.getAddress() == null || this.address == null){
-            if(!(contact.getAddress() == null && this.address == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getAddress().equals(this.address)){
-                return false;
-            }
-        }
-
-        if(contact.getPostcode() == null || this.postcode == null){
-            if(!(contact.getPostcode() == null && this.postcode == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getPostcode().equals(this.postcode)){
-                return false;
-            }
-        }
-
-        if(contact.getCity() == null || this.city == null){
-            if(!(contact.getCity() == null && this.city == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getCity().equals(this.city)){
-                return false;
-            }
-        }
-
-        if(contact.getState() == null || this.state == null){
-            if(!(contact.getState() == null && this.state == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getState().equals(this.state)){
-                return false;
-            }
-        }
-
-        if(contact.getCountry() == null || this.country == null){
-            if(!(contact.getCountry() == null && this.country == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getCountry().equals(this.country)){
-                return false;
-            }
-        }
-
-        if(contact.getEmail() == null || this.email == null){
-            if(!(contact.getEmail() == null && this.email == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getEmail().equals(this.email)){
-                return false;
-            }
-        }
-
-        if(contact.getPhoneNumber() == null || this.phoneNumber == null){
-            if(!(contact.getPhoneNumber() == null && this.phoneNumber == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getPhoneNumber().equals(this.phoneNumber)){
-                return false;
-            }
-        }
-
-        if(contact.getHomepage() == null || this.homepage == null){
-            if(!(contact.getHomepage() == null && this.homepage == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getHomepage().equals(this.homepage)){
-                return false;
-            }
-        }
-
-        if(contact.getInterests() == null || this.interests == null){
-            if(!(contact.getInterests() == null && this.interests == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getInterests().equals(this.interests)){
-                return false;
-            }
-        }
-
-        if(contact.getPublications() == null || this.publications == null){
-            if(!(contact.getPublications() == null && this.publications == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getPublications().equals(this.publications)){
-                return false;
-            }
-        }
-
-        if(contact.getPlaintext() == null || this.plaintext == null){
-            if(!(contact.getPlaintext() == null && this.plaintext == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getPlaintext().equals(this.plaintext)){
-                return false;
-            }
-        }
-
-        if(contact.getRating() == null || this.rating == null){
-            if(!(contact.getRating() == null && this.rating == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getRating().equals(this.rating)){
-                return false;
-            }
-        }
-
-        if(contact.getNotes() == null || this.notes == null){
-            if(!(contact.getNotes() == null && this.notes == null)){
-                return false;
-            }
-        }
-        else{
-            if(!contact.getNotes().equals(this.notes)){
-                return false;
-            }
-        }
-        return true;
+    private boolean equalOrBothNull(Object a, Object b) {
+        return (a == null || b == null) ? (a == null && b == null)
+                                        : a.equals(b);
     }
 }
