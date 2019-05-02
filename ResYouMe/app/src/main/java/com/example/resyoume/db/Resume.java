@@ -101,66 +101,17 @@ public class Resume {
     }
 
     public boolean equals(Object o){
-        if(this == o){
+        if (this == o) {
             return true;
         }
-        if(o == null){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if(getClass() != o.getClass()){
-            return false;
-        }
-        Resume resume = (Resume) o;
+        Resume resume = (Resume)o;
 
-        if(resume.contact == null || this.contact == null){
-            if(!(resume.contact == null && this.contact == null)){
-                return false;
-            }
-        }
-        else{
-            if(!resume.contact.equals(this.contact)){
-                return false;
-            }
-        }
+        return Utils.equalOrBothNull(this.getContact(),    resume.getContact()   )
+            && Utils.equalOrBothNull(this.educationPhases, resume.educationPhases)
+            && Utils.equalOrBothNull(this.workPhases,      resume.workPhases     );
 
-        if(resume.educationPhases == null || this.educationPhases == null){
-            if(!(resume.educationPhases == null && this.educationPhases == null)){
-                return false;
-            }
-        }
-        else{
-            if(resume.educationPhases.size() == this.educationPhases.size()){
-                int x;
-                for(x = 0; x < this.educationPhases.size(); x++){
-                    if(!resume.educationPhases.get(x).equals(this.educationPhases.get(x))){
-                        return false;
-                    }
-                }
-            }
-            else{
-                return false;
-            }
-        }
-
-        if(resume.workPhases == null || this.workPhases == null){
-            if(!(resume.workPhases == null && this.workPhases == null)){
-                return false;
-            }
-        }
-        else{
-            if(resume.workPhases.size() == this.workPhases.size()){
-                int x;
-                for(x = 0; x < this.workPhases.size(); x++){
-                    if(!resume.workPhases.get(x).equals(this.workPhases.get(x))){
-                        return false;
-                    }
-                }
-            }
-            else{
-                return false;
-            }
-        }
-
-        return true;
     }
 }

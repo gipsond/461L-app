@@ -302,28 +302,25 @@ public class Contact {
         }
         Contact other = (Contact) o;
 
-        return equalOrBothNull(other.getTimestamp(),    this.getTimestamp()   )
-            && equalOrBothNull(other.getFirstName(),    this.getFirstName()   )
-            && equalOrBothNull(other.getLastName(),     this.getLastName()    )
-            && equalOrBothNull(other.getTitle(),        this.getTitle()       )
-            && equalOrBothNull(other.getAddress(),      this.getAddress()     )
-            && equalOrBothNull(other.getPostcode(),     this.getPostcode()    )
-            && equalOrBothNull(other.getCity(),         this.getCity()        )
-            && equalOrBothNull(other.getState(),        this.getState()       )
-            && equalOrBothNull(other.getCountry(),      this.getCountry()     )
-            && equalOrBothNull(other.getEmail(),        this.getEmail()       )
-            && equalOrBothNull(other.getPhoneNumber(),  this.getPhoneNumber() )
-            && equalOrBothNull(other.getHomepage(),     this.getHomepage()    )
-            && equalOrBothNull(other.getInterests(),    this.getInterests()   )
-            && equalOrBothNull(other.getPublications(), this.getPublications())
-            && equalOrBothNull(other.getPlaintext(),    this.getPlaintext()   )
-            && equalOrBothNull(other.getRating(),       this.getRating()      )
-            && equalOrBothNull(other.getNotes(),        this.getNotes()       );
+        return Utils.equalOrBothNull(other.getTimestamp(),    this.getTimestamp()   )
+            && Utils.equalOrBothNull(other.getFirstName(),    this.getFirstName()   )
+            && Utils.equalOrBothNull(other.getLastName(),     this.getLastName()    )
+            && Utils.equalOrBothNull(other.getTitle(),        this.getTitle()       )
+            && Utils.equalOrBothNull(other.getAddress(),      this.getAddress()     )
+            && Utils.equalOrBothNull(other.getPostcode(),     this.getPostcode()    )
+            && Utils.equalOrBothNull(other.getCity(),         this.getCity()        )
+            && Utils.equalOrBothNull(other.getState(),        this.getState()       )
+            && Utils.equalOrBothNull(other.getCountry(),      this.getCountry()     )
+            && Utils.equalOrBothNull(other.getEmail(),        this.getEmail()       )
+            && Utils.equalOrBothNull(other.getPhoneNumber(),  this.getPhoneNumber() )
+            && Utils.equalOrBothNull(other.getHomepage(),     this.getHomepage()    )
+            && Utils.equalOrBothNull(other.getInterests(),    this.getInterests()   )
+            && Utils.equalOrBothNull(other.getPublications(), this.getPublications())
+            && Utils.equalOrBothNull(other.getPlaintext(),    this.getPlaintext()   )
+            && Utils.equalOrBothNull(other.getRating(),       this.getRating()      )
+            && Utils.equalOrBothNull(other.getNotes(),        this.getNotes()       );
 
     }
 
-    private boolean equalOrBothNull(Object a, Object b) {
-        return (a == null || b == null) ? (a == null && b == null)
-                                        : a.equals(b);
-    }
+
 }

@@ -143,83 +143,20 @@ public class WorkPhase {
         return work;
     }
 
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null){
-            return false;
-        }
-        if(getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         WorkPhase work = (WorkPhase) o;
 
-        if(work.getDateFrom() == null || this.dateFrom == null){
-            if(!(work.getDateFrom() == null && this.dateFrom == null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getDateFrom().equals(this.dateFrom)){
-                return false;
-            }
-        }
-
-        if(work.getDateTo() == null || this.dateTo == null){
-            if(!(work.getDateTo() == null && this.dateTo == null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getDateTo().equals(this.dateTo)){
-                return false;
-            }
-        }
-
-        if(work.getFunction() == null || this.function == null){
-            if(!(work.getFunction() == null && this.function == null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getFunction().equals(this.function)){
-                return false;
-            }
-        }
-
-        if(work.getCompany() == null || this.company == null){
-            if(!(work.getCompany() == null && this.company == null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getCompany().equals(this.company)){
-                return false;
-            }
-        }
-
-        if(work.getCountry() == null || this.country == null){
-            if(!(work.getCountry() == null && this.country== null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getCountry().equals(this.country)){
-                return false;
-            }
-        }
-
-        if(work.getPlaintext() == null || this.plaintext == null){
-            if(!(work.getPlaintext() == null && this.plaintext == null)){
-                return false;
-            }
-        }
-        else{
-            if(!work.getPlaintext().equals(this.plaintext)){
-                return false;
-            }
-        }
-        return true;
+        return Utils.equalOrBothNull(this.getDateFrom(),  work.getDateFrom() )
+            && Utils.equalOrBothNull(this.getDateTo(),    work.getDateTo()   )
+            && Utils.equalOrBothNull(this.getFunction(),  work.getFunction() )
+            && Utils.equalOrBothNull(this.getCompany(),   work.getCompany()  )
+            && Utils.equalOrBothNull(this.getCountry(),   work.getCountry()  )
+            && Utils.equalOrBothNull(this.getPlaintext(), work.getPlaintext());
     }
 }

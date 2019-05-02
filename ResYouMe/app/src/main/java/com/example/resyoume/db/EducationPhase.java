@@ -133,71 +133,18 @@ public class EducationPhase {
     }
 
     public boolean equals(Object o){
-        if(this == o){
+        if (this == o) {
             return true;
         }
-        if(o == null){
-            return false;
-        }
-        if(getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         EducationPhase education = (EducationPhase) o;
 
-        if(education.getDateFrom() == null || this.dateFrom == null){
-            if(!(education.getDateFrom() == null && this.dateFrom == null)){
-                return false;
-            }
-        }
-        else{
-            if(!education.getDateFrom().equals(this.dateFrom)){
-                return false;
-            }
-        }
-
-        if(education.getDateTo() == null || this.dateTo == null){
-            if(!(education.getDateTo() == null && this.dateTo == null)){
-                return false;
-            }
-        }
-        else{
-            if(!education.getDateTo().equals(this.dateTo)){
-                return false;
-            }
-        }
-
-        if(education.getSchoolName() == null || this.schoolName == null){
-            if(!(education.getSchoolName() == null && this.schoolName == null)){
-                return false;
-            }
-        }
-        else{
-            if(!education.getSchoolName().equals(this.schoolName)){
-                return false;
-            }
-        }
-
-        if(education.getCountry() == null || this.country == null){
-            if(!(education.getCountry() == null && this.country== null)){
-                return false;
-            }
-        }
-        else{
-            if(!education.getCountry().equals(this.country)){
-                return false;
-            }
-        }
-
-        if(education.getPlaintext() == null || this.plaintext == null){
-            if(!(education.getPlaintext() == null && this.plaintext == null)){
-                return false;
-            }
-        }
-        else{
-            if(!education.getPlaintext().equals(this.plaintext)){
-                return false;
-            }
-        }
-        return true;
+        return Utils.equalOrBothNull(this.getDateFrom(),   education.getDateFrom()  )
+            && Utils.equalOrBothNull(this.getDateTo(),     education.getDateTo()    )
+            && Utils.equalOrBothNull(this.getSchoolName(), education.getSchoolName())
+            && Utils.equalOrBothNull(this.getCountry(),    education.getCountry()   )
+            && Utils.equalOrBothNull(this.getPlaintext(),  education.getPlaintext() );
     }
 }
