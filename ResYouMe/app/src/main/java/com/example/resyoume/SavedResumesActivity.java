@@ -154,6 +154,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
         Resume resume = rvh.getResume();
         try {
             resumeExtra = new Extra("resumeJSON",resume.toJSONObject().toString());
+            System.out.println(resume.toJSONObject().toString());
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -173,6 +174,7 @@ public class SavedResumesActivity extends AppCompatActivity implements AdapterVi
             }
             case R.id.ctx_edit_resume:{
                 intent = intentFactory.createIntent("Edit", this, resumeExtra);
+                intent.putExtra("createNew", false);
                 break;
             }
         }

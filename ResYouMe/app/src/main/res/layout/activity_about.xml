@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/aboutText"
-            android:text="Name: James Sullivan\nMajor: Electrical and Computer Engineering\nResponsibilities: Resume Formatting\nGithub Issues: 1\nUnit Tests: 0" />
+            android:text="Name: James Sullivan\nMajor: Electrical and Computer Engineering\nResponsibilities: User Interface\nGithub Issues: 1\nUnit Tests: 0" />
 
         <TextView
             android:id="@+id/james_stats"
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/aboutText"
-            android:text="Name: Errol Williams\nMajor: Computer Engineering\nResponsibilities: Resume Upload and Parse \nGithub Issues: 3\nUnit Tests: 18" />
+            android:text="Name: Errol Williams\nMajor: Computer Engineering\nResponsibilities: Resume Upload and Display \nGithub Issues: 3\nUnit Tests: 13" />
 
         <TextView
             android:id="@+id/errol_stats"
@@ -218,7 +218,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/aboutText"
-            android:text="Github Stats: \nTotal Unit Tests: 29\nTotal Issues: 15" />
+            android:text="Github Stats: \nTotal Unit Tests: 42\nTotal Issues: 15" />
 
         <TextView
             android:id="@+id/github_stats"

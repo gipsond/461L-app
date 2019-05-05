@@ -192,6 +192,10 @@ public class EditTest {
             e.printStackTrace();
         }
 
+        ViewInteraction appCompatButton = onView(
+                allOf(withText("Sort")));
+        appCompatButton.perform(click());
+
         openEdit();
 
         editText = onView(

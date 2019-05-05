@@ -34,6 +34,7 @@ public class ResumeEditActivity extends AppCompatActivity {
     private LinearLayout baseLayout;
 
     private SingleResumeViewModel singleResumeViewModel;
+    private ResumeViewModel resumeViewModel;
     private Resume newResume;
 
     private int resumeId;
@@ -53,6 +54,7 @@ public class ResumeEditActivity extends AppCompatActivity {
     private int countryId;
     private int interestsId;
     private int publicationsId;
+    private boolean create;
 
     private LinearLayout educationPhaseLayout;
     private LinearLayout workPhaseLayout;
@@ -75,6 +77,7 @@ public class ResumeEditActivity extends AppCompatActivity {
         educationPhaseDBIDs = new ArrayList<>();
         Intent intent = getIntent();
         String resumeString = intent.getStringExtra("resumeJSON");
+        create = intent.getExtras().getBoolean("createNew");
         if (resumeString != null) {
             try {
                 JSONObject resumeJson = new JSONObject(resumeString);
@@ -413,18 +416,30 @@ public class ResumeEditActivity extends AppCompatActivity {
         newResume.workPhases = workPhases;
     }
 
-    private void saveResume(){
+    private void saveResume() {
 
         updateResumeFields();
 
-        if (singleResumeViewModel == null) {
-            singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+        String text = "";
+
+        if (create) {
+            if (resumeViewModel == null) {
+                resumeViewModel = ViewModelProviders.of(this).get(ResumeViewModel.class);
+            }
+            resumeViewModel.insert(newResume);
+            text = "Resume added to database";
+        } else{
+            if (singleResumeViewModel == null) {
+                singleResumeViewModel = ViewModelProviders.of(this).get(SingleResumeViewModel.class);
+            }
+            singleResumeViewModel.update(newResume);
+            text = "Resume changes have been saved";
         }
-        singleResumeViewModel.update(newResume);
+
 
         int duration = Toast.LENGTH_SHORT;
         Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, "Resume changes have been saved.", duration);
+        Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
     }

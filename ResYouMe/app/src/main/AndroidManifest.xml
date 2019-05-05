@@ -33,7 +33,6 @@
         <activity android:name=".DisplayECAC" />
         <activity android:name=".DisplayFunctional" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".ResumeParseActivity" />
         <activity
             android:name=".SavedResumesActivity"
             android:label="@string/title_activity_database"
