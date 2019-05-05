@@ -149,10 +149,6 @@ public class NFCActivity extends AppCompatActivity implements NfcAdapter.CreateN
         }
     }
 
-    //public TextView getResponse() {
-        //return response;
-    //}
-
     public SingleResumeViewModel getResumeViewModel() {
         return resumeViewModel;
     }

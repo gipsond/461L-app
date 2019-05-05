@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 import java.util.Objects;
 
 @Entity(tableName = "work_phases")
-public class WorkPhase {
+public class WorkPhase implements Phase {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -59,6 +59,11 @@ public class WorkPhase {
 
     public WorkPhase(){
 
+    }
+
+    @Override
+    public boolean hasExistingId() {
+        return getId() != 0;
     }
 
     /* Getters */
