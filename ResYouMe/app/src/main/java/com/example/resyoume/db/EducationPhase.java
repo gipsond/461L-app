@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 import java.util.Objects;
 
 @Entity(tableName = "education_phases")
-public class EducationPhase {
+public class EducationPhase implements Phase {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
@@ -57,6 +57,11 @@ public class EducationPhase {
 
     public EducationPhase(){
 
+    }
+
+    @Override
+    public boolean hasExistingId() {
+        return getId() != 0;
     }
 
     /* Getters */

@@ -13,12 +13,14 @@ import com.example.resyoume.db.Resume;
 import com.example.resyoume.db.TestEntityFactory;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,7 +29,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class NFCActivityUnitTests {
 
-    @Mock TextView mockResponseView;
     @Mock SingleResumeViewModel mockResumeViewModel;
     @Mock CompanyInfoViewModel mockCompanyInfoViewModel;
 
@@ -37,33 +38,35 @@ public class NFCActivityUnitTests {
     public void setUp() {
         NFCActivity realActivityUnderTest = new NFCActivity();
         spyActivityUnderTest = spy(realActivityUnderTest); // Partial mock
-        when(spyActivityUnderTest.getResponse()).thenReturn(mockResponseView);
         when(spyActivityUnderTest.getResumeViewModel()).thenReturn(mockResumeViewModel);
         when(spyActivityUnderTest.getCompanyInfoViewModel()).thenReturn(mockCompanyInfoViewModel);
     }
 
     @Test
     public void saveResponseToDB_shouldInsertNewResume_whenResponseIsResume() {
-        String testResumeJSONString = null;
         try {
-            testResumeJSONString = TestEntityFactory.createTestResume().toJSONObject().toString();
-        } catch (JSONException e) {}
-        when(mockResponseView.getText()).thenReturn(testResumeJSONString);
+            JSONObject testResumeJSON = TestEntityFactory.createTestResume().toJSONObject();
+            NFCDataSingleton.getInstance().setResponse(testResumeJSON.toString());
 
-        spyActivityUnderTest.saveResponseToDB(null);
-        verify(mockResumeViewModel).insert(any(Resume.class));
+            spyActivityUnderTest.saveResponseToDB(null);
+            verify(mockResumeViewModel).insert(any(JSONObject.class));
+
+        } catch (JSONException e) {
+            fail("Encountered JSON Exception");
+        }
     }
 
     @Test
     public void saveResponseToDB_shouldInsertNewCompanyInfo_whenResponseIsCompanyInfo() {
-        String testCompanyInfoJSONString = null;
         try {
-            testCompanyInfoJSONString = TestEntityFactory.createTestCompanyInfo().toJSONObject().toString();
-        } catch (JSONException e) {}
-        when(mockResponseView.getText()).thenReturn(testCompanyInfoJSONString);
+            JSONObject testCompanyInfoJSON = TestEntityFactory.createTestCompanyInfo().toJSONObject();
+            NFCDataSingleton.getInstance().setResponse(testCompanyInfoJSON.toString());
 
-        spyActivityUnderTest.saveResponseToDB(null);
-        verify(mockCompanyInfoViewModel).insert(any(CompanyInfo.class));
+            spyActivityUnderTest.saveResponseToDB(null);
+            verify(mockCompanyInfoViewModel).insert(any(JSONObject.class));
+        } catch (JSONException e) {
+            fail("Encountered JSON Exception");
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -75,40 +76,40 @@ public abstract class ResumeDao {
     }
 
     private void updateWorkPhases(int contactId, List<WorkPhase> phases) {
-        List<WorkPhase> oldPhases = new ArrayList<>(),
-                        newPhases = new ArrayList<>();
-        for (WorkPhase phase : phases) {
-            phase.setContactId(contactId);
-            List<WorkPhase> listToAddTo = phase.getId() == 0 ? newPhases : oldPhases;
-            listToAddTo.add(phase);
-            try {
-                System.out.println(phase.toJSONObject());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        updateWorkPhases(oldPhases);
-        insertWorkPhases(newPhases);
+        setContactIds(contactId, phases);
+        updateWorkPhases(getOldPhases(phases));
+        insertWorkPhases(getNewPhases(phases));
     }
 
     private void updateEducationPhases(int contactId, List<EducationPhase> phases) {
-        List<EducationPhase> oldPhases = new ArrayList<>(),
-                newPhases = new ArrayList<>();
-        for (EducationPhase phase : phases) {
-            phase.setContactId(contactId);
-            List<EducationPhase> listToAddTo = phase.getId() == 0 ? newPhases : oldPhases;
-            listToAddTo.add(phase);
-            try {
-                System.out.println(phase.toJSONObject());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        updateEducationPhases(oldPhases);
-        insertEducationPhases(newPhases);
+        setContactIds(contactId, phases);
+        updateEducationPhases(getOldPhases(phases));
+        insertEducationPhases(getNewPhases(phases));
     }
 
+    private void setContactIds(int contactId, List<? extends Phase> phases) {
+        for (Phase phase : phases) {
+            phase.setContactId(contactId);
+        }
+    }
 
+    private <P extends Phase> List<P> getOldPhases(List<P> phases) {
+        return getOldOrNewPhases(true, phases);
+    }
+
+    private <P extends Phase> List<P> getNewPhases(List<P> phases) {
+        return getOldOrNewPhases(false, phases);
+    }
+
+    private <P extends Phase> List<P> getOldOrNewPhases(boolean getOldPhases, List<P> phases) {
+        List<P> oldPhases = new ArrayList<>();
+        for (P phase : phases) {
+            if (phase.hasExistingId() == getOldPhases) {
+                oldPhases.add(phase);
+            }
+        }
+        return oldPhases;
+    }
 
     @Insert
     abstract long insertContact(Contact contact);
